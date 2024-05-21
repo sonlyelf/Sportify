@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>announcement</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/sportlayout.css">
+    <link rel="stylesheet" href="../css/sportlayout.css">
 
 <style>
 main h2 {
@@ -106,7 +106,7 @@ img {
               <div class="container-xl">
                 <!-- 表現LOGO連結的區域，可以加上LOGO圖片 -->
                 <a class="navbar-brand d-flex align-items-center" href="/path/sportify">
-                  <img src="./image/Logocopy.png" width="100" alt="">
+                  <img src="../image/Logocopy.png" width="100" alt="">
                   <h1 class="m-0 ms-1">SPORTIFy</h1>
                 </a>
                 <!-- 以下是手機版才出現的按鈕，負責控制顯示導覽選單 -->
@@ -149,9 +149,9 @@ img {
 
     <div class="col-12 banner">
       <picture>
-          <source srcset="./image/ToDaysmall.png" media="(max-width: 300px)">
-          <source srcset="./image/ToDaybig.png" media="(min-width: 768px)">
-          <img src="./image/ToDaybig.png" alt="...">
+          <source srcset="../image/ToDaysmall.png" media="(max-width: 300px)">
+          <source srcset="../image/ToDaybig.png" media="(min-width: 768px)">
+          <img src="../image/ToDaybig.png" alt="...">
       </picture>
   </div>
     
@@ -162,7 +162,7 @@ img {
 <hr style="border: 1px solid #afadad">
 <section id="course-intro" class="course-intro">
   <div class="content">
-      <img src="./image/yogacircle.jpeg" width="300px" height="auto" alt="Yoga Circle">
+      <img src="../image/yogacircle.jpeg" width="300px" height="auto" alt="Yoga Circle">
       <h3>Yoga Wheel瑜珈輪</h3>
       <p>
           透過圓形中空輔具的幫助，保持瑜伽練習時後彎等動作的穩定度，
@@ -174,7 +174,7 @@ img {
   </div>
   <hr>
   <div class="content">
-    <img src="./image/gettyimages-1663038026.jpg" width="300px" height="auto" alt="YinYoga">
+    <img src="../image/gettyimages-1663038026.jpg" width="300px" height="auto" alt="YinYoga">
     <h3>YinYoga 陰瑜珈</h3>
     <p>
       陰瑜珈Yin Yoga也適宜瑜伽初學者、工作壓力大的人和身體有傷之人練習。
@@ -187,7 +187,7 @@ img {
   <hr>
   
   <div class="content">
-    <img src="./image/pexels-ketut-subiyanto-4999475.jpg" width="300px" height="auto" alt="YinYoga">
+    <img src="../image/pexels-ketut-subiyanto-4999475.jpg" width="300px" height="auto" alt="YinYoga">
     <h3>空中舒緩瑜珈</h3>
     <p>
       空中舒緩基礎的瑜珈動作在騰空時練習，會有全然不同的感受，舒緩瑜珈的好處多，因為藉由地心引力的向下拉伸，可以深~深~地幫助各個部位順利延展，給肢體更大的活動空間，鬆開肩頸的緊繃，緩解背部和脊椎長期累積的壓力，拉拉腿部筋，舒緩肌肉的痠痛不適，暢通呼吸、放大感官神經，讓上下半身重新找回靈活舒暢。
@@ -195,7 +195,7 @@ img {
   </div>
   <hr>
   <div class="content">
-    <img src="./image/FunctionalTraining.jpg" width="300px" height="auto" alt="YinYoga">
+    <img src="../image/FunctionalTraining.jpg" width="300px" height="auto" alt="YinYoga">
     <h3>肌力循環式訓練</h3>
     <p>
       循環式訓練（Circuit training）是一種使用肌力訓練來挑戰能量代謝系統的訓練，
@@ -206,7 +206,7 @@ img {
   </div>
   <hr>
   <div class="content">
-    <img src="./image/b_ow0l3HccEXONmgGWflO9.webp" width="300px" height="auto" alt="YinYoga">
+    <img src="../image/b_ow0l3HccEXONmgGWflO9.webp" width="300px" height="auto" alt="YinYoga">
     <h3>BODY COMBAT拳擊有氧</h3>
     <p>
       BODY COMBAT又稱為「拳擊有氧、戰鬥有氧」，通過上半身打拳、下半身踢腿動作進行鍛煉，
@@ -215,7 +215,7 @@ img {
   </div>
   <hr>
   <div class="content">
-    <img src="./image/ZumbaDanceWorkout.jpeg" width="300px" height="auto" alt="YinYoga">
+    <img src="../image/ZumbaDanceWorkout.jpeg" width="300px" height="auto" alt="YinYoga">
     <h3>ZUMBA</h3>
     <p>
       Zumba來自拉丁美洲，是一種結合舞蹈和有氧的運動，動作配合音樂節奏的快慢，也可以看成是間歇訓練，能鍛鍊到肌耐力、身體協調性、平衡感…等，燃脂以外還有雕塑線條的效果。
@@ -226,7 +226,7 @@ img {
   </div>
   <hr>
   <div class="content">
-    <img src="./image/rtx.jpg" width="300px" height="auto" alt="YinYoga">
+    <img src="../image/rtx.jpg" width="300px" height="auto" alt="YinYoga">
     <h3>TRX 循環式訓練</h3>
     <p>
       TRX循環式訓練是利用懸吊式全身阻力運動的原理，在一次訓練中同時讓多組懸吊肌力動作輪替，進行高效率的運動練習，一次鍛鍊多處部位，幫助全身肌肉平均精實，以個人的體重為阻力，利用懸吊帶的角度及彈力或站姿來控制強度，不用擔心擔心練完變成厚片大肌肉。
@@ -234,7 +234,7 @@ img {
   </div>
   <hr>
   <div class="content">
-    <img src="./image/kettle-belljpg.jpeg" width="300px" height="auto" alt="YinYoga">
+    <img src="../image/kettle-belljpg.jpeg" width="300px" height="auto" alt="YinYoga">
     <h3>Kettlebell 壺鈴</h3>
     <p>
       近年來壺鈴訓練廣受歡迎，越來越多人開始嚐試，並愛上它帶來的運動效能！是一種拿來訓練全身力量及體能的工具。效率高、體積小，在更短的時間內即達到全身運動的高效能是非常實用的訓練器材。
@@ -243,7 +243,7 @@ img {
   </div>
   <hr>
   <div class="content">
-    <img src="./image/UBOUND.JPG" width="300px" height="auto" alt="YinYoga">
+    <img src="../image/UBOUND.JPG" width="300px" height="auto" alt="YinYoga">
     <h3>UBOUND®活力躍蹦</h3>
     <p>
       UBOUND®是一項前所未有、跨時代，利用在彈簧床上的跳躍動作組成的有氧運動課程。
@@ -272,12 +272,12 @@ img {
       </div>
       <div class="link-comm">
         <a href="https://line.me/tw/" >
-          <img src="./image/line4.png" width="50" height="auto" alt="">
+          <img src="../image/line4.png" width="50" height="auto" alt="">
         </a>
       </div>
       <div class="link-comm1">
         <a href="https://www.instagram.com/">
-          <img src="./image/instagram4.png" width="50" height="auto" alt="">
+          <img src="../image/instagram4.png" width="50" height="auto" alt="">
         </a>
       </div>
     </div>

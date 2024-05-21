@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
   <title>sportify</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./css/sportlayout.css">
+  <link rel="stylesheet" href="../css/sportlayout.css">
 
 
   <style>
@@ -39,7 +39,7 @@
 
     .card-title {
 
-      background-image: url(./image/cardTitle.png);
+      background-image: url(../image/cardTitle.png);
       background-size: auto;
       background-repeat: no-repeat;
 
@@ -163,7 +163,7 @@ fieldset .submit {
             <div class="container-xl">
               <!-- 表現LOGO連結的區域，可以加上LOGO圖片 -->
               <a class="navbar-brand d-flex align-items-center" href="/path/sportify">
-                <img src="./image/Logocopy.png" width="100" alt="">
+                <img src="../image/Logocopy.png" width="100" alt="">
                 <h1 class="m-0 ms-1">SPORTIFy</h1>
               </a>
               <!-- 以下是手機版才出現的按鈕，負責控制顯示導覽選單 -->
@@ -218,27 +218,27 @@ fieldset .submit {
 
           <div class="carousel-item active">
             <picture>
-              <source media="(min-width:768px)" srcset="./image/boxing.jpg">
-              <source media="(min-width:300px)" srcset="./image/pexels-andres-ayrton-6551174.jpg">
-              <img src="./image/boxing.jpg" class="img-fluid" alt="...">
-              <img src="./image/pexels-andres-ayrton-6551174.jpg" class="img-fluid" alt="...">
+              <source media="(min-width:768px)" srcset="../image/boxing.jpg">
+              <source media="(min-width:300px)" srcset="../image/pexels-andres-ayrton-6551174.jpg">
+              <img src="../image/boxing.jpg" class="img-fluid" alt="...">
+              <img src="../image/pexels-andres-ayrton-6551174.jpg" class="img-fluid" alt="...">
             </picture>
           </div>
 
           <div class="carousel-item">
             <picture>
-              <source media="(min-width:768px)" srcset="./image/pexels-ketut-subiyanto-4999388.jpg">
-              <source media="(min-width:300px)" srcset="./image/pexels-valeria-ushakova-603898-3094215.jpg">
-              <img src="./image/pexels-ketut-subiyanto-4999388.jpg" class="img-fluid" alt="...">
-              <img src="./image/pexels-valeria-ushakova-603898-3094215.jpg" class="img-fluid" alt="...">
+              <source media="(min-width:768px)" srcset="../image/pexels-ketut-subiyanto-4999388.jpg">
+              <source media="(min-width:300px)" srcset="../image/pexels-valeria-ushakova-603898-3094215.jpg">
+              <img src="../image/pexels-ketut-subiyanto-4999388.jpg" class="img-fluid" alt="...">
+              <img src="../image/pexels-valeria-ushakova-603898-3094215.jpg" class="img-fluid" alt="...">
             </picture>
           </div>
           <div class="carousel-item">
             <picture>
-              <source media="(min-width:768px)" srcset="./image/Circuitraining.jpg">
-              <source media="(min-width:300px)" srcset="./image/istockphoto-685722924-612x612.jpg">
-              <img src="./image/Circuitraining.jpg" class="img-fluid" alt="...">
-              <img src="./image/istockphoto-685722924-612x612.jpg" class="img-fluid" alt="...">
+              <source media="(min-width:768px)" srcset="../image/Circuitraining.jpg">
+              <source media="(min-width:300px)" srcset="../image/istockphoto-685722924-612x612.jpg">
+              <img src="../image/Circuitraining.jpg" class="img-fluid" alt="...">
+              <img src="../image/istockphoto-685722924-612x612.jpg" class="img-fluid" alt="...">
             </picture>
           </div>
         </div>
@@ -281,7 +281,7 @@ fieldset .submit {
               <div class="col-12 col-sm-6 col-md-4 p-3" data-no="1">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#prodModel1">
                   <p class="text-center"></p>
-                  <img src="./image/newOpen.png" class="d-block mw-100 mx-auto rounded-2 mb-2" data-bs-toggle="modal"
+                  <img src="../image/newOpen.png" class="d-block mw-100 mx-auto rounded-2 mb-2" data-bs-toggle="modal"
                     data-bs-target="#prodModel1" alt="">
                 </a>
               </div>
@@ -296,7 +296,7 @@ fieldset .submit {
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center">
-                      <img src="./image/newpost.png" alt="" width="460px" height="auto">
+                      <img src="../image/newpost.png" alt="" width="460px" height="auto">
                       <p></p>
                       <p>🎉🎉12/32-13/15🎉🎉</p>
                       <p>試營運全館課程88折</p>
@@ -315,7 +315,7 @@ fieldset .submit {
               <div class="col-12 col-sm-6 col-md-4 p-3" data-no="2">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#prodModel2">
                   <p class="text-center"></p>
-                  <img src="./image/membercard.png" class="d-block mw-100 mx-auto rounded-2 mb-2" data-bs-toggle="modal"
+                  <img src="../image/membercard.png" class="d-block mw-100 mx-auto rounded-2 mb-2" data-bs-toggle="modal"
                     data-bs-target="#prodModel2" alt="">
                 </a>
               </div>
@@ -331,7 +331,7 @@ fieldset .submit {
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center">
-                      <img src="./image/newMember.png" alt="" width="460px" height="auto">
+                      <img src="../image/newMember.png" alt="" width="460px" height="auto">
                       <p></p>
                       <p>🎉 🎉 🎉 會員好康🎉 🎉 🎉 </p>
                       <p>現在加入即免會費</p>
@@ -352,7 +352,7 @@ fieldset .submit {
               <div class="col-12 col-sm-6 col-md-4 p-3" data-no="3">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#prodModel3">
                   <p class="text-center"></p>
-                  <img src="./image/newcom.png" class="d-block mw-100 mx-auto rounded-2 mb-2" data-bs-toggle="modal"
+                  <img src="../image/newcom.png" class="d-block mw-100 mx-auto rounded-2 mb-2" data-bs-toggle="modal"
                     data-bs-target="#prodModel3" alt="">
                 </a>
               </div>
@@ -369,7 +369,7 @@ fieldset .submit {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body text-center">
-                <img src="./image/competition.png " alt="" width="460px" height="auto">
+                <img src="../image/competition.png " alt="" width="460px" height="auto">
                 <p></p>
                 <p>🏋️‍♂️🏋️‍♂比賽活動🏋️‍♂️🏋️‍♂</p>
                 <p>每個月一次比賽</p>
@@ -393,7 +393,7 @@ fieldset .submit {
               <div class="col-12 col-sm-6 col-md-4 p-3">
                 <p class="text-center"></p>
                 <img
-                  src="./image/classroom.png"class="d-block mw-100 mx-auto rounded-2 mb-2" data-bs-toggle="modal" data-bs-target="#prodModel4"
+                  src="../image/classroom.png"class="d-block mw-100 mx-auto rounded-2 mb-2" data-bs-toggle="modal" data-bs-target="#prodModel4"
                   alt="">
               </div>
 
@@ -408,7 +408,7 @@ fieldset .submit {
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-left">
-                      <!-- <img src="./image/newMember.png" alt="" width="460px" height="auto"> -->
+                      <!-- <img src="../image/newMember.png" alt="" width="460px" height="auto"> -->
                       <p></p>
                       <p style="font-size: 26px;">請參照各教室使用須知，貼心提醒以下三點：</p>
                       <p>1.上課前：請本人在教室外排隊等候，勿以物品佔位或排隊，排隊時也請留意勿影響他人運動空間，如需使用器材，請先設置好以利課程進行。</p>
@@ -430,7 +430,7 @@ fieldset .submit {
 
               <div class="col-12 col-sm-6 col-md-4 p-3">
                 <p class="text-center"></p>
-                <img src="./image/obj.png" class="d-block mw-100 mx-auto rounded-2 mb-2"
+                <img src="../image/obj.png" class="d-block mw-100 mx-auto rounded-2 mb-2"
                   data-bs-toggle="modal" data-bs-target="#prodModel5" alt="">
               </div>
 
@@ -444,7 +444,7 @@ fieldset .submit {
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-left">
-                      <!-- <img src="./image/newMember.png" alt="" width="460px" height="auto"> -->
+                      <!-- <img src="../image/newMember.png" alt="" width="460px" height="auto"> -->
                       <p></p>
                       <p style="font-size: 26px;">對任何健身器材使用程序有所問題，請詢問教室管理人員</p>
                       <p></p>
@@ -465,7 +465,7 @@ fieldset .submit {
 
               <div class="col-12 col-sm-6 col-md-4 p-3">
                 <p class="text-center"></p>
-                <img src="./image/rentRoom.png" class="d-block mw-100 mx-auto rounded-2 mb-2"
+                <img src="../image/rentRoom.png" class="d-block mw-100 mx-auto rounded-2 mb-2"
                   data-bs-toggle="modal" data-bs-target="#prodModel6" alt="">
               </div>
 
@@ -480,7 +480,7 @@ fieldset .submit {
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center">
-                      <!-- <img src="./image/newMember.png" alt="" width="460px" height="auto"> -->
+                      <!-- <img src="../image/newMember.png" alt="" width="460px" height="auto"> -->
                       <p></p>
                       <p style="font-size: 24px;">老師團課、私人課程場地租借</p>
                       <p></p>
@@ -565,10 +565,10 @@ fieldset .submit {
         </div>
         <div>
           <a href="https://line.me/tw/" class="link-comm">
-            <img src="./image/line4.png" width="50" height="auto" alt="">
+            <img src="../image/line4.png" width="50" height="auto" alt="">
           </a>
           <a href="https://www.instagram.com/" class="link-comm1">
-            <img src="./image/instagram4.png" width="50" height="auto" alt="">
+            <img src="../image/instagram4.png" width="50" height="auto" alt="">
           </a>
         </div>
       </div>

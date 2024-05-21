@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>course</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/sportlayout.css">
+    <link rel="stylesheet" href="../css/sportlayout.css">
   </head>
   
   <body data-bs-spy="scroll" data-bs-target="#navbarSupportedContent" data-bs-offset="200">
@@ -22,7 +22,7 @@
               <div class="container-xl">
                 <!-- 表現LOGO連結的區域，可以加上LOGO圖片 -->
                 <a class="navbar-brand d-flex align-items-center" href="/path/sportify">
-                  <img src="./image/Logocopy.png" width="100" alt="">
+                  <img src="../image/Logocopy.png" width="100" alt="">
                   <h1 class="m-0 ms-1">SPORTIFy</h1>
                 </a>
                 <!-- 以下是手機版才出現的按鈕，負責控制顯示導覽選單 -->
@@ -104,12 +104,12 @@
       </div>
       <div class="link-comm">
         <a href="https://line.me/tw/" >
-          <img src="./image/line4.png" width="50" height="auto" alt="">
+          <img src="../image/line4.png" width="50" height="auto" alt="">
         </a>
       </div>
       <div class="link-comm1">
         <a href="https://www.instagram.com/">
-          <img src="./image/instagram4.png" width="50" height="auto" alt="">
+          <img src="../image/instagram4.png" width="50" height="auto" alt="">
         </a>
       </div>
     </div>

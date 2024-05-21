@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>register</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/sportlayout.css">
+    <link rel="stylesheet" href="../css/sportlayout.css">
     <style>
     
     main{
@@ -56,7 +56,7 @@
                     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
                         <div class="container-xl">
                             <a class="navbar-brand d-flex align-items-center" href="/path/sportify">
-                                <img src="./image/Logocopy.png" width="100" alt="">
+                                <img src="../image/Logocopy.png" width="100" alt="">
                                 <h1 class="m-0 ms-1">SPORTIFy</h1>
                             </a>
                             <button class="navbar-toggler ctr-collapse" type="button" data-bs-toggle="collapse"
