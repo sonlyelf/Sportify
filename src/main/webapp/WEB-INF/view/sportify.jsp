@@ -191,7 +191,7 @@ fieldset .submit {
                         <li><a class="dropdown-item" href="/path/member">我的中心</a></li>
                     </ul>
                 </div>
-                  <li class="nav-item "><a class="nav-link" href="/path/informationl">交通資訊</a></li>
+                  <li class="nav-item "><a class="nav-link" href="/path/information">交通資訊</a></li>
                 </div>
               </div>
 
@@ -205,7 +205,7 @@ fieldset .submit {
 
   <main class="mb-5">
 
-    <section id="./sportify.html" class="p-0">
+    <section id="./sportify.jsp" class="p-0">
       <div id="topSlider" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#topSlider" data-bs-slide-to="0" clagss="active" aria-current="true"
