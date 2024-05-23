@@ -97,10 +97,16 @@
     </header>
 <main>
     <div class="container form-container">
+    	<div class="row">
+    		<div class="col-5">&nbsp;</div>
+    		<div class="col-7">
+    			${ resultMessage }
+    		</div>
+    	</div>
         <div class="row">
             <div class="col-12">
                 <h2 class="my-4 text-center">註冊會員</h2>
-                <form id="registerForm" action="/register" method="post">
+                <form id="registerForm" action="./user/register" method="post">
                     <div class="form-group">
                         <label for="Sname">姓名</label>
                         <input type="text" class="form-control" id="Sname" name="Sname" required>
@@ -138,7 +144,7 @@
             </div>
         </div>
     </div>
-
+	
     <!-- 會員須知模態對話框 -->
     <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
     <div class="modal-dialog">

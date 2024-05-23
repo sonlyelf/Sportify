@@ -1,46 +1,42 @@
 package com.sportify.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.sportify.model.dto.UserRegisterDto;
+import com.sportify.service.UserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
+	@Autowired
+	private UserService userService;
+
 	// 註冊
 	@PostMapping("/register")
-	private String getRegister() {
-		// 將要傳給jsp渲染的資料放在model中
-//		model.addAttribute("name", "Rose");
-//		model.addAttribute("time", new Date());
+	private String getRegister(Model model, UserRegisterDto userRegisterDto) {
 		
-		// 請實作
+		int result = userService.registerUser(userRegisterDto); // 新增 User
 		
-		return ""; // 會自動指向/WEB-INF/view/hello.jsp
+		model.addAttribute("resultMessage", result == 0 ? "註冊成功" : "註冊失敗");			
+		return "register"; //會自動指向/WEB-INF/view/.jsp
 	}
 
 	// 登入
 	@PostMapping("/login")
 	private String getLogin() {
-		// 將要傳給jsp渲染的資料放在model中
-//		model.addAttribute("name", "Rose");
-//		model.addAttribute("time", new Date());
-		
-		// 請實作
-		
-		return ""; // 會自動指向/WEB-INF/view/hello.jsp
+
+		return ""; //會自動指向/WEB-INF/view/.jsp
 	}
 
 	// 登出
 	@PostMapping("/logout")
 	private String getLogout() {
-		// 將要傳給jsp渲染的資料放在model中
-//		model.addAttribute("name", "Rose");
-//		model.addAttribute("time", new Date());
-		
-		// 請實作
-		
-		return ""; // 會自動指向/WEB-INF/view/hello.jsp
+
+		return ""; //會自動指向/WEB-INF/view/.jsp
 	}
 }
