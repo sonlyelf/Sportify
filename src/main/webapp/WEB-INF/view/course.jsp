@@ -21,7 +21,7 @@
               <!-- 設定區域範圍 -->
               <div class="container-xl">
                 <!-- 表現LOGO連結的區域，可以加上LOGO圖片 -->
-                <a class="navbar-brand d-flex align-items-center" href="/path/sportify">
+                <a class="navbar-brand d-flex align-items-center" href="/path/index">
                   <img src="../image/Logocopy.png" width="100" alt="">
                   <h1 class="m-0 ms-1">SPORTIFy</h1>
                 </a>
@@ -37,7 +37,7 @@
                   <!-- 這是一組選單，me-auto負責margin都在右邊，ms-auto負責margin都在左邊 -->
                   <div class="navbar-nav ms-auto">
                     <li class="nav-item">
-                      <a class="nav-link"href="/path/sportify">訊息公告</a>
+                      <a class="nav-link"href="/path/index">訊息公告</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/path/announcement">課程介紹</a></li>
                     <li class="nav-item"><a class="nav-link active" href="/path/course">課程報名</a></li>

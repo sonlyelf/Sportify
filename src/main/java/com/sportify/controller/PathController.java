@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/path")
 public class PathController {
 	
-	@GetMapping("/sportify")
+	@GetMapping("/index")
 	public String getIndex() {
-		return "sportify"; //會自動指向/WEB-INF/view/.jsp
+		return "index"; //會自動指向/WEB-INF/view/.jsp
 	}
 	
 	@GetMapping("/announcement")

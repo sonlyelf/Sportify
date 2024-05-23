@@ -7,7 +7,7 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=3.0">
   <meta charset="UTF-8">
-  <title>sportify</title>
+  <title>index</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/sportlayout.css">
 
@@ -162,7 +162,7 @@ fieldset .submit {
             <!-- 設定區域範圍 -->
             <div class="container-xl">
               <!-- 表現LOGO連結的區域，可以加上LOGO圖片 -->
-              <a class="navbar-brand d-flex align-items-center" href="/path/sportify">
+              <a class="navbar-brand d-flex align-items-center" href="/path/index">
                 <img src="../image/Logocopy.png" width="100" alt="">
                 <h1 class="m-0 ms-1">SPORTIFy</h1>
               </a>
@@ -178,7 +178,7 @@ fieldset .submit {
                 <!-- 這是一組選單，me-auto負責margin都在右邊，ms-auto負責margin都在左邊 -->
                 <div class="navbar-nav ms-auto">
                   <li class="nav-item">
-                    <a class="nav-link active"href="/path/sportify">訊息公告</a>
+                    <a class="nav-link active"href="/path/index">訊息公告</a>
                   </li>
                   <li class="nav-item"><a class="nav-link" href="/path/announcement">課程介紹</a></li>
                   <li class="nav-item"><a class="nav-link" href="/path/course">課程報名</a></li>

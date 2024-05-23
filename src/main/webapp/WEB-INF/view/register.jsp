@@ -55,7 +55,7 @@
                 <div class="col-12">
                     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
                         <div class="container-xl">
-                            <a class="navbar-brand d-flex align-items-center" href="/path/sportify">
+                            <a class="navbar-brand d-flex align-items-center" href="/path/index">
                                 <img src="../image/Logocopy.png" width="100" alt="">
                                 <h1 class="m-0 ms-1">SPORTIFy</h1>
                             </a>
@@ -67,7 +67,7 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="navbar-nav ms-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/path/sportify">訊息公告</a>
+                                        <a class="nav-link" href="/path/index">訊息公告</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="/path/announcement">課程介紹</a>
