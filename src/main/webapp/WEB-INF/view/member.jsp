@@ -181,16 +181,18 @@
                 <form class="form">
                   <div class="loginGroup">
                     <label >帳號
-                      <input type="email" id="Semail" name="Semail" placeholder="請輸入電子信箱" required>
+                      <input type="email" id="Semail" name="Semail" placeholder="請輸入電子信箱" required="required">
                     </label>
                   </div>
                   <div class="loginGroup">
                     <label >密碼
-                      <input type="password" id="Spassword" name="Spassword" placeholder="請輸入密碼" required>
+                      <input type="password" id="Spassword" name="Spassword" placeholder="請輸入密碼" required="required">
                     </label>
                   </div>
                   <div class="btnLogIn">
-                    <button type="submit" class="btn btnLogIn">登入</button>
+                  	<a href="/path/myCenter"> 
+                    	<button type="submit" class="btn btnLogIn" >登入</button>
+                   	</a>
                   </div>
                   <div class="links">
                     <a href="#">忘記密碼?</a>

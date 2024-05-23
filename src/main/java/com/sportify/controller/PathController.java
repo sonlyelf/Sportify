@@ -41,4 +41,10 @@ public class PathController {
 		return "information"; //會自動指向/WEB-INF/view/.jsp
 		
 	}
+	@GetMapping("/myCenter")
+	public String getMyCenter() {
+		return "myCenter"; //會自動指向/WEB-INF/view/.jsp
+		
+	}
 }
+

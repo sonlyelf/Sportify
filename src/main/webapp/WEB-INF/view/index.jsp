@@ -205,10 +205,10 @@ fieldset .submit {
 
   <main class="mb-5">
 
-    <section id="./sportify.jsp" class="p-0">
+    <section id="index" class="p-0">
       <div id="topSlider" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
-          <button type="button" data-bs-target="#topSlider" data-bs-slide-to="0" clagss="active" aria-current="true"
+          <button type="button" data-bs-target="#topSlider" data-bs-slide-to="0" class="active" aria-current="true"
             aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#topSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
           <button type="button" data-bs-target="#topSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
