@@ -130,7 +130,7 @@
               <!-- 設定區域範圍 -->
               <div class="container-xl">
                 <!-- 表現LOGO連結的區域，可以加上LOGO圖片 -->
-                <a class="navbar-brand d-flex align-items-center" href="/path/index">
+                <a class="navbar-brand d-flex align-items-center" href="/index">
                   <img src="../image/Logocopy.png" width="100" alt="">
                   <h1 class="m-0 ms-1">SPORTIFy</h1>
                 </a>
@@ -146,20 +146,20 @@
                   <!-- 這是一組選單，me-auto負責margin都在右邊，ms-auto負責margin都在左邊 -->
                   <div class="navbar-nav ms-auto">
                     <li class="nav-item">
-                      <a class="nav-link"href="/path/index">訊息公告</a>
+                      <a class="nav-link"href="/index">訊息公告</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="/path/announcement">課程介紹</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/path/course">課程報名</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/announcement">課程介紹</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/course">課程報名</a></li>
                     <div class="dropdown">
                       <a class="nav-link  dropdown-toggle" href="#" id="memberDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           會員中心
                       </a>
                       <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="memberDropdown">
-                          <li><a class="dropdown-item" href="/path/register">註冊會員</a></li>
-                          <li><a class="dropdown-item" href="/path/member">我的中心</a></li>
+                          <li><a class="dropdown-item" href="/register">註冊會員</a></li>
+                          <li><a class="dropdown-item" href="/member">我的中心</a></li>
                       </ul>
                   </div>
-                    <li class="nav-item "><a class="nav-link" href="/path/information">交通資訊</a></li>
+                    <li class="nav-item "><a class="nav-link" href="/information">交通資訊</a></li>
                   </div>
                 </div>
   
@@ -178,7 +178,7 @@
             <div class="col-12">
               <h2 class="text-center" style="font-size: 36px;">會員登入</h2>
               <div class="login">
-                <form class="form">
+                <form class="form" method="post" action="/user/login">
                   <div class="loginGroup">
                     <label >帳號
                       <input type="email" id="Semail" name="Semail" placeholder="請輸入電子信箱" required="required">
@@ -190,9 +190,7 @@
                     </label>
                   </div>
                   <div class="btnLogIn">
-                  	<a href="/path/myCenter" class="no-underline"> 
                     	<button type="submit" class="btn btnLogIn" >登入</button>
-                   	</a>
                   </div>
                   <div class="links">
                     <a href="#">忘記密碼?</a>
@@ -206,7 +204,7 @@
           <div class="row">
             <div class="col-12">
               <div class="btnReg ">
-                  <a href="/path/register"  class="no-underline">
+                  <a href="/register"  class="no-underline">
                       <button type="submit" class="btn btnReg ">註冊會員</button>
                   </a>
                   </div>

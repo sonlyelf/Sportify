@@ -11,7 +11,7 @@ public class UserService {
 	
 	// 註冊 User
 	public int registerUser(UserRegisterDto userRegisterDto) {
-		
+		System.out.println(userRegisterDto);
 		return 0;
 	}
 	

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sportify.model.dto.UserLoginDto;
 import com.sportify.model.dto.UserRegisterDto;
 import com.sportify.service.UserService;
 
@@ -28,15 +29,16 @@ public class UserController {
 
 	// 登入
 	@PostMapping("/login")
-	private String getLogin() {
-
-		return ""; //會自動指向/WEB-INF/view/.jsp
+	private String getLogin(Model model, UserLoginDto userLoginDto) {
+		
+		System.out.println(userLoginDto);
+		return "myCenter"; //會自動指向/WEB-INF/view/.jsp
 	}
 
 	// 登出
 	@PostMapping("/logout")
 	private String getLogout() {
 
-		return ""; //會自動指向/WEB-INF/view/.jsp
+		return "index"; //會自動指向/WEB-INF/view/.jsp
 	}
 }

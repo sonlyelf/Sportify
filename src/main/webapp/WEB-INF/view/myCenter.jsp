@@ -94,7 +94,7 @@ footer{
                 <!-- 設定區域範圍 -->
                 <div class="container-xl">
                 <!-- 表現LOGO連結的區域，可以加上LOGO圖片 -->
-                <a class="navbar-brand d-flex align-items-center" href="/path/index">
+                <a class="navbar-brand d-flex align-items-center" href="/index">
                     <img src="../image/Logocopy.png" width="100" alt="">
                     <h1 class="m-0 ms-1">SPORTIFy</h1>
                 </a>
@@ -110,21 +110,21 @@ footer{
                     <!-- 這是一組選單，me-auto負責margin都在右邊，ms-auto負責margin都在左邊 -->
                     <div class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link "href="/path/index">訊息公告</a>
+                        <a class="nav-link "href="/index">訊息公告</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="/path/announcement">課程介紹</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/path/course">課程報名</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/announcement">課程介紹</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/course">課程報名</a></li>
                     <div class="dropdown">
                         <a class="nav-link active dropdown-toggle" href="#" id="memberDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             會員中心
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="memberDropdown">
-                            <li><a class="dropdown-item" href="/path/index">登出</a></li>
-                            <li><a class="dropdown-item" href="/path/myCenter">我的中心</a></li>
+                            <li><a class="dropdown-item" href="/index">登出</a></li>
+                            <li><a class="dropdown-item" href="/myCenter">我的中心</a></li>
                         </ul>
                     </div>
-                    <li class="nav-item "><a class="nav-link" href="/path/information">交通資訊</a></li>
-                    <li class="nav-item "><a class="nav-link" href="/path/index">登出</a></li>
+                    <li class="nav-item "><a class="nav-link" href="/information">交通資訊</a></li>
+                    <li class="nav-item "><a class="nav-link" href="/index">登出</a></li>
                     </div>
                 </div>
                 </div>
