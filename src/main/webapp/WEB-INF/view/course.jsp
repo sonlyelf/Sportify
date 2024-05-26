@@ -8,6 +8,7 @@
 <title>course</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/sportlayout.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <link rel="icon" href="../image/Logocopy11.png">
 
 <style>
@@ -181,7 +182,7 @@ h4{
               </div>
               <p>價格：NT$2000/每期</p>
               <div class="d-flex justify-content-end">
-              <button class="submit" id="bookingBtn" onclick="bookCourse('Yoga-Wheel')">預約</button>
+              <button class="submit" id="bookingBtn1" onclick="bookCourse('course-name')">預約</button>
               </div>
           </section>
           <hr>
@@ -199,7 +200,7 @@ h4{
               </div>
               <p>價格:${course.price}/每期</p>
               <div class="d-flex justify-content-end">
-              <button onclick="bookCourse('class-name')">預約</button>
+               <button class="submit" id="bookingBtn2" onclick="bookCourse('course-name')">預約</button>
               </div>
               <hr>
           </section>
@@ -238,7 +239,7 @@ h4{
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     if ($('.navbar-toggler').is(':hidden')) {
         $(window).on('scroll', function () {
@@ -258,6 +259,35 @@ h4{
     function closeModal() {
         document.getElementById('myModal').style.display = "none";
     }
+   
+   
+    document.getElementById('bookingBtn1').addEventListener('click', function() {
+        checkLoginAndBook();
+    });
+
+    document.getElementById('bookingBtn2').addEventListener('click', function() {
+        checkLoginAndBook();
+    });
+
+    function checkLoginAndBook() {
+        var isLoggedIn = false; // 這裡應該根據實際情況設置
+
+        if (!isLoggedIn) {
+            Swal.fire({
+                title: '請先登入',
+                text: '您需要登入才能預約',
+                icon: 'warning',
+                confirmButtonText: '確定'
+            });
+        } else {
+            // 用戶已登入，執行預約操作
+            bookCourse();
+        }
+    }
+  /*   function bookCourse() {
+        // 實際預約課程的邏輯
+        console.log("Booking the course...");
+    } */
 </script>
 </body>
 </html>
