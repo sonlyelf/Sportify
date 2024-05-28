@@ -87,6 +87,7 @@
                                     </div>
                                     <li class="nav-item">
                                         <a class="nav-link" href="/information">交通資訊</a>
+                                          <li class="nav-item logout-btn " ><a class="nav-link" href="/logout">登出</a></li>
                                     </li>
                                 </div>
                             </div>
@@ -266,13 +267,16 @@
 
     // 自動填充範例數據
     $(document).ready(function () {
-        $('#name').val('範例姓名').addClass('placeholder-text');;
-        $('#birthdate').val('1990-01-01').addClass('placeholder-text');;
-        $('#phone').val('0912345678').addClass('placeholder-text');;
-        $('#email').val('example@example.com').addClass('placeholder-text');;
-        $('#password').val('password').addClass('placeholder-text');;
-        $('#confirm_password').val('password').addClass('placeholder-text');;
+        $('#Sname').val('範例姓名').addClass('placeholder-text');;
+        $('#Sbirthdate').val('1990-01-01').addClass('placeholder-text');;
+        $('#Sphone').val('0912345678').addClass('placeholder-text');;
+        $('#Semail').val('example@example.com').addClass('placeholder-text');;
+        $('#Spassword').val('password').addClass('placeholder-text');;
+        $('#Sconfirm_password').val('password').addClass('placeholder-text');;
     });
 </script>
+  <div>
+        <p id="user-greeting"></p>
+    </div>
 </body>
 </html>

@@ -192,6 +192,7 @@ fieldset .submit {
                     </ul>
                 </div>
                   <li class="nav-item "><a class="nav-link" href="/information">交通資訊</a></li>
+                  <li id="logout-btn" style="display:none;"><a href="/logout">登出</a></li>
                 </div>
               </div>
 
@@ -581,7 +582,7 @@ fieldset .submit {
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-
+ <script src="../js/app.js"></script>
   <script>
 
     //header============
@@ -611,6 +612,8 @@ fieldset .submit {
 
 
   </script>
-
+  <div>
+        <p id="user-greeting"></p>
+    </div>
 </body>
 </html>

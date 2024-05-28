@@ -63,6 +63,9 @@ footer{
     margin-top: 70px;
     
 }
+.placeholder-text {
+    color:black;
+}
 
 @media(min-width:768px){
 
@@ -124,7 +127,7 @@ footer{
                         </ul>
                     </div>
                     <li class="nav-item "><a class="nav-link" href="/information">交通資訊</a></li>
-                    <li class="nav-item "><a class="nav-link" href="/index">登出</a></li>
+                    <li class="nav-item logout-btn " ><a class="nav-link" href="/logout">登出</a></li>
                     </div>
                 </div>
                 </div>
@@ -265,6 +268,7 @@ footer{
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="../js/app.js"></script>
 <script>
 
 if ($('.navbar-toggler').is(':hidden')) {
@@ -278,7 +282,18 @@ if ($('.navbar-toggler').is(':hidden')) {
 	}
 });
 }
+$(document).ready(function () {
+    $('#Sname').val('Sname').addClass('placeholder-text');;
+    $('#Sbirthdate').val('Sbirthdate').addClass('placeholder-text');;
+    $('#Sphone').val('Sphone').addClass('placeholder-text');;
+    $('#Semail').val('Semail').addClass('placeholder-text');;
+    $('#Spassword').val('Spassword').addClass('placeholder-text');;
+    $('#Sconfirm_password').val('Sconfirm_password').addClass('placeholder-text');;
+});
 
 </script>
+  <div>
+        <p id="user-greeting"></p>
+    </div>
 </body>
 </html>

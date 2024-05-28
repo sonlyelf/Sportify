@@ -30,7 +30,7 @@ public class UserController {
 	// 登入
 	@PostMapping("/login")
 	private String getLogin(Model model, UserLoginDto userLoginDto) {
-		
+	    //session.setAttribute("user", userLoginDto.getUsername());
 		System.out.println(userLoginDto);
 		return "myCenter"; //會自動指向/WEB-INF/view/.jsp
 	}
@@ -38,7 +38,7 @@ public class UserController {
 	// 登出
 	@PostMapping("/logout")
 	private String getLogout() {
-
+		//session.invalidate();
 		return "index"; //會自動指向/WEB-INF/view/.jsp
 	}
 }

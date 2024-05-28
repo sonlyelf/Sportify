@@ -88,6 +88,11 @@ h4{
   font-size: 26px;
   
 }
+button {
+    background-color: var(--c-point); /* 自定義背景顏色 */
+    color: white; /* 自定義文字顏色 */
+    border: none; /* 去除邊框 */
+  }
 
 @media (min-width: 768px) {
 .container {
@@ -95,8 +100,8 @@ h4{
 }
 
 .sidebar {
-  flex: 0 1 350px;
-  max-width: 500px;
+  flex: 0 1 400px;
+  max-width: 600px;
   margin-right: 20px;
 }
 .content {
@@ -145,6 +150,7 @@ h4{
                                     </ul>
                                 </div>
                                 <li class="nav-item "><a class="nav-link" href="/information">交通資訊</a></li>
+                                <li id="logout-btn" style="display:none;"><a href="/logout">登出</a></li>
                             </div>
                         </div>
                     </div>
@@ -162,9 +168,9 @@ h4{
   <div class="container course-intro">
       <div class="sidebar">
           <picture>
-              <source srcset="../image/course2.1.png" media="(min-width: 769px)">
-              <source srcset="../image/course.1.png" media="(max-width: 768px)">
-              <img src="../image/course2.1.png" alt="課程表" onclick="openModal()">
+              <source srcset="../image/course22.1.png" media="(min-width: 769px)">
+              <source srcset="../image/corse23.1.png" media="(max-width: 768px)">
+              <img src="../image/course22.1.png" alt="課程表" onclick="openModal()">
           </picture>
       </div>
       <div class="content">
@@ -209,7 +215,7 @@ h4{
   <!-- Modal -->
   <div id="myModal">
       <span class="close" onclick="closeModal()">&times;</span>
-      <img src="../image/course2.1.png" alt="課程表">
+      <img src="../image/course22.1.png" alt="課程表">
   </div>
 </main>
 
@@ -240,6 +246,7 @@ h4{
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ <script src="../js/app.js"></script>
 <script>
     if ($('.navbar-toggler').is(':hidden')) {
         $(window).on('scroll', function () {
@@ -289,5 +296,8 @@ h4{
         console.log("Booking the course...");
     } */
 </script>
+  <div>
+        <p id="user-greeting"></p>
+    </div>
 </body>
 </html>
