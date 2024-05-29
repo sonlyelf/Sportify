@@ -192,7 +192,7 @@ fieldset .submit {
                     </ul>
                 </div>
                   <li class="nav-item "><a class="nav-link" href="/information">交通資訊</a></li>
-                  <li id="logout-btn" style="display:none;"><a href="/logout">登出</a></li>
+                   <li class="btn btnLogOut" id="logout-btn" style="display:none;"><a href="/logout">登出</a></li>
                 </div>
               </div>
 
@@ -612,8 +612,6 @@ fieldset .submit {
 
 
   </script>
-  <div>
-        <p id="user-greeting"></p>
-    </div>
+  
 </body>
 </html>

@@ -85,10 +85,9 @@
                                             <li><a class="dropdown-item" href="/member">我的中心</a></li>
                                         </ul>
                                     </div>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/information">交通資訊</a>
-                                          <li class="nav-item logout-btn " ><a class="nav-link" href="/logout">登出</a></li>
-                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="/information">交通資訊</a></li>
+                                    <li class="btn btnLogOut" id="logout-btn" style="display:none;"><a href="/logout">登出</a></li>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -109,8 +108,8 @@
                     </div>
                 
                     <div class="form-group">
-                        <label for="Sbirthdate">出生日期</label>
-                        <input type="date" class="form-control" id="Sbirthdate" name="Sbirthdate" required>
+                        <label for="Sbirthday">出生日期</label>
+                        <input type="date" class="form-control" id="Sbirthday" name="Sbirthday" required>
                     </div>
                     <div class="form-group">
                         <label for="Sphone">手機</label>
@@ -275,8 +274,6 @@
         $('#Sconfirm_password').val('password').addClass('placeholder-text');;
     });
 </script>
-  <div>
-        <p id="user-greeting"></p>
-    </div>
+  
 </body>
 </html>

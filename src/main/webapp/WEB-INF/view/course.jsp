@@ -150,7 +150,7 @@ button {
                                     </ul>
                                 </div>
                                 <li class="nav-item "><a class="nav-link" href="/information">交通資訊</a></li>
-                                <li id="logout-btn" style="display:none;"><a href="/logout">登出</a></li>
+                                 <li class="btn btnLogOut" id="logout-btn" style="display:none;"><a href="/logout">登出</a></li>
                             </div>
                         </div>
                     </div>
@@ -186,9 +186,9 @@ button {
                   <option value="4">Yoga Wheel瑜珈輪 星期日 15:00-16:00</option>
                 </select>
               </div>
-              <p>價格：NT$2000/每期</p>
+              <p>價格：NT$1600/每期</p>
               <div class="d-flex justify-content-end">
-              <button class="submit" id="bookingBtn1" onclick="bookCourse('course-name')">預約</button>
+              <button class="submit" id="bookingBtn1" onclick="bookCourse('course-id')">預約</button>
               </div>
           </section>
           <hr>
@@ -206,7 +206,7 @@ button {
               </div>
               <p>價格:${course.price}/每期</p>
               <div class="d-flex justify-content-end">
-               <button class="submit" id="bookingBtn2" onclick="bookCourse('course-name')">預約</button>
+               <button class="submit" id="bookingBtn2" onclick="bookCourse('course-id')">預約</button>
               </div>
               <hr>
           </section>
@@ -296,8 +296,6 @@ button {
         console.log("Booking the course...");
     } */
 </script>
-  <div>
-        <p id="user-greeting"></p>
-    </div>
+ 
 </body>
 </html>

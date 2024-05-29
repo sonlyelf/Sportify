@@ -36,30 +36,26 @@ public class PathController {
 	@GetMapping("/member")
 	public String getMember() {
 		
-		
 		return "member"; //會自動指向/WEB-INF/view/.jsp
 	}
 	
 	// 註冊
 	@GetMapping("/register")
 	public String getRegister() {
-		
-		
+	
 		return "register"; //會自動指向/WEB-INF/view/.jsp
 	}
 	
 	// 交通資訊
 	@GetMapping("/information")
 	public String getInformation() {
-		
-		
+	
 		return "information"; //會自動指向/WEB-INF/view/.jsp
 	}
 	
 	// 我的中心
 	@GetMapping("/myCenter")
 	public String getMyCenter() {
-		
 		
 		return "myCenter"; //會自動指向/WEB-INF/view/.jsp
 	}

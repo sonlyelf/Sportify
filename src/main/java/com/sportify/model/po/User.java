@@ -1,6 +1,7 @@
 package com.sportify.model.po;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,4 +21,5 @@ public class User {
 	private Date birthday; // 生日
 	private Integer phone; // 手機
 	private String email; // 信箱
+	//private ? salt; // 加鹽
 }

@@ -25,7 +25,11 @@ public class UserController {
 		
 		model.addAttribute("resultMessage", result == 0 ? "註冊成功" : "註冊失敗");			
 		return "register"; //會自動指向/WEB-INF/view/.jsp
+		 
 	}
+	        
+	     
+	
 
 	// 登入
 	@PostMapping("/login")

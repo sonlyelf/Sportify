@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant-TW">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=3.0">
 <meta charset="UTF-8">
 <title>My Center</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
@@ -18,6 +19,7 @@ main {
     justify-content: center;
     align-items: center;
     flex: 1;
+    min-height: 80vh;
         
         }
     
@@ -58,13 +60,14 @@ main {
     margin-bottom: 10px;
     margin-right: 10px;
 }
+.btn-cancel{
+	background-color: rgb(241, 106, 62);
+    color: #fff;
+}
 
 footer{
-    margin-top: 70px;
+    margin-top: 100px;
     
-}
-.placeholder-text {
-    color:black;
 }
 
 @media(min-width:768px){
@@ -127,7 +130,7 @@ footer{
                         </ul>
                     </div>
                     <li class="nav-item "><a class="nav-link" href="/information">交通資訊</a></li>
-                    <li class="nav-item logout-btn " ><a class="nav-link" href="/logout">登出</a></li>
+                   <li class="btn btnLogOut" id="logout-btn" style="display:none;"><a href="/logout">登出</a></li>
                     </div>
                 </div>
                 </div>
@@ -138,7 +141,7 @@ footer{
     </header>
     
     
-    <main>
+      <main>
         <section id="sec1">
             <div class="container-xl">
             <div class="d-md-block text-center col-xl-12" style="color: rgb(26, 123, 220);">
@@ -174,6 +177,7 @@ footer{
                                                                 <th scope="col">日期</th>
                                                                 <th scope="col">時間</th>
                                                                 <th scope="col">金額</th>
+                                                                
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -181,8 +185,19 @@ footer{
                                                                 <td>${course.date}</td>
                                                                 <td>${course.day}</td>
                                                                 <td>${course.price}</td>
+                                                                
                                                             </tr>
-                                                        </tbody>
+                                                            <hr>
+                                                            <tr>
+                                                            	<td></td>
+																<td></td>
+																<td>
+	                                                             <div class="d-flex justify-content-end">
+	                                                            	<button type="submit" class="btn btn-cancel" id="btnCencel" onclick="bookCourse('course-id')">取消預約</button>
+	                                                            </div>
+	                                                            </td>
+	                                                      	</tr>
+                                                        </tbody>   
                                                     </table>
                                                 </div>
                                             </div>
@@ -201,26 +216,26 @@ footer{
                                     <form class="updateInfoForm" id="updateInfoForm" method="post">
                                         <div class="form-group">
                                             <label for="Sname">姓名</label>
-                                            <input type="text" class="form-control" id="Sname" name="Sname" >
+                                            <input type="text" class="form-control" id="Sname" name="Sname" required>
                                         </div>
                     
                                         <div class="form-group">
                                             <label for="Semail">電子信箱</label>
-                                            <input type="email" class="form-control" id="Semail" name="Semail" >
+                                            <input type="email" class="form-control" id="Semail" name="Semail" required>
                                         </div>
                     
                                         <div class="form-group">
                                             <label for="Sphone">手機</label>
-                                            <input type="tel" class="form-control" id="Sphone" name="Sphone" >
+                                            <input type="tel" class="form-control" id="Sphone" name="Sphone" required>
                                         </div>
                             <hr style="border: darkcyan 1px solid;">
                             <div class="form-group">
                                 <label for="Spassword">密碼</label>
-                                <input type="password" class="form-control" id="Spassword" name="Spassword" >
+                                <input type="password" class="form-control" id="Spassword" name="Spassword" required>
                             </div>
                             <div class="form-group">
                                 <label for="Sconfirm_password">確認密碼</label>
-                                <input type="password" class="form-control" id="Sconfirm_password" name="Sconfirm_password" >
+                                <input type="password" class="form-control" id="Sconfirm_password" name="Sconfirm_password" required>
                             </div>
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-update" id="updateBtn">更新</button>
@@ -233,42 +248,38 @@ footer{
             </div>
     
 </section>
-
-
     </main>
     
     
-    
-        <footer class="w-100">
+     <footer class="w-100">
         <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-4 d-flex flex-column">
-            <p class="footer-title " style="font-size: 26px;">SPORTIFy</p>
-            <p>地址：302 新竹縣竹北市十興ＸＸ街25號</p>
-            <p>電話：(03)3456700</p>
-            <p>電子信箱：sportify@gmail.com</p>
-            <p>營業時間：1000-2200</p>
-            </div>
+       		<div class="row">
+           		 <div class="col-12 col-md-4 d-flex flex-column">
+		            <p class="footer-title " style="font-size: 26px;">SPORTIFy</p>
+		            <p>地址：302 新竹縣竹北市十興ＸＸ街25號</p>
+		            <p>電話：(03)3456700</p>
+		            <p>電子信箱：sportify@gmail.com</p>
+		            <p>營業時間：0600-2200</p>
+            	</div>
             <div class="link-comm">
-            <a href="https://line.me/tw/" >
-                <img src="../image/line4.png" width="50" height="auto" alt="">
-            </a>
+	            <a href="https://line.me/tw/" >
+	                <img src="../image/line4.png" width="50" height="auto" alt="">
+	            </a>
             </div>
             <div class="link-comm1">
-            <a href="https://www.instagram.com/">
-                <img src="../image/instagram4.png" width="50" height="auto" alt="">
-            </a>
+	            <a href="https://www.instagram.com/">
+	                <img src="../image/instagram4.png" width="50" height="auto" alt="">
+	            </a>
             </div>
-        </div>
-        </div>
-        </div>
-        </footer>
+        		</div>
+        	</div>
+      </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-     <script src="../js/app.js"></script>
+ 
 <script>
 
 if ($('.navbar-toggler').is(':hidden')) {
@@ -282,18 +293,16 @@ if ($('.navbar-toggler').is(':hidden')) {
 	}
 });
 }
-$(document).ready(function () {
+ $(document).ready(function () {
     $('#Sname').val('Sname').addClass('placeholder-text');;
     $('#Sbirthdate').val('Sbirthdate').addClass('placeholder-text');;
     $('#Sphone').val('Sphone').addClass('placeholder-text');;
     $('#Semail').val('Semail').addClass('placeholder-text');;
     $('#Spassword').val('Spassword').addClass('placeholder-text');;
     $('#Sconfirm_password').val('Sconfirm_password').addClass('placeholder-text');;
-});
+}); 
 
 </script>
-  <div>
-        <p id="user-greeting"></p>
-    </div>
+
 </body>
 </html>
