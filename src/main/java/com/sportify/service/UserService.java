@@ -17,9 +17,7 @@ public class UserService {
   @Autowired
   private UserDao userDao;
   
-  @Autowired
-  private UserRegisterDto userRegisterDto;
-  
+
 	public UserDao getUserDao() {
 		return userDao;
 	}
@@ -54,9 +52,9 @@ public class UserService {
 	
 	
 	// 註冊 User
-	public int registerUser(UserRegisterDto userRegisterDto) {
-		System.out.println(userRegisterDto);
+	public int addUser(UserRegisterDto userRegisterDto) {
 		
+		// 將 DTO 轉換成 PO
 		User user = new User();
 		user.setName(userRegisterDto.getSname());
 		user.setPassword(userRegisterDto.getSpassword());
@@ -64,7 +62,10 @@ public class UserService {
 		user.setEmail(userRegisterDto.getSemail());
 		user.setPhone(userRegisterDto.getSphone());
 
-		return 0;
+		// 將 PO 傳入到 DAO
+		int result = userDao.createUser(user);
+		
+		return result;
 	}
 	
 	// 登入

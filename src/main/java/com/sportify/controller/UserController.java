@@ -11,28 +11,25 @@ import com.sportify.model.dto.UserRegisterDto;
 import com.sportify.service.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping
 public class UserController {
 
 	@Autowired
 	private UserService userService;
 
 	// 註冊
-	@PostMapping("/register")
+	@PostMapping("/registeraaa")
 	private String getRegister(Model model, UserRegisterDto userRegisterDto) {
 		
-		int result = userService.registerUser(userRegisterDto); // 新增 User
-		
+		int result = userService.addUser(userRegisterDto); // 新增 User
+		System.out.println("111111111111 " );
 		model.addAttribute("resultMessage", result == 0 ? "註冊成功" : "註冊失敗");			
-		return "register"; //會自動指向/WEB-INF/view/.jsp
+		return "index"; //會自動指向/WEB-INF/view/.jsp
 		 
 	}
-	        
-	     
-	
 
 	// 登入
-	@PostMapping("/login")
+	@PostMapping("/user/login")
 	private String getLogin(Model model, UserLoginDto userLoginDto) {
 	    //session.setAttribute("user", userLoginDto.getUsername());
 		System.out.println(userLoginDto);
@@ -40,7 +37,7 @@ public class UserController {
 	}
 
 	// 登出
-	@PostMapping("/logout")
+	@PostMapping("/user/logout")
 	private String getLogout() {
 		//session.invalidate();
 		return "index"; //會自動指向/WEB-INF/view/.jsp

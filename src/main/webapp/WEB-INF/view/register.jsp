@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- JSTL 標籤 -->    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<!-- Spring Form 表單標籤 -->
+<%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
@@ -101,41 +107,7 @@
         <div class="row">
             <div class="col-12">
                 <h2 class="my-4 text-center">註冊會員</h2>
-                <form id="registerForm" action="/user/register" method="post">
-                    <div class="form-group">
-                        <label for="Sname">姓名</label>
-                        <input type="text" class="form-control" id="Sname" name="Sname" required>
-                    </div>
-                
-                    <div class="form-group">
-                        <label for="Sbirthday">出生日期</label>
-                        <input type="date" class="form-control" id="Sbirthday" name="Sbirthday" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="Sphone">手機</label>
-                        <input type="tel" class="form-control" id="Sphone" name="Sphone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="Semail">電子信箱</label>
-                        <input type="email" class="form-control" id="Semail" name="Semail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="Spassword">密碼</label>
-                        <input type="password" class="form-control" id="Spassword" name="Spassword" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="Sconfirm_password">確認密碼</label>
-                        <input type="password" class="form-control" id="Sconfirm_password" name="Sconfirm_password" required>
-                    </div>
-                    <div class="form-check mb-3">
-                        <input type="checkbox" class="form-check-input" id="terms" disabled>
-                        <label class="form-check-label" for="terms" >我同意會員條款</label>
-                        <button type="button" class="btn btn-link no-underline" data-bs-toggle="modal" data-bs-target="#termsModal">會員須知</button>
-                    </div>
-                    <div class="text-right">
-                        <button type="submit" class="btn btn-primary" id="submitBtn" disabled>註冊</button>
-                    </div>
-                </form>
+				 
             </div>
         </div>
     </div>
@@ -152,7 +124,41 @@
                 <p>這裡是會員須知的內容。在此列出所有相關的條款和條件，並確保用戶在勾選同意之前閱讀完這些內容。</p>
                 <p>會員條款
 
-                    為保障合法使用「法令訂閱服務」網站（以下簡稱本網站）的權益，敬請詳閱並遵守下列「會員條款」（以下簡稱本條款）。使用本網站之服務者（不論是否加入會員），視為已閱讀、知悉並同意本條款。
+                    為保障合法使用「法令訂閱<sp:form modelAttribute="userRegisterDto" method="post" action="/registeraaa">
+                    <div class="form-group">
+                        <label for="Sname">姓名</label>
+                        <sp:input  class="form-control"  path="Sname" required="required" />
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="Sbirthday">出生日期</label>
+                        <sp:input type="date" class="form-control"  path="Sbirthday" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Sphone">手機</label>
+                        <sp:input type="number" class="form-control"  path="Sphone" required="required"  />
+                    </div>
+                    <div class="form-group">
+                        <label for="Semail">電子信箱</label>
+                        <sp:input type="email" class="form-control"  path="Semail" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Spassword">密碼</label>
+                        <sp:input type="password" class="form-control"  path="Spassword" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Sconfirm_password">確認密碼</label>
+                        <input type="password" class="form-control" path="Sconfirm_password" required="required" />
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="terms" disabled="disabled"/>
+                        <label class="form-check-label" for="terms" >我同意會員條款</label>
+                        <button type="button" class="btn btn-link no-underline" data-bs-toggle="modal" data-bs-target="#termsModal">會員須知</button>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary" id="submitBtn" disabled="disabled">註冊</button>
+                    </div>
+                </sp:form>服務」網站（以下簡稱本網站）的權益，敬請詳閱並遵守下列「會員條款」（以下簡稱本條款）。使用本網站之服務者（不論是否加入會員），視為已閱讀、知悉並同意本條款。
                     
                 <p> 壹：會員權益
                     註冊加入會員享有「法令訂閱服務」，相關權益、使用期限，以註冊為會員時之規定為準。

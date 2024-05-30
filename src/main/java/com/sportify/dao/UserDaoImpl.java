@@ -10,6 +10,7 @@ import com.sportify.model.po.User;
 
 @Repository
 public class UserDaoImpl implements UserDao {
+	
 	JdbcTemplate jdbcTemplate;
 
 	@Override

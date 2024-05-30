@@ -1,7 +1,5 @@
 package com.sportify.model.dto;
-
 import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,9 +12,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserRegisterDto {
 	
+   
 	private String Sname; // 名稱
+
+  
 	private String Spassword; // 密碼
+
 	private Date Sbirthday; // 生日
-	private Integer Sphone; // 手機
+
+   
+	private String Sphone; // 手機
+
 	private String Semail; // 信箱
 }
