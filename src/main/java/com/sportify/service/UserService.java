@@ -1,10 +1,13 @@
 package com.sportify.service;
 
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.sportify.dao.UserDao;
 import com.sportify.model.dto.UserRegisterDto;
@@ -27,18 +30,19 @@ public class UserService {
 		return userDao.FindAllUsers();
 	}
 	
-	public User findById(Integer id) {
+	public Optional <User> findById(Integer id) {
 		return userDao.findById(id);
 	}
 
-	public User findByEmail(String email) {
+	public Optional <User> findByEmail(String email) {
 		return userDao.findByEmail(email);
 	}
 
 	// 更新 User
-	public int updateUser(User user) {
-		return userDao.updateUser(user);
+	public int updateUser(Integer userId, User user) {
+		return userDao.updateUser(userId, user);
 	}
+	
 
 	// 刪除 User
 	public int deleteUser(Integer id) {
@@ -47,15 +51,23 @@ public class UserService {
 
 	// 新增 User
 	public int createUser(User user) {
+		
 		return userDao.createUser(user);
 	}
 	
 	
 	// 註冊 User
+	@PostMapping
 	public int addUser(UserRegisterDto userRegisterDto) {
 		
 		// 將 DTO 轉換成 PO
 		User user = new User();
+//		user.setName("kevin");
+//		user.setBirthday(new Date());
+//		user.setPassword("123456789");
+//		user.setEmail("kevin@gmail.com");
+//		user.setPhone("0987654321");
+//		
 		user.setName(userRegisterDto.getSname());
 		user.setPassword(userRegisterDto.getSpassword());
 		user.setBirthday(userRegisterDto.getSbirthday());
@@ -81,4 +93,8 @@ public class UserService {
 		
 		return 0;
 	}
+
+	
+
+	
 }

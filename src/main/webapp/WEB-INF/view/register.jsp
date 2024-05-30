@@ -112,19 +112,7 @@
         </div>
     </div>
 
-    <!-- 會員須知模態對話框 -->
-    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="termsModalLabel">會員須知</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <class="modal-body">
-                <p>這裡是會員須知的內容。在此列出所有相關的條款和條件，並確保用戶在勾選同意之前閱讀完這些內容。</p>
-                <p>會員條款
-
-                    為保障合法使用「法令訂閱<sp:form modelAttribute="userRegisterDto" method="post" action="/registeraaa">
+   <sp:form modelAttribute="userRegisterDto" method="post" action="/regist">
                     <div class="form-group">
                         <label for="Sname">姓名</label>
                         <sp:input  class="form-control"  path="Sname" required="required" />
@@ -158,7 +146,20 @@
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary" id="submitBtn" disabled="disabled">註冊</button>
                     </div>
-                </sp:form>服務」網站（以下簡稱本網站）的權益，敬請詳閱並遵守下列「會員條款」（以下簡稱本條款）。使用本網站之服務者（不論是否加入會員），視為已閱讀、知悉並同意本條款。
+                </sp:form>
+                 <!-- 會員須知模態對話框 -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">會員須知</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <class="modal-body">
+                <p>這裡是會員須知的內容。在此列出所有相關的條款和條件，並確保用戶在勾選同意之前閱讀完這些內容。</p>
+                <p>會員條款
+
+                    為保障合法使用「法令訂閱服務」網站（以下簡稱本網站）的權益，敬請詳閱並遵守下列「會員條款」（以下簡稱本條款）。使用本網站之服務者（不論是否加入會員），視為已閱讀、知悉並同意本條款。
                     
                 <p> 壹：會員權益
                     註冊加入會員享有「法令訂閱服務」，相關權益、使用期限，以註冊為會員時之規定為準。

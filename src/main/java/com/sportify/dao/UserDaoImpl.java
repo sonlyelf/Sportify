@@ -1,7 +1,9 @@
 package com.sportify.dao;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,22 +13,35 @@ import com.sportify.model.po.User;
 @Repository
 public class UserDaoImpl implements UserDao {
 	
+	@Autowired
 	JdbcTemplate jdbcTemplate;
 
 	@Override
-	public User findById(Integer id) {
+	public Optional<User> findById(Integer id) {
 		
 		String sql = "select id, name from user where id=?";
 		
-		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), id);
+		try {
+			User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), id);
+			return Optional.of(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Optional.of(null);
 	}
 
 	@Override
-	public User findByEmail(String email) {
+	public Optional <User>findByEmail(String email) {
 		
 		String sql = "select id,name,birthday,phone,email from user where email=?";
 
-		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
+		try {
+			User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
+			return Optional.of(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Optional.of(null);
 	}
 
 	@Override
@@ -47,7 +62,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int updateUser(User user) {
+	public int updateUser(Integer userId, User user) {
 		
 		String sql = "update user set name=?, birthday=?, phone=?, email=? where id=?";
 		
