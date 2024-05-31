@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- JSTL 標籤 -->    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<!-- Tomcat 10.x JSTL -->    
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!-- Spring Form 表單標籤 -->
 <%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form" %>
 
@@ -115,28 +115,28 @@
    <sp:form modelAttribute="userRegisterDto" method="post" action="/regist">
                     <div class="form-group">
                         <label for="Sname">姓名</label>
-                        <sp:input  class="form-control"  path="Sname" required="required" />
+                        <sp:input  class="form-control"  path="name" required="required" />
                     </div>
                 
                     <div class="form-group">
                         <label for="Sbirthday">出生日期</label>
-                        <sp:input type="date" class="form-control"  path="Sbirthday" required="required" />
+                        <sp:input type="date" class="form-control"  path="birthday" required="required" />
                     </div>
                     <div class="form-group">
                         <label for="Sphone">手機</label>
-                        <sp:input type="number" class="form-control"  path="Sphone" required="required"  />
+                        <sp:input type="number" class="form-control"  path="phone" required="required"  />
                     </div>
                     <div class="form-group">
                         <label for="Semail">電子信箱</label>
-                        <sp:input type="email" class="form-control"  path="Semail" required="required" />
+                        <sp:input type="email" class="form-control"  path="email" required="required" />
                     </div>
                     <div class="form-group">
                         <label for="Spassword">密碼</label>
-                        <sp:input type="password" class="form-control"  path="Spassword" required="required" />
+                        <sp:input type="password" class="form-control"  path="password" required="required" />
                     </div>
                     <div class="form-group">
                         <label for="Sconfirm_password">確認密碼</label>
-                        <input type="password" class="form-control" path="Sconfirm_password" required="required" />
+                        <input type="password" class="form-control" path="confirm_password" required="required" />
                     </div>
                     <div class="form-check mb-3">
                         <input type="checkbox" class="form-check-input" id="terms" disabled="disabled"/>
@@ -273,12 +273,12 @@
 
     // 自動填充範例數據
     $(document).ready(function () {
-        $('#Sname').val('範例姓名').addClass('placeholder-text');;
-        $('#Sbirthdate').val('1990-01-01').addClass('placeholder-text');;
-        $('#Sphone').val('0912345678').addClass('placeholder-text');;
-        $('#Semail').val('example@example.com').addClass('placeholder-text');;
-        $('#Spassword').val('password').addClass('placeholder-text');;
-        $('#Sconfirm_password').val('password').addClass('placeholder-text');;
+        $('#name').val('範例姓名').addClass('placeholder-text');;
+        $('#birthdate').val('1990-01-01').addClass('placeholder-text');;
+        $('#phone').val('0912345678').addClass('placeholder-text');;
+        $('#email').val('example@example.com').addClass('placeholder-text');;
+        $('#password').val('password').addClass('placeholder-text');;
+        $('#confirm_password').val('password').addClass('placeholder-text');;
     });
 </script>
   

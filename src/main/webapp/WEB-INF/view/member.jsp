@@ -182,12 +182,12 @@
                 <form class="form" method="post" action="/user/login">
                   <div class="loginGroup">
                     <label >帳號
-                      <input type="email" id="Semail" name="Semail" placeholder="請輸入電子信箱" required="required">
+                      <input type="email" id="email" name="email" placeholder="請輸入電子信箱" required="required">
                     </label>
                   </div>
                   <div class="loginGroup">
                     <label >密碼
-                      <input type="password" id="Spassword" name="Spassword" placeholder="請輸入密碼" required="required">
+                      <input type="password" id="password" name="password" placeholder="請輸入密碼" required="required">
                     </label>
                   </div>
                   <div class="btnLogIn">

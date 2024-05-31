@@ -215,27 +215,27 @@ footer{
                                 <p class="text-center" style="background-color: darkcyan; color: rgb(244, 247, 247); font-size: 24px;"">修改基本資料</p>
                                     <form class="updateInfoForm" id="updateInfoForm" method="post">
                                         <div class="form-group">
-                                            <label for="Sname">姓名</label>
-                                            <input type="text" class="form-control" id="Sname" name="Sname" required>
+                                            <label for="name">姓名</label>
+                                            <input type="text" class="form-control" id="name" name="name" required>
                                         </div>
                     
                                         <div class="form-group">
-                                            <label for="Semail">電子信箱</label>
-                                            <input type="email" class="form-control" id="Semail" name="Semail" required>
+                                            <label for="email">電子信箱</label>
+                                            <input type="email" class="form-control" id="email" name="email" required>
                                         </div>
                     
                                         <div class="form-group">
-                                            <label for="Sphone">手機</label>
-                                            <input type="tel" class="form-control" id="Sphone" name="Sphone" required>
+                                            <label for="phone">手機</label>
+                                            <input type="tel" class="form-control" id="phone" name="phone" required>
                                         </div>
                             <hr style="border: darkcyan 1px solid;">
                             <div class="form-group">
-                                <label for="Spassword">密碼</label>
-                                <input type="password" class="form-control" id="Spassword" name="Spassword" required>
+                                <label for="password">密碼</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                             <div class="form-group">
-                                <label for="Sconfirm_password">確認密碼</label>
-                                <input type="password" class="form-control" id="Sconfirm_password" name="Sconfirm_password" required>
+                                <label for="confirm_password">確認密碼</label>
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
                             </div>
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-update" id="updateBtn">更新</button>
@@ -294,12 +294,12 @@ if ($('.navbar-toggler').is(':hidden')) {
 });
 }
  $(document).ready(function () {
-    $('#Sname').val('Sname').addClass('placeholder-text');;
-    $('#Sbirthdate').val('Sbirthdate').addClass('placeholder-text');;
-    $('#Sphone').val('Sphone').addClass('placeholder-text');;
-    $('#Semail').val('Semail').addClass('placeholder-text');;
-    $('#Spassword').val('Spassword').addClass('placeholder-text');;
-    $('#Sconfirm_password').val('Sconfirm_password').addClass('placeholder-text');;
+    $('#name').val('name').addClass('placeholder-text');;
+    $('#birthdate').val('birthdate').addClass('placeholder-text');;
+    $('#phone').val('phone').addClass('placeholder-text');;
+    $('#email').val('email').addClass('placeholder-text');;
+    $('#password').val('password').addClass('placeholder-text');;
+    $('#confirm_password').val('password').addClass('placeholder-text');;
 }); 
 
 </script>

@@ -68,11 +68,11 @@ public class UserService {
 //		user.setEmail("kevin@gmail.com");
 //		user.setPhone("0987654321");
 //		
-		user.setName(userRegisterDto.getSname());
-		user.setPassword(userRegisterDto.getSpassword());
-		user.setBirthday(userRegisterDto.getSbirthday());
-		user.setEmail(userRegisterDto.getSemail());
-		user.setPhone(userRegisterDto.getSphone());
+		user.setName(userRegisterDto.getName());
+		user.setPassword(userRegisterDto.getPassword());
+		user.setBirthday(userRegisterDto.getBirthday());
+		user.setEmail(userRegisterDto.getEmail());
+		user.setPhone(userRegisterDto.getPhone());
 
 		// 將 PO 傳入到 DAO
 		int result = userDao.createUser(user);
@@ -83,8 +83,8 @@ public class UserService {
 	// 登入
 	public UserRegisterDto logintUser(UserRegisterDto userRegisterDto) {
 		User user = new User();
-		user.setEmail(userRegisterDto.getSemail());
-		user.setPassword(userRegisterDto.getSpassword());
+		user.setEmail(userRegisterDto.getEmail());
+		user.setPassword(userRegisterDto.getPassword());
 		return null;
 	}
 	

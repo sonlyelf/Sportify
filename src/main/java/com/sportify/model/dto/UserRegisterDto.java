@@ -13,15 +13,15 @@ import lombok.NoArgsConstructor;
 public class UserRegisterDto {
 	
    
-	private String Sname; // 名稱
+	private String name; // 名稱
 
   
-	private String Spassword; // 密碼
+	private String password; // 密碼
 
-	private Date Sbirthday; // 生日
+	private Date birthday; // 生日
 
    
-	private String Sphone; // 手機
+	private String phone; // 手機
 
-	private String Semail; // 信箱
+	private String email; // 信箱
 }

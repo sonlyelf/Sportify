@@ -2,7 +2,10 @@ package com.sportify.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.sportify.model.dto.UserRegisterDto;
 
 @Controller
 @RequestMapping
@@ -41,8 +44,7 @@ public class PathController {
 	
 	// 註冊
 	@GetMapping("/register")
-	public String getRegister() {
-	
+	public String getRegister(@ModelAttribute UserRegisterDto userRegisterDto) {
 		return "register"; //會自動指向/WEB-INF/view/.jsp
 	}
 	

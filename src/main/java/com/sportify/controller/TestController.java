@@ -20,7 +20,7 @@ import com.sportify.service.UserService;
 
 @Controller
 @RequestMapping("/find")
-public class testController {
+public class TestController {
 	
 	@Autowired
 	UserService userService;
