@@ -1,8 +1,15 @@
 package com.sportify.model.po;
 
 import java.util.Date;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +29,10 @@ public class User {
 	
 	private String password; // 密碼
 	
-	
+	@NotNull(message = "{user.birth.notnull}")
+	@Past(message = "{user.birth.past}")
+	@DateTimeFormat(pattern = "yyyy-MM-dd") // 日期格式
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date birthday; // 生日
 	
 	private String phone; // 手機

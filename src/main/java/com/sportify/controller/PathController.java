@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sportify.model.dto.UserRegisterDto;
+import com.sportify.model.po.User;
 
 @Controller
 @RequestMapping

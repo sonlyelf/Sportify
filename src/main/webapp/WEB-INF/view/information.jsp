@@ -111,7 +111,8 @@
                     </ul>
                   </dix>
                   <li class="nav-item "><a class="nav-link active" href="/information">交通資訊</a></li>
-                   <li class="btn btnLogOut" id="logout-btn" style="display:none;"><a href="/logout">登出</a></li>
+                  <li class="nav-item "><a class="nav-link"
+										href="#" style="display: ${loginStatus==true?'':'none'};" onclick="logout()">登出</a></li>
                 </div>
               </div>
 
@@ -188,7 +189,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-   <script src="../js/app.js"></script>
+  <script src="<c:url value='/js/app.js'/>"></script>
   <script>
 
     //header============

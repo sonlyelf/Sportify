@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.sportify.dao.UserDao;
+import com.sportify.model.dto.UserLoginDto;
 import com.sportify.model.dto.UserRegisterDto;
 import com.sportify.model.po.User;
 
@@ -35,6 +36,9 @@ public class UserService {
 	}
 
 	public Optional <User> findByEmail(String email) {
+		 if ("user@example.com".equals(email)) {  
+	        }
+	       
 		return userDao.findByEmail(email);
 	}
 
@@ -76,17 +80,20 @@ public class UserService {
 
 		// 將 PO 傳入到 DAO
 		int result = userDao.createUser(user);
-		
 		return result;
 	}
 	
+
 	// 登入
-	public UserRegisterDto logintUser(UserRegisterDto userRegisterDto) {
-		User user = new User();
-		user.setEmail(userRegisterDto.getEmail());
-		user.setPassword(userRegisterDto.getPassword());
-		return null;
-	}
+		public UserLoginDto logintUser(UserLoginDto userLoginDto) {
+			User user = new User();
+			user.setEmail(userLoginDto.getEmail());
+			user.setPassword(userLoginDto.getPassword());
+			
+			
+			return null;
+		}
+		
 	
 	// 登出
 	public int logoutUser(UserRegisterDto userRegisterDto) {

@@ -92,7 +92,8 @@
                                         </ul>
                                     </div>
                                     <li class="nav-item"><a class="nav-link" href="/information">交通資訊</a></li>
-                                    <li class="btn btnLogOut" id="logout-btn" style="display:none;"><a href="/logout">登出</a></li>
+                                  <li class="nav-item "><a class="nav-link"
+										href="#" style="display: ${loginStatus==true?'':'none'};" onclick="logout()">登出</a></li>
                                     
                                 </div>
                             </div>
@@ -103,16 +104,16 @@
         </div>
     </header>
 <main>
-    <div class="container form-container">
-        <div class="row">
+ 
+
+   <sp:form modelAttribute="userRegisterDto" method="post" action="/regist">
+		<div class="container form-container">
+		 <div class="row">
             <div class="col-12">
                 <h2 class="my-4 text-center">註冊會員</h2>
 				 
             </div>
         </div>
-    </div>
-
-   <sp:form modelAttribute="userRegisterDto" method="post" action="/regist">
                     <div class="form-group">
                         <label for="Sname">姓名</label>
                         <sp:input  class="form-control"  path="name" required="required" />
@@ -231,12 +232,14 @@
                 <button type="button" class="btn btn-primary" id="agreeBtn">同意</button>
             </div>
         </div>
+        </div>
     </div>
 </div>
 </main>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<c:url value='/js/app.js'/>"></script>
     <script> 
     // 確保桌機版滾動時固定 header
     if ($('.navbar-toggler').is(':hidden')) {

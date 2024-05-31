@@ -1,29 +1,64 @@
-// app.js
 document.addEventListener("DOMContentLoaded", function() {
-    // 假设通过某种方式从后端获取用户登录状态
-    var userLoggedIn = false; // 示例变量，实际情况中应通过后端获取
+    // 假設通過某種方式從後端獲取用戶登錄狀態
+    var userLoggedIn = false; // 示例變量，實際情況中應通過後端獲取
 
-    // 这里可以使用fetch API从后端获取登录状态
+    // 使用 fetch API 從後端獲取登錄狀態
     fetch('/api/check-login')
         .then(response => response.json())
         .then(data => {
             userLoggedIn = data.loggedIn;
-            updateNavbar(userLoggedIn, data.username);
+            updateNavbar(userLoggedIn, data.email);
         });
 
-    function updateNavbar(isLoggedIn, userId) {
+    function updateNavbar(isLoggedIn, userEmail) {
         const loginBtn = document.getElementById('login-btn');
         const logoutBtn = document.getElementById('logout-btn');
         const userGreeting = document.getElementById('user-greeting');
 
         if (isLoggedIn) {
-            loginBtn.style.display = 'none';
-            logoutBtn.style.display = 'block';
-            userGreeting.textContent = `Welcome, ${userId}}!`;
+            if (loginBtn) loginBtn.style.display = 'none';
+            if (logoutBtn) logoutBtn.style.display = 'block';
+            if (userGreeting) userGreeting.textContent = `Welcome, ${userEmail}!`;
         } else {
-            loginBtn.style.display = 'block';
-            logoutBtn.style.display = 'none';
-            userGreeting.textContent = 'Please log in.';
+            if (loginBtn) loginBtn.style.display = 'block';
+            if (logoutBtn) logoutBtn.style.display = 'none';
+            if (userGreeting) userGreeting.textContent = 'Please log in.';
         }
     }
+
+    // 表單提交時處理登錄邏輯
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // 防止表單提交，模擬登入邏輯
+            const email = document.getElementById('email').value;
+            login(email);
+        });
+    }
 });
+
+// 設置 userEmail
+function setUserEmail(userEmail) {
+    document.getElementById("userId").innerText = userEmail;
+}
+
+// 處理登出操作
+function logout() {
+    fetch('/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }).then(response => {
+        if (response.ok) {
+            window.location.href = '/login';
+        }
+    });
+}
+
+// 處理登錄操作
+function login(email) {
+    // 模擬登錄邏輯，可以根據實際需求進行修改
+    setUserEmail(email);
+    updateNavbar(true, email);
+}

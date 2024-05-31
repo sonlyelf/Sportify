@@ -1,5 +1,10 @@
 package com.sportify.model.dto;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +23,8 @@ public class UserRegisterDto {
   
 	private String password; // 密碼
 
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd") // 日期格式
 	private Date birthday; // 生日
 
    
