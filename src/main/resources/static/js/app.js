@@ -43,18 +43,22 @@ function setUserEmail(userEmail) {
 }
 
 // 處理登出操作
-function logout() {
-    fetch('/logout', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+   function logout() {
+            fetch('/user/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = '/index'; // 重定向到主页
+                } else {
+                    console.error('Logout failed');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
         }
-    }).then(response => {
-        if (response.ok) {
-            window.location.href = '/login';
-        }
-    });
-}
 
 // 處理登錄操作
 function login(email) {

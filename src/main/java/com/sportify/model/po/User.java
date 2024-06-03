@@ -32,7 +32,7 @@ public class User {
 	@NotNull(message = "{user.birth.notnull}")
 	@Past(message = "{user.birth.past}")
 	@DateTimeFormat(pattern = "yyyy-MM-dd") // 日期格式
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date birthday; // 生日
 	
 	private String phone; // 手機

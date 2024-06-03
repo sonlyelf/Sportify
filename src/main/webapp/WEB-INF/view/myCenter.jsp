@@ -19,7 +19,7 @@ main {
 	justify-content: center;
 	align-items: center;
 	flex: 1;
-	min-height: 80vh;
+	
 }
 
 /* =====頁籤一般狀態====== */
@@ -145,7 +145,7 @@ footer {
 			<div class="container-xl">
 				<div class="d-md-block text-center col-xl-12"
 					style="color: rgb(26, 123, 220);">
-					${userLoginDto}
+				
 					<h2 style="font-size: 36px" id="mainContent" tabindex="2">我的中心</h2>
 				</div>
 				<nav>
@@ -295,7 +295,7 @@ footer {
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="<c:url value='/js/app.js'/>"></script>
+	<script src="<c:url value='./js/app.js'/>"></script>
 	<script>
 		if ($('.navbar-toggler').is(':hidden')) {
 			$(window).on('scroll', function() {

@@ -295,7 +295,7 @@ img {
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="<c:url value='/js/app.js'/>"></script>
+	<script src="<c:url value='./js/app.js'/>"></script>
 	<script>
 		//header============
 		//當桌機版時....那麼進行以下工作

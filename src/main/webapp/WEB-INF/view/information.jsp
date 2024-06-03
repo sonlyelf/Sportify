@@ -181,7 +181,7 @@
         </div>
       </div>
     </div>
-    </div>
+
   </footer>
 
 
@@ -189,7 +189,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="<c:url value='/js/app.js'/>"></script>
+  <script src="<c:url value='./js/app.js'/>"></script>
   <script>
 
     //header============

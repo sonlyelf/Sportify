@@ -1,6 +1,5 @@
 package com.sportify.service;
 
-
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -16,29 +15,28 @@ import com.sportify.model.po.User;
 
 @Service
 public class UserService {
-	
+
 	// 實作 UserDao
-  @Autowired
-  private UserDao userDao;
-  
+	@Autowired
+	private UserDao userDao;
 
 	public UserDao getUserDao() {
 		return userDao;
 	}
-	
+
 	// 取得所有 User
 	public List<User> findAllUsers() {
 		return userDao.FindAllUsers();
 	}
-	
-	public Optional <User> findById(Integer id) {
+
+	public Optional<User> findById(Integer id) {
 		return userDao.findById(id);
 	}
 
-	public Optional <User> findByEmail(String email) {
-		 if ("user@example.com".equals(email)) {  
-	        }
-	       
+	public Optional<User> findByEmail(String email) {
+		if ("user@example.com".equals(email)) {
+		}
+
 		return userDao.findByEmail(email);
 	}
 
@@ -46,24 +44,16 @@ public class UserService {
 	public int updateUser(Integer userId, User user) {
 		return userDao.updateUser(userId, user);
 	}
-	
 
 	// 刪除 User
 	public int deleteUser(Integer id) {
 		return userDao.deleteUser(id);
 	}
 
-	// 新增 User
-	public int createUser(User user) {
-		
-		return userDao.createUser(user);
-	}
-	
-	
 	// 註冊 User
 	@PostMapping
 	public int addUser(UserRegisterDto userRegisterDto) {
-		
+
 		// 將 DTO 轉換成 PO
 		User user = new User();
 //		user.setName("kevin");
@@ -71,7 +61,13 @@ public class UserService {
 //		user.setPassword("123456789");
 //		user.setEmail("kevin@gmail.com");
 //		user.setPhone("0987654321");
-//		
+//	
+//		// 檢查電子郵件是否已經存在
+//	    Optional<User> existingUser = userDao.findByEmail(userRegisterDto.getEmail());
+//	    if (existingUser.isPresent()) {
+//	        // 如果電子郵件已經存在，可以根據你的需求返回錯誤或者執行其他處理
+//	        return -1; // 或者 throw new RuntimeException("Email already exists!");
+//	    }
 		user.setName(userRegisterDto.getName());
 		user.setPassword(userRegisterDto.getPassword());
 		user.setBirthday(userRegisterDto.getBirthday());
@@ -82,26 +78,29 @@ public class UserService {
 		int result = userDao.createUser(user);
 		return result;
 	}
-	
 
 	// 登入
-		public UserLoginDto logintUser(UserLoginDto userLoginDto) {
-			User user = new User();
-			user.setEmail(userLoginDto.getEmail());
-			user.setPassword(userLoginDto.getPassword());
-			
-			
-			return null;
-		}
+	public UserLoginDto logintUser(UserLoginDto userLoginDto) {
+
+		// 1.後端取資料庫user資料
+		User user = userDao.findByEmail(userLoginDto.getEmail()).get();
 		
-	
+		System.out.println(user);
+		// 2.前端資訊跟user資料做比對
+		if (user.getPassword().equals(userLoginDto.getPassword())) {
+			UserLoginDto userLogin = new UserLoginDto();
+			userLogin.setEmail(user.getEmail());
+			userLogin.setPassword(user.getPassword());
+			return userLogin; 
+		}
+		return new UserLoginDto();
+
+	}
+
 	// 登出
 	public int logoutUser(UserRegisterDto userRegisterDto) {
-		
+
 		return 0;
 	}
 
-	
-
-	
 }

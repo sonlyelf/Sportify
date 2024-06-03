@@ -2,6 +2,8 @@ package com.sportify.dao;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -19,7 +21,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public Optional<User> findById(Integer id) {
 		
-		String sql = "select id, name from user where id=?";
+		String sql = "select id, name ,password from user where id=?";
 		
 		try {
 			User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), id);
@@ -31,23 +33,22 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public Optional <User>findByEmail(String email) {
-		
-		String sql = "select id,name,birthday,phone,email from user where email=?";
-
-		try {
-			User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
-			return Optional.of(user);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return Optional.of(null);
+	public Optional<User> findByEmail(String email) {
+	    String sql = "select id, name, password, email from user where email=?";
+	    
+	    try {
+	        User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
+	        return Optional.ofNullable(user);
+	    } catch (Exception e) {
+	        // 使用記錄器記錄例外狀況，取代列印堆疊追蹤
+	        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+	    }
+	    return Optional.empty();
 	}
-
 	@Override
 	public List<User> FindAllUsers() {
 		
-		String sql = "select id, name,birthday ,phone ,email from user";
+		String sql = "select id,password, name,birthday ,phone ,email from user";
 		List<User> users = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
 		
 		return users;
@@ -64,9 +65,9 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int updateUser(Integer userId, User user) {
 		
-		String sql = "update user set name=?, birthday=?, phone=?, email=? where id=?";
+		String sql = "update user set name=?, birthday=?, phone=?, email=? password=? where id=?";
 		
-		return jdbcTemplate.update(sql, user.getName(), user.getBirthday(), user.getPhone(), user.getEmail(), user.getId());
+		return jdbcTemplate.update(sql, user.getName(), user.getBirthday(), user.getPhone(), user.getEmail(),user.getPassword(), user.getId());
 	}
 
 	@Override

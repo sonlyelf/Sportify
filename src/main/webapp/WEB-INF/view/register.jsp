@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=3.0">
     <meta charset="UTF-8">
     <title>register</title>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/sportlayout.css">
     <link rel="icon" href="../image/Logocopy11.png">
@@ -107,7 +108,7 @@
  
 
    <sp:form modelAttribute="userRegisterDto" method="post" action="/regist">
-		<div class="container form-container">
+		<div class="container form-container" id="from-register">
 		 <div class="row">
             <div class="col-12">
                 <h2 class="my-4 text-center">註冊會員</h2>
@@ -115,28 +116,28 @@
             </div>
         </div>
                     <div class="form-group">
-                        <label for="Sname">姓名</label>
+                        <label for="name">姓名</label>
                         <sp:input  class="form-control"  path="name" required="required" />
                     </div>
                 
                     <div class="form-group">
-                        <label for="Sbirthday">出生日期</label>
+                        <label for="birthday">出生日期</label>
                         <sp:input type="date" class="form-control"  path="birthday" required="required" />
                     </div>
                     <div class="form-group">
-                        <label for="Sphone">手機</label>
+                        <label for="phone">手機</label>
                         <sp:input type="number" class="form-control"  path="phone" required="required"  />
                     </div>
                     <div class="form-group">
-                        <label for="Semail">電子信箱</label>
+                        <label for="email">電子信箱</label>
                         <sp:input type="email" class="form-control"  path="email" required="required" />
                     </div>
                     <div class="form-group">
-                        <label for="Spassword">密碼</label>
+                        <label for="password">密碼</label>
                         <sp:input type="password" class="form-control"  path="password" required="required" />
                     </div>
                     <div class="form-group">
-                        <label for="Sconfirm_password">確認密碼</label>
+                        <label for="confirm_password">確認密碼</label>
                         <input type="password" class="form-control" path="confirm_password" required="required" />
                     </div>
                     <div class="form-check mb-3">
@@ -239,7 +240,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<c:url value='/js/app.js'/>"></script>
+    <script src="<c:url value='./js/app.js'/>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script> 
     // 確保桌機版滾動時固定 header
     if ($('.navbar-toggler').is(':hidden')) {
@@ -283,6 +285,57 @@
         $('#password').val('password').addClass('placeholder-text');;
         $('#confirm_password').val('password').addClass('placeholder-text');;
     });
+    
+ // 获取注册表单
+    const registerForm = document.getElementById('from-register');
+
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // 阻止表单提交默认行为
+
+            // 获取表单数据
+            const formData = new FormData(registerForm);
+
+            // 发送Ajax请求
+            fetch('/regist', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(resultMessage => {
+                // 根据返回的结果消息进行处理
+                alert(resultMessage); // 弹出提示框通知用户
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    } 
+   document.addEventListener('DOMContentLoaded', function() {
+        const emailInput = document.getElementById('email');
+
+        if (emailInput) {
+            emailInput.addEventListener('blur', function() {
+                const email = emailInput.value;
+
+                // 发送Ajax请求检查邮箱是否已被注册
+                fetch(`/check-email?email=${email}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.exists) {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: '警告',
+                                text: '此邮箱已被注册，请使用其他邮箱。',
+                                confirmButtonText: '好的'
+                            });
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        }
+    });
+    
 </script>
   
 </body>
