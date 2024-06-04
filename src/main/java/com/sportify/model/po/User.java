@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,8 @@ public class User {
 	@Size(min = 2, max = 50, message = "{user.name.size}")
 	private String name; // 名稱
 	
+	@NotEmpty(message = "{user.password.notnull}")
+	@Size(min = 6, max = 50, message = "{user.password.size}")
 	private String password; // 密碼
 	
 	@NotNull(message = "{user.birth.notnull}")
@@ -35,8 +38,10 @@ public class User {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date birthday; // 生日
 	
+	@NotEmpty(message = "{user.phone.notnull}")
 	private String phone; // 手機
 	
+	@NotEmpty(message = "{user.email.notnull}")
 	private String email; // 信箱
 	//private ? salt; // 加鹽
 }

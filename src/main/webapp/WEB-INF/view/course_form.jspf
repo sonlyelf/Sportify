@@ -1,0 +1,54 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isErrorPage="true"%>
+<!-- Tomcat 10.x JSTL -->    
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<!-- Spring Form 表單標籤 -->
+<%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form" %>
+<sp:form action="/backgroundCourse" method="post" modelAttribute="courseDto" class="pure-form pure-form-aligned">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="name">Name:</label>
+            <sp:input path="name" id="name" required="true"/>
+        </div>
+        
+        <div class="pure-control-group">
+            <label for="startDate">Start Date:</label>
+            <sp:input path="start_date" id="start_date" type="date" required="true"/>
+        </div>
+        
+        <div class="pure-control-group">
+            <label for="endDate">End Date:</label>
+            <sp:input path="end_date" id="end_date" type="date" required="true"/>
+        </div>
+        
+        <div class="pure-control-group">
+            <label for="startTime">Start Time:</label>
+            <sp:input path="start_time" id="start_time" type="time" required="true"/>
+        </div>
+        
+        <div class="pure-control-group">
+            <label for="endTime">End Time:</label>
+            <sp:input path="end_time" id="end_time" type="time" required="true"/>
+        </div>
+        
+        <div class="pure-control-group">
+            <label for="day">Day:</label>
+            <sp:input path="day" id="day" required="true"/>
+        </div>
+        
+        <div class="pure-control-group">
+            <label for="price">Price:</label>
+            <sp:input path="price" id="price" type="number" required="true"/>
+        </div>
+        
+        <div class="pure-control-group">
+            <label for="groupId">Group ID:</label>
+            <sp:input path="group_id" id="group_id" type="number" required="true"/>
+        </div>
+        
+        <div class="pure-controls">
+            <button type="submit" class="pure-button pure-button-primary">新增</button>
+        </div>
+    </fieldset>
+</sp:form>

@@ -62,5 +62,8 @@ public class PathController {
 		
 		return "myCenter"; //會自動指向/WEB-INF/view/.jsp
 	}
+	
+
+
 }
 

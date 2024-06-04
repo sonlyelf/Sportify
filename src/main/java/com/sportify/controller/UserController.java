@@ -1,5 +1,7 @@
 package com.sportify.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sportify.model.dto.UserLoginDto;
 import com.sportify.model.dto.UserRegisterDto;
@@ -24,8 +28,17 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@GetMapping("/check-email")
+    @ResponseBody
+    public Map<String, Boolean> checkEmail(@RequestParam("email") String email) {
+        Map<String, Boolean> response = new HashMap<>();
+        Optional<User> existingUser = userService.findByEmail(email);
+        response.put("exists", existingUser.isPresent());
+        return response;
+    }
+	
 	@PostMapping("/regist")
-	private String getRegister(Model model, UserRegisterDto userRegisterDto, HttpSession session) {
+	public String getRegister(Model model, UserRegisterDto userRegisterDto, HttpSession session) {
 	    // 檢查郵件是否已存在
 	    Optional<User> existingUser = userService.findByEmail(userRegisterDto.getEmail());
 	    if (existingUser.isPresent()) {

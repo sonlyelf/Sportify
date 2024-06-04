@@ -17,9 +17,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Course {
 	
-	private Integer courseid;
+	private Integer id;
 	
-	private String coursename;
+	private String name;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd") // 日期格式
 	@JsonFormat(pattern = "yyyy-MM-dd")
@@ -28,10 +28,15 @@ public class Course {
 	@DateTimeFormat(pattern = "yyyy-MM-dd") // 日期格式
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
-	
+	@DateTimeFormat(pattern = "HH:mm:ss") // 日期格式
+	@JsonFormat(pattern = "HH:mm:ss")
 	private Time startTime;
+	@DateTimeFormat(pattern = "HH:mm:ss") // 日期格式
+	@JsonFormat(pattern = "HH:mm:ss")
 	private Time endTime;
 	private String day;
 	private Integer price;
+	
+	private Integer groupId;
 
 }

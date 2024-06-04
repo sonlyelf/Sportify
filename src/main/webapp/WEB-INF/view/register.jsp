@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isErrorPage="true"%>
 <!-- Tomcat 10.x JSTL -->    
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
@@ -54,6 +54,7 @@
         .placeholder-text {
             color: rgb(154, 150, 150);
         }
+      
     </style>
 </head>
 <body>
@@ -115,30 +116,34 @@
 				 
             </div>
         </div>
+        <input name="_method" type="hidden" value="${ _method }" />
                     <div class="form-group">
                         <label for="name">姓名</label>
-                        <sp:input  class="form-control"  path="name" required="required" />
+                        <sp:input  class="form-control" id="name" name="name" path="name" required="required" />
+                    
                     </div>
                 
                     <div class="form-group">
                         <label for="birthday">出生日期</label>
-                        <sp:input type="date" class="form-control"  path="birthday" required="required" />
+                        <sp:input type="date" class="form-control" id="birthday" name="birthday" path="birthday" required="required" />
                     </div>
                     <div class="form-group">
                         <label for="phone">手機</label>
-                        <sp:input type="number" class="form-control"  path="phone" required="required"  />
+                        <sp:input type="number" class="form-control" id="phone" name="phone" path="phone" required="required"  />
                     </div>
                     <div class="form-group">
-                        <label for="email">電子信箱</label>
-                        <sp:input type="email" class="form-control"  path="email" required="required" />
+                        <label for="email">電子信箱 </label>
+                        <span style="color: red">${error}</span>
+                        <sp:input type="email" class="form-control" id="email" name="email"  path="email" required="required" />
+                       
                     </div>
                     <div class="form-group">
                         <label for="password">密碼</label>
-                        <sp:input type="password" class="form-control"  path="password" required="required" />
+                        <sp:input type="password" class="form-control" id="password" name="password" path="password" required="required" />
                     </div>
                     <div class="form-group">
                         <label for="confirm_password">確認密碼</label>
-                        <input type="password" class="form-control" path="confirm_password" required="required" />
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" path="confirm_password" required="required" />
                     </div>
                     <div class="form-check mb-3">
                         <input type="checkbox" class="form-check-input" id="terms" disabled="disabled"/>
@@ -286,55 +291,9 @@
         $('#confirm_password').val('password').addClass('placeholder-text');;
     });
     
- // 获取注册表单
-    const registerForm = document.getElementById('from-register');
-
-    if (registerForm) {
-        registerForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // 阻止表单提交默认行为
-
-            // 获取表单数据
-            const formData = new FormData(registerForm);
-
-            // 发送Ajax请求
-            fetch('/regist', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(resultMessage => {
-                // 根据返回的结果消息进行处理
-                alert(resultMessage); // 弹出提示框通知用户
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    } 
-   document.addEventListener('DOMContentLoaded', function() {
-        const emailInput = document.getElementById('email');
-
-        if (emailInput) {
-            emailInput.addEventListener('blur', function() {
-                const email = emailInput.value;
-
-                // 发送Ajax请求检查邮箱是否已被注册
-                fetch(`/check-email?email=${email}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.exists) {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: '警告',
-                                text: '此邮箱已被注册，请使用其他邮箱。',
-                                confirmButtonText: '好的'
-                            });
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            });
-        }
-    });
+    
+    
+  
     
 </script>
   

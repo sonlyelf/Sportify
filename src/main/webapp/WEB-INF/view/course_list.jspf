@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isErrorPage="true"%>
+<!-- Tomcat 10.x JSTL -->    
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<!-- Spring Form 表單標籤 -->
+<%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form" %>
+
+<fieldset>
+    <legend>Course Form</legend>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Day</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Price</th>
+            <th>Group</th>
+            <th>Actions</th>
+        </tr>
+        <c:forEach var="courses" items="${courses}">
+            <tr>
+                <td>${course.id}</td>
+                <td>${course.name}</td>
+                <td>${course.start_date}</td>
+                <td>${course.end_date}</td>
+                <td>${course.day}</td>
+                <td>${course.start_time}</td>
+                <td>${course.end_time}</td>
+                <td>${course.price}</td>
+                <td>${course.group_id}</td>
+                <td>
+                    <a href="/backgroundCourse/id/${course.id}">View</a>
+                    <form action="/backgroundCourse/update/${course.id}" method="post" style="display:inline;">
+                        <input name="_method" type="hidden" value="PUT">
+                        <input type="submit" value="修改">
+                    </form>
+                    <form action="/backgroundCourse/delete/${course.id}" method="post" style="display:inline;">
+                        <input name="_method" type="hidden" value="DELETE">
+                        <input type="submit" value="刪除">
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+</fieldset>
