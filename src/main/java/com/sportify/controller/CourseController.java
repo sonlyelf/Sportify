@@ -33,14 +33,15 @@ public class CourseController {
     
     // 查找所有課程
     @GetMapping
-    public String findAll(Model model) {
+    public String findAll(@ModelAttribute CourseDto courseDto, Model model) {
         model.addAttribute("courses", courseService.findAllCourses());
+        model.addAttribute("method", "POST");
         return "backgroundCourse";
     }
     
     // 根據課程ID查找課程
     @GetMapping("/id/{id}")
-    public String findById(@PathVariable Integer id, Model model) {
+    public String findById(@ModelAttribute CourseDto courseDto, @PathVariable Integer id, Model model) {
         model.addAttribute("course", courseService.getCourseById(id));
         return "backgroundCourse";
     }
@@ -48,18 +49,32 @@ public class CourseController {
     // 新增課程
     @PostMapping
     public String add(@ModelAttribute CourseDto courseDto, Model model) {
+    	System.out.println(courseDto);
         int result = courseService.addCourse(courseDto);
+        
         String message = "課程新增" + (result == 1 ? "成功" : "失敗");
         model.addAttribute("message", message);
-        return "backgroundCourse";
+        return "redirect:/backgroundCourse";
+    }
+    
+    // 修改課程
+    @PutMapping
+    public String update(@ModelAttribute CourseDto courseDto, Model model) {
+    	System.out.println(courseDto);
+        int result = courseService.amendCourse(courseDto);
+        
+        String message = "課程修改" + (result == 1 ? "成功" : "失敗");
+        model.addAttribute("message", message);
+        return "redirect:/backgroundCourse";
     }
     
     // 更新課程
     @PutMapping("/update/{id}")
-    public String update(@PathVariable Integer id, @ModelAttribute Course course, Model model) {
-        int rowcount = courseService.updateCourse(id, course);
-        String message = "課程修改" + (rowcount == 1 ? "成功" : "失敗");
-        model.addAttribute("message", message);
+    public String update(@PathVariable Integer id, Model model) {
+    	Course course = courseService.getCourseById(id);
+    	model.addAttribute("method", "PUT");
+    	model.addAttribute("courses", courseService.findAllCourses());
+        model.addAttribute("course", course);
         return "backgroundCourse";
     }
     
@@ -69,7 +84,7 @@ public class CourseController {
         int rowcount = courseService.deleteCourse(id);
         String message = "課程取消" + (rowcount == 1 ? "成功" : "失敗");
         model.addAttribute("message", message);
-        return "backgroundCourse";
+        return "redirect:/backgroundCourse";
     }
 }
 

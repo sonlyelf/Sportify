@@ -17,34 +17,27 @@ public class CourseDaoImpl implements CourseDao {
 	JdbcTemplate jdbcTemplate ;
 
 	@Override
-	public Optional<Course > findById(Integer id) {
-		String sql = "select id, name, start_date, end_date, start_time, end_time, day, price from course where id=?";
-		
-		try {
-			Course course = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Course.class), id);
-			return Optional.ofNullable(course);  
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return Optional.of(null); 
+	public Course findById(Integer id) {
+		String sql = "select id, name, startDate, endDate, time, day, price, groupId from course where id=?";
+		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Course.class), id);
 	}
 
 	@Override
 	public List<Course> findAllCourses() {
-		String sql = "select id, name, start_date, end_date, start_time, end_time, day, price ,group_id from course";
+		String sql = "select id, name, startDate, endDate, time, day, price ,groupId from course";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Course.class));
 	}
 
 	@Override
 	public int createCourse(Course course) {
-		String sql = "insert into course( name, start_date, end_date, start_time, end_time, day, price,group_id) values(?,?,?,?,?,?,?,?)";
-		return jdbcTemplate.update(sql, course.getName(), course.getStartDate(), course.getEndDate(), course.getStartTime(), course.getEndTime(), course.getDay(), course.getPrice(),course.getGroupId());
+		String sql = "insert into course( name, startDate, endDate, time, day, price,groupId) values(?,?,?,?,?,?,?)";
+		return jdbcTemplate.update(sql, course.getName(), course.getStartDate(), course.getEndDate(), course.getTime(), course.getDay(), course.getPrice(),course.getGroupId());
 	}
 
 	@Override
-	public int updateCourse(Integer id, Course course) {
-		String sql = "update course set name=?, start_date=?, end_date=?, start_time=?, end_time=?, day=?, price=? group_id=? where id=?";
-		return jdbcTemplate.update(sql, course.getName(), course.getStartDate(), course.getEndDate(), course.getStartTime(), course.getEndTime(), course.getDay(), course.getPrice(),course.getGroupId(), id);
+	public int updateCourse (Course course) {
+		String sql = "update course set name=?, startDate=?, endDate=?, time=?, day=?, price=?,groupId=? where id=?";
+		return jdbcTemplate.update(sql, course.getName(), course.getStartDate(), course.getEndDate(), course.getTime(), course.getDay(), course.getPrice(),course.getGroupId(), course.getId());
 	}
 
 	@Override
@@ -55,7 +48,7 @@ public class CourseDaoImpl implements CourseDao {
 
 	@Override
 	public List<Course> getGroupCourse(Integer groupId) {
-		String sql = "select group_id, name,  from course where id in (select id from groupcourse where group_id = ?)";
+		String sql = "select groupId, name,  from course where id in (select id from groupcourse where groupId = ?)";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Course.class), groupId);
 	}
 

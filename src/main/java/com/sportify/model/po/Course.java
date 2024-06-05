@@ -1,7 +1,6 @@
 package com.sportify.model.po;
 
 
-import java.sql.Time;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,12 +27,9 @@ public class Course {
 	@DateTimeFormat(pattern = "yyyy-MM-dd") // 日期格式
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
-	@DateTimeFormat(pattern = "HH:mm:ss") // 日期格式
-	@JsonFormat(pattern = "HH:mm:ss")
-	private Time startTime;
-	@DateTimeFormat(pattern = "HH:mm:ss") // 日期格式
-	@JsonFormat(pattern = "HH:mm:ss")
-	private Time endTime;
+	
+	private String time;
+	
 	private String day;
 	private Integer price;
 	

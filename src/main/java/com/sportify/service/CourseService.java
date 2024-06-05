@@ -24,7 +24,7 @@ public class CourseService {
 		return courseDao;
 	}
 	
-	public Optional<Course> getCourseById(Integer id) {
+	public Course getCourseById(Integer id) {
 		return courseDao.findById(id);
 	}
 
@@ -34,8 +34,22 @@ public class CourseService {
 
 
 	
-	public int updateCourse(Integer id, Course course) {
-		return courseDao.updateCourse(id, course);
+	public int amendCourse(CourseDto courseDto)  {
+		// 1.後端取資料庫user資料
+					Course course= new Course();
+					course.setId(courseDto.getId());
+					course.setName(courseDto.getName());
+					course.setStartDate(courseDto.getStartDate());
+					course.setEndDate(courseDto.getEndDate());
+					course.setTime(courseDto.getTime());
+					course.setDay(courseDto.getDay());
+					course.setPrice(courseDto.getPrice());
+					course.setGroupId(courseDto.getGroupId());
+					System.out.println(courseDto);
+					
+					int result = courseDao.updateCourse(course);
+						return result;
+		
 	}
 	
 	public  int deleteCourse(Integer id) {
@@ -51,19 +65,16 @@ public class CourseService {
 		public  int addCourse(CourseDto courseDto) {
 
 			// 1.後端取資料庫user資料
-			Course course= new Course();
+		Course course= new Course();
 			course.setName(courseDto.getName());
 			course.setStartDate(courseDto.getStartDate());
 			course.setEndDate(courseDto.getEndDate());
-			course.setStartTime(courseDto.getStartTime());
-			course.setEndTime(courseDto.getEndTime());
+			course.setTime(courseDto.getTime());
 			course.setDay(courseDto.getDay());
 			course.setPrice(courseDto.getPrice());
 			course.setGroupId(courseDto.getGroupId());
-			courseDao.createCourse(course);
+			int result= courseDao.createCourse(course);
 			System.out.println(courseDto);
-			
-			int result = courseDao.createCourse(course);
 			
 				return result;
 			
