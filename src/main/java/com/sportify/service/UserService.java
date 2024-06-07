@@ -41,8 +41,8 @@ public class UserService {
 	}
 
 	// 更新 User
-	public int updateUser(Integer userId, User user) {
-		return userDao.updateUser(userId, user);
+	public int updateUser( User user) {
+		return userDao.updateUser(user);
 	}
 
 	// 刪除 User

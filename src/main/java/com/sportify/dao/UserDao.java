@@ -15,7 +15,7 @@ public interface UserDao {
 
     int createUser(User user); // 建立 User
 
-	int updateUser(Integer userId, User user); // 更新 User
+	int updateUser(User user); // 更新 User
 
 	int deleteUser(Integer id); // 刪除 User
 

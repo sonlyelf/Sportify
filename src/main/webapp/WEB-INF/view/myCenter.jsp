@@ -111,32 +111,22 @@ footer {
 							<div class="collapse navbar-collapse" id="navbarSupportedContent">
 								<!-- 這是一組選單，me-auto負責margin都在右邊，ms-auto負責margin都在左邊 -->
 								<div class="navbar-nav ms-auto">
-									<li class="nav-item"><a class="nav-link " href="/index">訊息公告</a>
-									</li>
-									<li class="nav-item"><a class="nav-link"
-										href="/announcement">課程介紹</a></li>
-									<li class="nav-item"><a class="nav-link" href="/course">課程報名</a></li>
-									<div class="dropdown">
-										<a class="nav-link active dropdown-toggle" href="#"
-											id="memberDropdown" role="button" data-bs-toggle="dropdown"
-											aria-expanded="false"> 會員中心 </a>
-										<ul class="dropdown-menu dropdown-menu-dark"
-											aria-labelledby="memberDropdown">
-											<li><a class="dropdown-item" href="#" style="display: ${loginStatus==true?'':'none'};" onclick="logout()">登出</a></li>
-											<li><a class="dropdown-item" href="/myCenter">我的中心</a></li>
-										</ul>
-									</div>
-									<li class="nav-item "><a class="nav-link"
-										href="/information">交通資訊</a></li>
-									<li class="nav-item "><a class="nav-link"
-										href="#" style="display: ${loginStatus==true?'':'none'};" onclick="logout()">登出</a></li>
-								</div>
-							</div>
-						</div>
-					</nav>
+										<li class="nav-item"><a class="nav-link " href="/index">訊息公告</a></li>
+										<li class="nav-item"><a class="nav-link"href="/announcement">課程介紹</a></li>
+										<li class="nav-item"><a class="nav-link" href="/course">課程報名</a></li>
+										<li class="nav-item"> <a class="nav-link" href="/myCenter">會員中心</a></li>
+										<li class="nav-item "><a class="nav-link"href="/information">交通資訊</a></li>
+			                  			<li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
+						                <li class="nav-item"><a id="login-btn" class="nav-link" href="/member" onclick="showLoginForm()">登入</a></li>
+						            </div>
+						        </div>
+       									 <span id="user-greeting" style="display: none;"></span>
+                            </div>
+                    
+          				</nav>
+					</div>				
 				</div>
 			</div>
-		</div>
 	</header>
 
 
@@ -295,7 +285,7 @@ footer {
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="<c:url value='./js/app.js'/>"></script>
+	<script src="/js/app.js"></script>
 	<script>
 		if ($('.navbar-toggler').is(':hidden')) {
 			$(window).on('scroll', function() {

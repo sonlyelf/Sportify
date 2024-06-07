@@ -27,6 +27,7 @@ public class CourseDto {
 	private String time;
 	
 	private String day;
+	
 	private Integer price;
 	private Integer groupId;
 

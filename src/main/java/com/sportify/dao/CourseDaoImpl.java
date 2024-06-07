@@ -48,8 +48,14 @@ public class CourseDaoImpl implements CourseDao {
 
 	@Override
 	public List<Course> getGroupCourse(Integer groupId) {
-		String sql = "select groupId, name,  from course where id in (select id from groupcourse where groupId = ?)";
+		String sql = "select id, name, startDate, endDate, time, day, price, groupId from course where groupId=?";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Course.class), groupId);
+	}
+
+	@Override
+	public List<Integer> getAllGroupId() {
+		String sql = "SELECT groupId FROM course group by groupId";
+		return jdbcTemplate.queryForList(sql, Integer.class);
 	}
 
 }

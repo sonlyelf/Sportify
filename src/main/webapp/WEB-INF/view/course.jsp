@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<!-- Tomcat 10.x JSTL -->    
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<!-- Spring Form 表單標籤 -->
+<%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form" %>
+
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+
+
+
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
@@ -10,8 +21,7 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/sportlayout.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <link rel="icon" href="../image/Logocopy11.png">
 
 <style>
@@ -32,6 +42,7 @@ main h2 {
 	width: 100%;
 	cursor: pointer;
 	transition: transform 0.3s ease;
+	
 }
 
 .sidebar img:hover {
@@ -97,24 +108,42 @@ button {
 	color: white; /* 自定義文字顏色 */
 	border: none; /* 去除邊框 */
 }
+.rwd-select {
+   flex-direction: row;
+    flex-wrap: wrap;
+ }
+
+   .rwd-select select {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+ .form-select {
+        width: 100%; /* 確保下拉選單在小螢幕上佔滿寬度 */
+    }
+    
 
 @media ( min-width : 768px) {
-	.container {
-		flex-direction: row;
-	}
-	.sidebar {
-		flex: 0 1 400px;
-		max-width: 600px;
-		margin-right: 20px;
-	}
-	.content {
-		display: flex;
-		flex-direction: column;
-		flex: 1 1 500px;
-		text-align: left;
-		padding: 20px;
-		margin-left: 200px;
-	}
+
+    .container {
+        flex-direction: row;
+    }
+    .sidebar {
+        flex: 0 1 400px;
+        max-width: 600px;
+        margin-right: 20px;
+    }
+  
+    .content {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 500px;
+        text-align: left;
+        padding: 20px;
+        margin-left: 200px;
+    }
+    .form-select {
+            width: auto; /* 在桌機版上自動調整寬度 */
+        }   
 }
 </style>
 </head>
@@ -147,27 +176,19 @@ button {
 										href="/announcement">課程介紹</a></li>
 									<li class="nav-item"><a class="nav-link active"
 										href="/course">課程報名</a></li>
-									<div class="dropdown">
-										<a class="nav-link  dropdown-toggle" href="#"
-											id="memberDropdown" role="button" data-bs-toggle="dropdown"
-											aria-expanded="false"> 會員中心 </a>
-										<ul class="dropdown-menu dropdown-menu-dark"
-											aria-labelledby="memberDropdown">
-											<li><a class="dropdown-item" href="/register">註冊會員</a></li>
-											<li><a class="dropdown-item" href="/member">我的中心</a></li>
-										</ul>
-									</div>
-									<li class="nav-item "><a class="nav-link"
-										href="/information">交通資訊</a></li>
-									<li class="nav-item "><a class="nav-link"
-										href="#" style="display: ${loginStatus==true?'':'none'};" onclick="logout()">登出</a></li>
-								</div>
-							</div>
-						</div>
-					</nav>
+									<li class="nav-item"> <a class="nav-link" href="/myCenter" >會員中心</a></li>
+									<li class="nav-item "><a class="nav-link"href="/information">交通資訊</a></li>
+				                  	<li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
+						            <li class="nav-item"><a id="login-btn" class="nav-link" href="/member" onclick="showLoginForm()">登入</a></li>
+						            </div>
+						        </div>
+       									 <span id="user-greeting" style="display: none;"></span>
+                            </div>
+                    
+          				</nav>
+					</div>				
 				</div>
 			</div>
-		</div>
 	</header>
 
 	<main>
@@ -183,53 +204,33 @@ button {
 				<img src="../image/course22.1.png" alt="課程表" onclick="openModal()">
 				</picture>
 			</div>
-			<div class="content">
-				<section id="course_id" class="course-detail">
-					<h4>Yoga Wheel瑜珈輪</h4>
-					<div class="mb-3">
-						<label for="booking" class="form-label">2024/07/01~2024/08/31</label>
-						<select name="booking-course" id="booking_course"
-							class="form-select" required>
-							<option value="" selected disabled>請選擇預約課程...</option>
-							<option value="1">Yoga Wheel瑜珈輪 星期一 17:10-18:10</option>
-							<option value="2">Yoga Wheel瑜珈輪 星期三 17:10-18:10</option>
-							<option value="3">Yoga Wheel瑜珈輪 星期六 18:20-19:20</option>
-							<option value="4">Yoga Wheel瑜珈輪 星期日 15:00-16:00</option>
-						</select>
-					</div>
-					<p>價格：NT$1600/每期</p>
-					<div class="d-flex justify-content-end">
-						<button class="submit" id="bookingBtn1"
-							onclick="bookCourse('course-id')">預約</button>
-					</div>
-				</section>
-				<hr>
-				<section id="course_id" class="course-detail">
-					<h4>${course.name}</h4>
-					<div class="mb-3">
-						<label for="booking" class="form-label">${course.start-date}~${course.end-date}</label>
-						<select name="booking-course" id="booking_course"
-							class="form-select" required>
-							<option value="" selected disabled>請選擇預約課程...</option>
-							<option value="1">${course.name}${course.day}
-								${course.startTime}-${course.endTime}</option>
-							<option value="2">${course.name}${course.day}
-								${course.startTime}-${course.endTime}</option>
-							<option value="3">${course.name}${course.day}
-								${course.startTime}-${course.endTime}</option>
-							<option value="4">${course.name}${course.day}
-								${course.startTime}-${course.endTime}</option>
-						</select>
-					</div>
-					<p>價格:${course.price}/每期</p>
-					<div class="d-flex justify-content-end">
-						<button class="submit" id="bookingBtn2"
-							onclick="bookCourse('course-id')">預約</button>
-					</div>
-					<hr>
-				</section>
-			</div>
-		</div>
+<div class="content">
+    <!-- 根據課程名稱選擇 -->
+    <c:forEach items="${groups}" var="courses">
+        <section class="group-section">
+            <h4>${courses[0].name }</h4>
+            <section id="course_${courses[0].groupId}" class="course-detail">
+                <form id="bookingForm_${courses[0].groupId}" onsubmit="bookCourse(event, 'course_${courses[0].groupId}')">
+                    <div class="mb-3">
+                        <label for="booking" class="form-label">${courses[0].startDate} ~ ${courses[0].endDate}</label>
+                        <div class="rwd-select">
+                            <select name="booking-course" class="form-select" required>
+                                <option value="" selected disabled>請選擇預約課程...</option>
+                                <c:forEach items="${courses}" var="course">
+                                    <option path="${course.id}" value="${course.id}">${course.name} ${course.day} ${course.time} 價格：NT$ ${course.price}/每期</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="submit" id="bookingBtn_${courses[0].groupId}">預約</button>
+                    </div>
+                </form>
+            </section>
+            <hr>
+        </section>
+    </c:forEach>
+</div>
 		<!-- Modal -->
 		<div id="myModal">
 			<span class="close" onclick="closeModal()">&times;</span> <img
@@ -266,7 +267,7 @@ button {
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="<c:url value='./js/app.js'/>"></script>
+	<script src="/js/app.js"></script>
 	<script>
 		if ($('.navbar-toggler').is(':hidden')) {
 			$(window).on('scroll', function() {
@@ -278,7 +279,11 @@ button {
 				}
 			});
 		}
-
+		
+		
+		
+		
+		
 		function openModal() {
 			document.getElementById('myModal').style.display = "flex";
 		}
@@ -287,31 +292,30 @@ button {
 			document.getElementById('myModal').style.display = "none";
 		}
 
-		document.getElementById('bookingBtn1').addEventListener('click',
-				function() {
-					checkLoginAndBook();
-				});
+		
+		
+		  document.querySelectorAll('[id^="bookingBtn_"]').forEach(button => {
+		        button.addEventListener('click', function() {
+		            checkLoginAndBook(this);
+		        });
+		    });
 
-		document.getElementById('bookingBtn2').addEventListener('click',
-				function() {
-					checkLoginAndBook();
-				});
+		    function checkLoginAndBook(button) {
+		        var isLoggedIn = false; // 這裡應該根據實際情況設置
 
-		function checkLoginAndBook() {
-			var isLoggedIn = false; // 這裡應該根據實際情況設置
-
-			if (!isLoggedIn) {
-				Swal.fire({
-					title : '請先登入',
-					text : '您需要登入才能預約',
-					icon : 'warning',
-					confirmButtonText : '確定'
-				});
-			} else {
-				// 用戶已登入，執行預約操作
-				bookCourse();
-			}
-		}
+		        if (!isLoggedIn) {
+		            Swal.fire({
+		                title: '請先登入',
+		                text: '您需要登入才能預約',
+		                icon: 'warning',
+		                confirmButtonText: '確定'
+		            });
+		        } else {
+		            // 用戶已登入，提交表單
+		            var formId = button.closest('form').id;
+		            document.getElementById(formId).submit();
+		        }
+		    }
 		/*   function bookCourse() {
 		      // 實際預約課程的邏輯
 		      console.log("Booking the course...");

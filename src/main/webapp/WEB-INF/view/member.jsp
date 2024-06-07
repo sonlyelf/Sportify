@@ -10,6 +10,8 @@
 <title>member</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">	
+	
 <link rel="stylesheet" href="../css/sportlayout.css">
 <link rel="icon" href="../image/Logocopy11.png">
 <style>
@@ -25,7 +27,7 @@ main h2 {
 	margin-top: 200px;
 }
 
-.login {
+.form{
 	max-width: 800px; /* 增加最大寬度 */
 	margin: 0 auto; /* 居中對齊 */
 	padding: 20px;
@@ -145,34 +147,24 @@ footer {
 							<div class="collapse navbar-collapse" id="navbarSupportedContent">
 								<!-- 這是一組選單，me-auto負責margin都在右邊，ms-auto負責margin都在左邊 -->
 								<div class="navbar-nav ms-auto">
-									<li class="nav-item"><a class="nav-link" href="/index">訊息公告</a>
-									</li>
-									<li class="nav-item"><a class="nav-link"
-										href="/announcement">課程介紹</a></li>
-									<li class="nav-item"><a class="nav-link" href="/course">課程報名</a></li>
-									<div class="dropdown">
-										<a class="nav-link  dropdown-toggle" href="#"
-											id="memberDropdown" role="button" data-bs-toggle="dropdown"
-											aria-expanded="false"> 會員中心 </a>
-										<ul class="dropdown-menu dropdown-menu-dark"
-											aria-labelledby="memberDropdown">
-											<li><a class="dropdown-item" href="/register">註冊會員</a></li>
-											<li><a class="dropdown-item" href="/member">我的中心</a></li>
-										</ul>
+										<li class="nav-item"><a class="nav-link" href="/index">訊息公告</a></li>
+										<li class="nav-item"><a class="nav-link"href="/announcement">課程介紹</a></li>
+										<li class="nav-item"><a class="nav-link" href="/course">課程報名</a></li>
+										
+										<li class="nav-item"> <a class="nav-link" href="/myCenter" >會員中心</a></li>
+										<li class="nav-item "><a class="nav-link"href="/information">交通資訊</a></li>
+										<li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
+						                <li class="nav-item"><a id="login-btn" class="nav-link" href="/member" onclick="showLoginForm()">登入</a></li>
+						            </div>
+						        </div>
+       									 <span id="user-greeting" style="display: none;"></span>
 									</div>
-									<li class="nav-item "><a class="nav-link"
-										href="/information">交通資訊</a></li>
-									<li class="nav-item "><a class="nav-link" href="#"
-										style="display: ${loginStatus==true?'':'none'};"
-										onclick="logout()">登出</a></li>
-								</div>
-							</div>
-
+								</nav>
+							</div>				
 						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
+					</div>
+				
+		
 
 	</header>
 <body>
@@ -181,27 +173,27 @@ footer {
 			<div class="row">
 				<div class="col-12">
 					<h2 class="text-center" style="font-size: 36px;">會員登入</h2>
-					<span id="user-greeting"></span>
-					<div class="login">
-						<form class="form" method="post" action="/user/login">
-							<div class="loginGroup">
-								<label>帳號 <input type="email" id="email" name="email"
-									placeholder="請輸入電子信箱" required="required">
-								</label>
-							</div>
-							<div class="loginGroup">
-								<label>密碼 <input type="password" id="password"
-									name="password" placeholder="請輸入密碼" required="required">
-								</label>
-							</div>
-							<div class="btnLogIn">
-								<button type="submit" class="btn btnLogIn" id="login-submit-btn">登入</button>
-							</div>
-							<div class="links">
-								<a href="#">忘記密碼?</a>
-							</div>
-						</form>
-					</div>
+					<!-- <span id="user-greeting"></span> -->
+					<div id="login-form-container">
+				        <form id="login-form" class="form">
+				            <div class="loginGroup">
+				                <label>帳號 
+				                    <input type="email" id="email" name="email" placeholder="請輸入電子信箱" required="required">
+				                </label>
+				            </div>
+				            <div class="loginGroup">
+				                <label>密碼 
+				                    <input type="password" id="password" name="password" placeholder="請輸入密碼" required="required">
+				                </label>
+				            </div>
+				            <div class="btnLogIn">
+				                <button type="button" class="btn btnLogIn" id="login-submit-btn" onclick="login()">登入</button>
+				            </div>
+				            <div class="links">
+				                <a href="#" style="font-size: 16px">忘記密碼?</a>
+				            </div>
+				        </form>
+				    </div>
 				</div>
 			</div>
 		</div>
@@ -244,11 +236,10 @@ footer {
 	</footer>
 
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="<c:url value='./js/app.js'/>"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
+	<script src="/js/app.js"></script>
 	<script>
 		//header============
 		//當桌機版時....那麼進行以下工作
@@ -268,12 +259,7 @@ footer {
 			});
 		}
 
-		// if ($('.navbar-toggler').is(':visible')) {
-		//   $('.navbar-collapse .nav-link').on('click', function () {
-		//     //原來滑動效果依舊，再執行 .ctr-collapse自動觸發click
-		//     $('.ctr-collapse').trigger('click');
-		//   });
-		// }
+	
 	</script>
 
 </body>

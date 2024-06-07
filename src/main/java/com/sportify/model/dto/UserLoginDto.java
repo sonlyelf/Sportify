@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserLoginDto {
+	private Integer id;
 	private String email;
 	private String password;
 }

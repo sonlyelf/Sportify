@@ -1,5 +1,8 @@
 package com.sportify.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +33,7 @@ public class CourseController {
         model.addAttribute("groupCourses", courseService.getGroupCourse(groupId));
         return "backgroundCourse";
     }
-    
+        
     // 查找所有課程
     @GetMapping
     public String findAll(@ModelAttribute CourseDto courseDto, Model model) {
@@ -40,7 +43,7 @@ public class CourseController {
     }
     
     // 根據課程ID查找課程
-    @GetMapping("/id/{id}")
+    @GetMapping("/course/{id}")
     public String findById(@ModelAttribute CourseDto courseDto, @PathVariable Integer id, Model model) {
         model.addAttribute("course", courseService.getCourseById(id));
         return "backgroundCourse";

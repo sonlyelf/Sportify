@@ -1,15 +1,21 @@
 package com.sportify.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,9 +63,8 @@ public class UserController {
 	}
 	
 	
-
-	
 	@PostMapping("/user/login")
+	@ResponseBody
 	public String getLogin(Model model, @ModelAttribute UserLoginDto userLoginDto, HttpSession session) {
 	    // 模拟登录逻辑，实际应用中应从数据库验证用户信息
 	  
@@ -68,10 +73,10 @@ public class UserController {
 	        session.setAttribute("loginStatus", true);
 	        session.setAttribute("Email", userLoginDto.getEmail());
 	        model.addAttribute("userLoginDto", userLoginDto);
-	        return "myCenter"; // 会自动指向/WEB-INF/view/.jsp
+	        return "success"; // 会自动指向/WEB-INF/view/.jsp
 	    } else {
 	        model.addAttribute("loginError", "Invalid email or password");
-	        return "member"; // 登录失败，返回登录页面
+	        return "fail"; // 登录失败，返回登录页面
 	    }
 	}
 	// 登出
@@ -80,4 +85,21 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/index"; // 會自動指向/WEB-INF/view/.jsp
 	}
-}
+	//檢查是否登入
+	    @GetMapping("/api/check-login")
+	    public ResponseEntity<Map<String, Object>> checkLogin(HttpSession session) {
+	        Map<String, Object> response = new HashMap<>();
+	        Boolean loginStatus = (Boolean) session.getAttribute("loginStatus");
+	        if (loginStatus != null && loginStatus) {
+	            response.put("loggedIn", true);
+	            response.put("email", session.getAttribute("Email"));
+	        } else {
+	            response.put("loggedIn", false);
+	        }
+	        return ResponseEntity.ok(response);
+	    }
+	    
+
+	   
+
+	}

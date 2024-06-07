@@ -127,30 +127,19 @@ img {
 									<li class="nav-item"><a class="nav-link active"
 										href="/announcement">課程介紹</a></li>
 									<li class="nav-item"><a class="nav-link" href="/course">課程報名</a></li>
-									<div class="dropdown">
-										<a class="nav-link  dropdown-toggle" href="#"
-											id="memberDropdown" role="button" data-bs-toggle="dropdown"
-											aria-expanded="false"> 會員中心 </a>
-										<ul class="dropdown-menu dropdown-menu-dark"
-											aria-labelledby="memberDropdown">
-											<li><a class="dropdown-item" href="/register">註冊會員</a></li>
-											<li><a class="dropdown-item" href="/member">我的中心</a></li>
-										</ul>
-									</div>
-									<li class="nav-item "><a class="nav-link"
-										href="/information">交通資訊</a></li>
-									<li class="nav-item "><a class="nav-link" href="#"
-										style="display: ${loginStatus==true?'':'none'};"
-										onclick="logout()">登出</a></li>
-								</div>
-							</div>
-
-						</div>
-					</nav>
+									<li class="nav-item"> <a class="nav-link" href="/myCenter">會員中心</a></li>
+									<li class="nav-item "><a class="nav-link"href="/information">交通資訊</a></li>
+			                  		<li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
+						            <li class="nav-item"><a id="login-btn" class="nav-link" href="/member" onclick="showLoginForm()">登入</a></li>
+						            </div>
+						        </div>
+       									 <span id="user-greeting" style="display: none;"></span>
+                            </div>
+                    
+          				</nav>
+					</div>				
 				</div>
 			</div>
-
-		</div>
 
 	</header>
 
@@ -250,7 +239,7 @@ img {
 						<h3>UBOUND®活力躍蹦</h3>
 						<p>UBOUND®是一項前所未有、跨時代，利用在彈簧床上的跳躍動作組成的有氧運動課程。
 							利用不穩定的彈簧床面，增加核心肌群的使用，達到心肺耐力、與下半身的肌力訓練。簡單而紮實的動作，有氧和無氧運動的組合，既零衝擊、無損傷参與者的膝蓋，又具有顯著的運動強度；對淋巴系統亦有所助益，有利於毒素釋放。
-							簡單易上手、有效且相當有趣的訓練課程，是RADICAL FITNESS最特別的項目之一。</p>
+							簡單易上手、有效且相當有趣的訓練課程，是Sportify最特別的項目之一。</p>
 
 					</div>
 
@@ -295,7 +284,7 @@ img {
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="<c:url value='./js/app.js'/>"></script>
+	<script src="/js/app.js"></script>
 	<script>
 		//header============
 		//當桌機版時....那麼進行以下工作

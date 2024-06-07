@@ -12,5 +12,7 @@ public interface CourseDao {
 	int updateCourse(Course course);
 	int deleteCourse(Integer id);
 	List<Course>getGroupCourse(Integer groupId);
+	List<Integer> getAllGroupId();
+	
 	
 }

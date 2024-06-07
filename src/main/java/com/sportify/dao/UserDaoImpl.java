@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public Optional<User> findById(Integer id) {
 		
-		String sql = "select id, name ,password from user where id=?";
+		String sql = "select id, name, birthday ,phone ,email ,password from user where id=?";
 		
 		try {
 			User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), id);
@@ -34,7 +34,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public Optional<User> findByEmail(String email) {
-	    String sql = "select id, name, password, email from user where email=?";
+	    String sql = "select id, name, birthday ,phone , password, email from user where email=?";
 	    
 	    try {
 	        User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
@@ -63,7 +63,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int updateUser(Integer userId, User user) {
+	public int updateUser( User user) {
 		
 		String sql = "update user set name=?, birthday=?, phone=?, email=? password=? where id=?";
 		
