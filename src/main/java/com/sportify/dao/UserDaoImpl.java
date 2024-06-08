@@ -33,14 +33,15 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public Optional<User> findByEmail(String email) {
-	    String sql = "select id, name, birthday ,phone , password,salt, email from user where email=?";
+	    String sql = "select id, name, birthday ,phone,password,salt, email from user where email=?";
 	    
 	    try {
 	        User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
-	        return Optional.ofNullable(user);
+	        return Optional.of(user);
 	    } catch (Exception e) {
-	        // 使用記錄器記錄例外狀況，取代列印堆疊追蹤
-	        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+	       
+	    	 e.printStackTrace();
+//	        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
 	    }
 	    return Optional.empty();
 	}

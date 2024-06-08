@@ -64,62 +64,30 @@ public class UserService {
 	@PostMapping
 	public int addUser(UserRegisterDto userRegisterDto) throws Exception {
 		
-		String password = userRegisterDto.getPassword();
+		//String password = userRegisterDto.getPassword();
+		String[] hashAndSalt = passwordToHash(userRegisterDto.getPassword());
 		
-		// 2.隨機生成一個鹽(Salt)
-		byte[] salt = new byte[16];
-		SecureRandom secureRandom = new SecureRandom();
-		secureRandom.nextBytes(salt); // 填充隨機值
-		System.out.printf("鹽: %s%n", Arrays.toString(salt));
-		System.out.printf("鹽(Hex): %s%n", KeyUtil.bytesToHex(salt));
-		
-		// 3.獲取 SHA-256 消息摘要物件來幫助我們生成密碼的哈希
-		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-		
-		// 4.加鹽
-		messageDigest.update(salt);
-		
-		// 5.將密碼轉換為 byte[] 然後生成哈希
-		byte[] hashedBytes = messageDigest.digest(password.getBytes());
-		
-		// 6.將 byte[] 轉 Hex
-		String hashedHexString = KeyUtil.bytesToHex(hashedBytes);
-		System.out.printf("原始密碼: %s%n", password);
-		System.out.printf("加鹽後的哈希密碼: %s%n", hashedHexString);
-		
-		messageDigest.reset(); // 重制
-		messageDigest.update(salt); // 加鹽
-		byte[] inputHashedBytes = messageDigest.digest(password.getBytes());
-		String inputHashedHexString = KeyUtil.bytesToHex(inputHashedBytes);
-		
-		// 9.驗證密碼
-		if(inputHashedHexString.equals(hashedHexString)) {
-			System.out.println("驗證成功");
-		} else {
-			System.out.println("驗證失敗");
-		}
+//		String[] hashAndSalt = passwordToHash("passwordBase64");
+//		String passwordBase64 = hashAndSalt[0];
+//		String salt = hashAndSalt[1];
+//		String inputHashedHexString = salt + passwordBase64;
+//		System.out.println(inputHashedHexString);
+//		
+//		if(password.equals(passwordBase64)) {
+//			System.out.println("驗證成功");
+//		} else {
+//			System.out.println("驗證失敗");
+//		}
 
 		// 將 DTO 轉換成 PO
 		User user = new User();
-//		user.setName("kevin");
-//		user.setBirthday(new Date());
-//		user.setPassword("123456789");
-//		user.setEmail("kevin@gmail.com");
-//		user.setPhone("0987654321");
-//	
-//		// 檢查電子郵件是否已經存在
-//	    Optional<User> existingUser = userDao.findByEmail(userRegisterDto.getEmail());
-//	    if (existingUser.isPresent()) {
-//	        // 如果電子郵件已經存在，可以根據你的需求返回錯誤或者執行其他處理
-//	        return -1; // 或者 throw new RuntimeException("Email already exists!");
-//	    }
 		user.setName(userRegisterDto.getName());
 		//user.setPassword(userRegisterDto.getPassword());
 		user.setBirthday(userRegisterDto.getBirthday());
 		user.setEmail(userRegisterDto.getEmail());
 		user.setPhone(userRegisterDto.getPhone());
-		user.setPassword(inputHashedHexString);
-	    user.setSalt(hashedHexString);
+		user.setPassword(hashAndSalt[0]);
+	    user.setSalt( hashAndSalt[1] );
 
 		// 將 PO 傳入到 DAO
 		int result = userDao.createUser(user);
@@ -127,12 +95,22 @@ public class UserService {
 	}
 
 	// 登入
-	public UserLoginDto logintUser(UserLoginDto userLoginDto) {
-
-		// 1.後端取資料庫user資料
-		User user = userDao.findByEmail(userLoginDto.getEmail()).get();
+	public UserLoginDto logintUser(UserLoginDto userLoginDto) throws Exception {
+		
+			User user = userDao.findByEmail(userLoginDto.getEmail()).get();
+			
+			
+		
+			// 保存的密碼
+		        String [] storedSaltHex = passwordToHash(userLoginDto.getPassword());
+		        userLoginDto.setPassword(storedSaltHex[0]);
+//
+//		// 1.後端取資料庫user資料
+//		User user = userDao.findByEmail(userLoginDto.getEmail()).get();
 		
 		System.out.println(user);
+		System.out.println(userLoginDto.getPassword());
+		
 		// 2.前端資訊跟user資料做比對
 		if (user.getPassword().equals(userLoginDto.getPassword())) {
 			UserLoginDto userLogin = new UserLoginDto();
@@ -140,14 +118,61 @@ public class UserService {
 			userLogin.setPassword(user.getPassword());
 			return userLogin; 
 		}
-			return new UserLoginDto();
-
+		
+			
+		    return new UserLoginDto();
+		
 	}
 
+
+	
+	
 	// 登出
 	public int logoutUser(UserRegisterDto userRegisterDto) {
 
 		return 0;
 	}
+	
+	private String [] passwordToHash(String password) throws Exception {
+				
+		String[] result = new String[2];
+		
+				
+		// 1.設定一個密碼
+		//String password = "1234";
+				
+		// 2.隨機生成一個鹽(Salt)
+		byte[] salt = new byte[16];
+		SecureRandom secureRandom = new SecureRandom();
+		secureRandom.nextBytes(salt); // 填充隨機值
+		System.out.printf("鹽: %s%n", Arrays.toString(salt));
+		System.out.printf("鹽(Hex): %s%n", KeyUtil.bytesToHex(salt));
+				
+		// 3.獲取 SHA-256 消息摘要物件來幫助我們生成密碼的哈希
+		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+				
+		// 4.加鹽
+		messageDigest.update(salt);
+				
+		// 5.將密碼轉換為 byte[] 然後生成哈希
+		byte[] hashedBytes = messageDigest.digest(password.getBytes());
+				
+		// 6.將 byte[] 轉 Hex
+		String hashedHexString = KeyUtil.bytesToHex(hashedBytes);
+		System.out.printf("原始密碼: %s%n", password);
+		System.out.printf("加鹽後的哈希密碼: %s%n", hashedHexString);
+				
+		messageDigest.reset(); // 重制
+		messageDigest.update(salt); // 加鹽
+		byte[] inputHashedBytes = messageDigest.digest(password.getBytes());
+
+		// 返回原始密码和盐的哈希值
+		    result[0] = hashedHexString; // 哈希后的密码
+		    result[1] = KeyUtil.bytesToHex(salt); // 盐的十六进制字符串
+
+		   return result;
+	}
+	
+	
 
 }

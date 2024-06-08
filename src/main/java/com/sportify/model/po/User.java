@@ -29,7 +29,7 @@ public class User {
 	private String name; // 名稱
 	
 	@NotEmpty(message = "{user.password.notnull}")
-	@Size(min = 6, max = 50, message = "{user.password.size}")
+	@Size(min = 6, max = 255, message = "{user.password.size}")
 	private String password; // 密碼
 	
 	@NotNull(message = "{user.birth.notnull}")
@@ -44,7 +44,7 @@ public class User {
 	@NotEmpty(message = "{user.email.notnull}")
 	private String email; // 信箱
 	
-	
+	@Size(max = 255, message = "{user.salt.size}")
 	private String salt; // 新增的鹽值屬性
 	
 	 // getters and setters for all fields, including salt

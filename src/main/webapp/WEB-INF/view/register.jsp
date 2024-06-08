@@ -138,7 +138,7 @@
                         <button type="button" class="btn btn-link no-underline" data-bs-toggle="modal" data-bs-target="#termsModal">會員須知</button>
                     </div>
                     <div class="text-right">
-                        <button type="submit" class="btn btn-primary" id="submitBtn" disabled="disabled">註冊</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn" disabled="disabled" >註冊</button>
                     </div>
                 </sp:form>
                  <!-- 會員須知模態對話框 -->
@@ -278,6 +278,9 @@
         $('#password').val('password').addClass('placeholder-text');;
         $('#confirm_password').val('password').addClass('placeholder-text');;
     });
+    
+    
+  
     
     
     

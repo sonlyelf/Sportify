@@ -322,6 +322,17 @@ public class KeyUtil {
         return sb.toString();
     }
     
+    
+    public static byte[] hexToBytes(String hexString) {
+        int len = hexString.length();
+        byte[] bytes = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            bytes[i / 2] = (byte) ((Character.digit(hexString.charAt(i), 16) << 4)
+                    + Character.digit(hexString.charAt(i + 1), 16));
+        }
+        return bytes;
+    }
+    
     /**
      * 要從十六進制格式的雜湊字串轉回 byte[]
      * 
@@ -735,6 +746,7 @@ public class KeyUtil {
         jweObject.decrypt(new DirectDecrypter(decryptionSecret.getBytes()));
         return jweObject.getPayload().toSignedJWT();
     }
-    
+
+
 
 }
