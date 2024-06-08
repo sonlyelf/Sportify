@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<!-- Tomcat 10.x JSTL -->    
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<!-- Spring Form 表單標籤 -->
+<%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
@@ -209,40 +214,45 @@ footer {
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="p2" role="tabpanel"
-						aria-labelledby="p2-tab">
-						<div class="container form-container">
-							<div class="row">
-								<div class="col-12">
-									<p class="text-center"
-										style="background-color: darkcyan; color: rgb(244, 247, 247); font-size: 24px;"">修改基本資料</p>
-									<form class="updateInfoForm" id="updateInfoForm" method="post">
-										<div class="form-group">
-											<label for="name">姓名</label> <input type="text"
-												class="form-control" id="name" name="name" required>
-										</div>
-
-										<div class="form-group">
-											<label for="email">電子信箱</label> <input type="email"
-												class="form-control" id="email" name="email" required>
-										</div>
-
-										<div class="form-group">
-											<label for="phone">手機</label> <input type="tel"
-												class="form-control" id="phone" name="phone" required>
-										</div>
-										<hr style="border: darkcyan 1px solid;">
-										<div class="form-group">
-											<label for="password">密碼</label> <input type="password"
-												class="form-control" id="password" name="password" required>
-										</div>
-										<div class="form-group">
-											<label for="confirm_password">確認密碼</label> <input
-												type="password" class="form-control" id="confirm_password"
-												name="confirm_password" required>
-										</div>
-										<div class="d-flex justify-content-end">
-											<button type="submit" class="btn btn-update" id="updateBtn">更新</button>
+					<div class="tab-pane fade" id="p2" role="tabpanel" aria-labelledby="p2-tab">
+    <div class="container form-container">
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center" style="background-color: darkcyan; color: rgb(244, 247, 247); font-size: 24px;">修改基本資料</p>
+                <form class="updateInfoForm" id="updateInfoForm" action="/fruser" method="post">
+                    <input name="_method" id="_method" type="hidden" value="PUT">
+                    <input name="id" id="userId" type="hidden" value="${ user.id }">
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input class="form-control" id="name" name="name" value="${ user.name }" required>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="email">電子信箱</label>
+                        <input type="email" class="form-control" id="email" name="email" value="${ user.email }" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">手機</label>
+                        <input class="form-control" id="phone" name="phone" value="${ phone }" required>
+                    </div>
+                    <hr style="border: darkcyan 1px solid;">
+                    <div class="form-group">
+                        <label for="password">密碼</label>
+                        <input type="password" class="form-control" id="password" name="password" value="${ user.password }" required="required" onkeyup="checkPassword()">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">確認密碼</label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required="required" onkeyup="checkPassword()">
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <input name="_method" id="updateMethod" type="hidden" value="PUT">
+                        <button type="submit" class="btn btn-update" id="updateBtn">更新</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 										</div>
 									</form>
 								</div>
@@ -298,27 +308,38 @@ footer {
 				}
 			});
 		}
-		$(document)
-				.ready(
-						function() {
-							$('#name').val('name').addClass('placeholder-text');
-							;
-							$('#birthdate').val('birthdate').addClass(
-									'placeholder-text');
-							;
-							$('#phone').val('phone').addClass(
-									'placeholder-text');
-							;
-							$('#email').val('email').addClass(
-									'placeholder-text');
-							;
-							$('#password').val('password').addClass(
-									'placeholder-text');
-							;
-							$('#confirm_password').val('password').addClass(
-									'placeholder-text');
-							;
-						});
+		
+		
+		$(document).ready(function() {
+		    // 填充姓名
+		    $('#name').val('${user.name}').addClass('placeholder-text');
+		    
+		    // 填充邮箱
+		    $('#email').val('${user.email}').addClass('placeholder-text');
+		    
+		    // 填充手机
+		    $('#phone').val('${user.phone}').addClass('placeholder-text');
+		    
+		    // 密码字段不应该被填充
+		});
+		
+		 function checkPassword() {
+	            var password = document.getElementById("password").value;
+	            var confirmPassword = document.getElementById("confirm_password").value;
+	            var message = document.getElementById("passwordMessage");
+	            var submitButton = document.getElementById("updateBtn");
+
+	            if (password === confirmPassword) {
+	                message.style.color = "green";
+	                message.innerHTML = "密碼匹配";
+	                submitButton.disabled = false;
+	            } else {
+	                message.style.color = "red";
+	                message.innerHTML = "密碼不一致";
+	                submitButton.disabled = true;
+	            }
+	        }
+		
 	</script>
 
 </body>

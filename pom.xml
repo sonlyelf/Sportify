@@ -89,6 +89,39 @@
 		    <artifactId>hibernate-validator</artifactId>
 		    <version>5.4.1.Final</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+	    	<artifactId>httpclient</artifactId>
+	    	<version>4.5.13</version> <!-- 請檢查 Maven 中心以獲得最新版本 -->
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>fluent-hc</artifactId>
+		    <version>4.5.13</version> <!-- 请根据需要替换为最新版本 -->
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.nimbusds</groupId>
+		    <artifactId>nimbus-jose-jwt</artifactId>
+		    <version>9.16</version> <!-- 請檢查 Maven 中心以獲得最新版本 -->
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/net.glxn/qrgen -->
+		<dependency>
+		    <groupId>net.glxn</groupId>
+		    <artifactId>qrgen</artifactId>
+		    <version>1.4</version>
+		</dependency>
+
+		<!-- JWT -->
+		<dependency>
+			<groupId>com.nimbusds</groupId>
+			<artifactId>nimbus-jose-jwt</artifactId>
+			<version>9.15.1</version>
+		</dependency>
+
 	</dependencies>
 
 

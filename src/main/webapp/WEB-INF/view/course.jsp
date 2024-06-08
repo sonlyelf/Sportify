@@ -3,6 +3,7 @@
 	<!-- Tomcat 10.x JSTL -->    
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!-- Spring Form 表單標籤 -->
 <%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form" %>
 
@@ -205,14 +206,18 @@ button {
 				</picture>
 			</div>
 <div class="content">
+	
     <!-- 根據課程名稱選擇 -->
     <c:forEach items="${groups}" var="courses">
         <section class="group-section">
-            <h4>${courses[0].name }</h4>
+        	<h4>${courses[0].name }</h4>
             <section id="course_${courses[0].groupId}" class="course-detail">
                 <form id="bookingForm_${courses[0].groupId}" onsubmit="bookCourse(event, 'course_${courses[0].groupId}')">
                     <div class="mb-3">
-                        <label for="booking" class="form-label">${courses[0].startDate} ~ ${courses[0].endDate}</label>
+                        <label for="booking" class="form-label">
+                        ${fn:replace(courses[0].startDate, '00:00:00.0', '')}
+                         ~ 
+                        ${fn:replace(courses[0].endDate, '00:00:00.0', '')}</label>
                         <div class="rwd-select">
                             <select name="booking-course" class="form-select" required>
                                 <option value="" selected disabled>請選擇預約課程...</option>
@@ -299,27 +304,36 @@ button {
 		            checkLoginAndBook(this);
 		        });
 		    });
+		  
+		  var isLoggedIn = false;
 
-		    function checkLoginAndBook(button) {
-		        var isLoggedIn = false; // 這裡應該根據實際情況設置
+	        $(document).ready(function() {
+	            $.ajax({
+	                url: '/api/check-login',
+	                method: 'GET',
+	                success: function(response) {
+	                    if (response.loggedIn) {
+	                        isLoggedIn = true;
+	                    }
+	                }
+	            });
+	        });
 
-		        if (!isLoggedIn) {
-		            Swal.fire({
-		                title: '請先登入',
-		                text: '您需要登入才能預約',
-		                icon: 'warning',
-		                confirmButtonText: '確定'
-		            });
-		        } else {
-		            // 用戶已登入，提交表單
-		            var formId = button.closest('form').id;
-		            document.getElementById(formId).submit();
-		        }
-		    }
-		/*   function bookCourse() {
-		      // 實際預約課程的邏輯
-		      console.log("Booking the course...");
-		  } */
+
+	        function checkLoginAndBook(button) {
+	            if (!isLoggedIn) {
+	                Swal.fire({
+	                    title: '請先登入',
+	                    text: '您需要登入才能預約',
+	                    icon: 'warning',
+	                    confirmButtonText: '確定'
+	                });
+	            } else {
+	                // 用戶已登入，提交表單
+	                var formId = button.closest('form').id;
+	                document.getElementById(formId).submit();
+	            }
+	        }
 	</script>
 
 </body>

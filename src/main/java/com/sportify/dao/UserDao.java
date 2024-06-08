@@ -18,6 +18,9 @@ public interface UserDao {
 	int updateUser(User user); // 更新 User
 
 	int deleteUser(Integer id); // 刪除 User
+	
+	int replaceUser(User user); // 前台更新 User
+	
 
 	
 }

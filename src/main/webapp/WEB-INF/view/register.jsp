@@ -126,11 +126,11 @@
                     </div>
                     <div class="form-group">
                         <label for="password">密碼</label>
-                        <sp:input type="password" class="form-control" id="password" name="password" path="password" required="required" />
+                        <sp:input type="password" class="form-control" id="password" name="password" path="password" required="required" onkeyup="validatePassword()" />
                     </div>
                     <div class="form-group">
                         <label for="confirm_password">確認密碼</label>
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" path="confirm_password" required="required" />
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required="required" onkeyup="validatePassword()" />
                     </div>
                     <div class="form-check mb-3">
                         <input type="checkbox" class="form-check-input" id="terms" disabled="disabled"/>
@@ -233,6 +233,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/app.js"></script>
+     <script src="/js/validatePassword.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script> 
     // 確保桌機版滾動時固定 header

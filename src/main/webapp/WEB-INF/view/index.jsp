@@ -505,9 +505,9 @@ fieldset .submit {
       </div>
     </section>
   
-    <hr style="border: 1px solid #afadad">
+   <!--  <hr style="border: 1px solid #afadad"> -->
     
-    <section id="sec2">
+   <!--  <section id="sec2">
       <div class="container-xl">
         <div class="row justify-content-center align-items-center" style="min-height: auto;">
           <div class="col-12 col-md-8 col-lg-6">
@@ -545,7 +545,7 @@ fieldset .submit {
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
   </main>
 
   <footer>

@@ -31,4 +31,9 @@ public class UserRegisterDto {
 	private String phone; // 手機
 
 	private String email; // 信箱
-}
+	
+	
+	private String salt; // 新增的鹽值屬性
+
+   }
+

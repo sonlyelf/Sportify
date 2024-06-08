@@ -43,5 +43,18 @@ public class User {
 	
 	@NotEmpty(message = "{user.email.notnull}")
 	private String email; // 信箱
-	//private ? salt; // 加鹽
+	
+	
+	private String salt; // 新增的鹽值屬性
+	
+	 // getters and setters for all fields, including salt
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String saltHex) {
+        this.salt = saltHex;
+    }
+
+
 }
