@@ -43,40 +43,26 @@ public class UserController {
         return response;
     }
 	
-	 @PostMapping("/regist")
-	    public String getRegister(Model model, UserRegisterDto userRegisterDto, HttpSession session) {
-	        // 檢查郵件是否已存在
-	        Optional<User> existingUser = userService.findByEmail(userRegisterDto.getEmail());
-	        if (existingUser.isPresent()) {
-	            // 用戶已存在，設置登入狀態為 false
-	            session.setAttribute("loginStatus", false);
-	            model.addAttribute("error", "此郵箱已被註冊，請重新註冊。");
-	            return "register"; // 返回註冊頁面，顯示錯誤消息
-	        }
-
-	        // 如果郵箱未被使用，則執行註冊邏輯
-	        int result;
-	        try {
-	            result = userService.addUser(userRegisterDto); // 新增 User
-	            if (result == 0) {
-	                // 註冊成功
-	                model.addAttribute("resultMessage", "註冊成功");
-	                // 註冊成功後，設置登入狀態為 true
-	                session.setAttribute("loginStatus", true);
-	                return "member"; // 導向會員頁面
-	            } else {
-	                // 註冊失敗
-	                model.addAttribute("resultMessage", "註冊失敗");
-	                session.setAttribute("loginStatus", false);
-	                return "register"; // 返回註冊頁面，顯示錯誤消息
-	            }
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            model.addAttribute("error", "系統錯誤，請稍後再試。");
-	            session.setAttribute("loginStatus", false);
-	            return "register"; // 返回註冊頁面，顯示系統錯誤消息
-	        }
+	@PostMapping("/regist")
+	public String getRegister(Model model, UserRegisterDto userRegisterDto, HttpSession session) throws Exception {
+	    // 檢查郵件是否已存在
+	    Optional<User> existingUser = userService.findByEmail(userRegisterDto.getEmail());
+	    if (existingUser.isPresent()) {
+	        // 用户已存在，设置登录状态为 false
+	        session.setAttribute("loginStatus", false);
+	        model.addAttribute("error", "此郵箱已被註冊，請重新註冊。");
+	        return "register"; // 返回注册页面，显示错误消息
 	    }
+
+	    // 如果邮箱未被使用，则执行注册逻辑
+	  
+		int	result = userService.addUser(userRegisterDto);
+		
+	    model.addAttribute("resultMessage", result == 0 ? "註冊成功" : "註冊失敗");
+	    // 注册成功后，设置登录状态为 true
+	    session.setAttribute("loginStatus", true);
+	    return "member"; // 会自动指向/WEB-INF/view/.jsp
+	}
 	
 	
 	@PostMapping("/user/login")

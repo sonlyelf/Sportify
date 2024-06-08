@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpSession;
 
 @WebFilter(urlPatterns = {"/myCenter/*"})
 public class LoginFilter extends HttpFilter {
+	
+	//之前舊的
 //
 //	@Override
 //	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -23,7 +25,7 @@ public class LoginFilter extends HttpFilter {
 //		chain.doFilter(request, response);
 //	}
 	
-	
+	//問chatGPT的
 	  @Override
 	    protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 	            throws IOException, ServletException {
