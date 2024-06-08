@@ -33,7 +33,7 @@ public class UserRegisterDto {
 	private String email; // 信箱
 	
 	
-	private String salt; // 新增的鹽值屬性
+//	private String salt; // 新增的鹽值屬性
 
    }
 

@@ -45,16 +45,16 @@ public class User {
 	private String email; // 信箱
 	
 	
-	private String salt; // 新增的鹽值屬性
-	
-	 // getters and setters for all fields, including salt
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String saltHex) {
-        this.salt = saltHex;
-    }
+//	private String salt; // 新增的鹽值屬性
+//	
+//	 // getters and setters for all fields, including salt
+//    public String getSalt() {
+//        return salt;
+//    }
+//
+//    public void setSalt(String saltHex) {
+//        this.salt = saltHex;
+//    }
 
 
 }

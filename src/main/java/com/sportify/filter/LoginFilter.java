@@ -12,15 +12,29 @@ import jakarta.servlet.http.HttpSession;
 
 @WebFilter(urlPatterns = {"/myCenter/*"})
 public class LoginFilter extends HttpFilter {
-
-	@Override
-	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		HttpSession session = request.getSession();
-		if(session.getAttribute("loginStatus") == null) {
-			response.sendRedirect("/member");
-		} 
-		chain.doFilter(request, response);
-	}
+//
+//	@Override
+//	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+//			throws IOException, ServletException {
+//		HttpSession session = request.getSession();
+//		if(session.getAttribute("loginStatus") == null) {
+//			response.sendRedirect("/member");
+//		} 
+//		chain.doFilter(request, response);
+//	}
+	
+	
+	  @Override
+	    protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+	            throws IOException, ServletException {
+	        HttpSession session = request.getSession();
+	        Boolean loginStatus = (Boolean) session.getAttribute("loginStatus");
+	        
+	        if (loginStatus == null || !loginStatus) {
+	            response.sendRedirect("/member");
+	        } else {
+	            chain.doFilter(request, response);
+	        }
+	    }
 	
 }

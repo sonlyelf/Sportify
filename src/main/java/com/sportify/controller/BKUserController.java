@@ -105,7 +105,7 @@ public class BKUserController {
 	
 	//新增使用者
 	@PostMapping
-	public String addUser(@ModelAttribute UserRegisterDto user,Model model) throws Exception {
+	public String addUser(@ModelAttribute UserRegisterDto user,Model model)  {
 		int result = userService.addUser(user);
 		String message = "新增使用者" + (result == 1 ? "成功" : "失敗");
 		model.addAttribute("message", message);

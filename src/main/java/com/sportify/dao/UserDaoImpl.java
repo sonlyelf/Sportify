@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public Optional<User> findById(Integer id) {
-	    String sql = "SELECT id, name, birthday, phone, email, password, salt FROM user WHERE id=?";
+	    String sql = "select id, name, birthday ,phone ,email ,password from user where id=?";
 	    
 	    try {
 	        User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), id);
@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public Optional<User> findByEmail(String email) {
-	    String sql = "select id, name, birthday, phone, email, password, salt FROM user  where email=?";
+	    String sql = "select id, name, birthday ,phone , password, email from user where email=?";
 	    
 	    try {
 	        User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
@@ -47,7 +47,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> FindAllUsers() {
 		
-		String sql = "select id, name, birthday, phone, email, password, salt from user";
+		String sql = "select id, name, birthday, phone, email, password  from user";
 		List<User> users = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
 		
 		return users;
@@ -56,17 +56,17 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int createUser(User user) {
 		
-		String sql = "insert into user(name, birthday, phone, email ,password, salt) values(?,?,?,?,?,?)";
+		String sql = "insert into user(name, birthday, phone, email ,password, values(?,?,?,?,?,)";
 		
-		return jdbcTemplate.update(sql, user.getName(), user.getBirthday(), user.getPhone(), user.getEmail(), user.getPassword(), user.getSalt());
+		return jdbcTemplate.update(sql, user.getName(), user.getBirthday(), user.getPhone(), user.getEmail(), user.getPassword());
 	}
 
 	@Override
 	public int updateUser( User user) {
 		
-		String sql = "update user set name=?, birthday=?, phone=?, email=? password=? salt=? where id=?";
+		String sql = "update user set name=?, birthday=?, phone=?, email=? password=?  where id=?";
 		
-		return jdbcTemplate.update(sql, user.getName(), user.getBirthday(), user.getPhone(), user.getEmail(),user.getPassword(), user.getSalt(), user.getId());
+		return jdbcTemplate.update(sql, user.getName(), user.getBirthday(), user.getPhone(), user.getEmail(),user.getPassword(),  user.getId());
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int replaceUser(User user) {
-		String sql = "update user set name=?, phone=?, email=? password=? salt=? where id=?";
-		return jdbcTemplate.update(sql, user.getName(), user.getPhone(), user.getEmail(),user.getPassword(), user.getSalt(), user.getId());
+		String sql = "update user set name=?, phone=?, email=? password=?  where id=?";
+		return jdbcTemplate.update(sql, user.getName(), user.getPhone(), user.getEmail(),user.getPassword(), user.getId());
 	}
 }

@@ -81,7 +81,7 @@ public class UserController {
 	
 	@PostMapping("/user/login")
 	@ResponseBody
-	public String getLogin(Model model, @ModelAttribute UserLoginDto userLoginDto, HttpSession session) throws Exception {
+	public String getLogin(Model model, @ModelAttribute UserLoginDto userLoginDto, HttpSession session)  {
 	    // 模拟登录逻辑，实际应用中应从数据库验证用户信息
 	  
 		UserLoginDto userLogin = userService.logintUser(userLoginDto);

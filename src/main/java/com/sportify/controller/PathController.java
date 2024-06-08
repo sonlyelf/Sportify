@@ -1,6 +1,6 @@
 package com.sportify.controller;
 
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sportify.model.dto.CourseDto;
+
 import com.sportify.model.dto.UserLoginDto;
 import com.sportify.model.dto.UserRegisterDto;
 import com.sportify.model.po.Course;
@@ -82,6 +82,7 @@ public class PathController {
 	// 我的中心
 	@GetMapping("/myCenter")
 	public String getmyCenter(HttpSession session, Model model) {
+		
 		UserLoginDto userLogin = (UserLoginDto) session.getAttribute("userLogin");
 		User user = userService.findByEmail(userLogin.getEmail()).get();
 		System.out.println(user);
