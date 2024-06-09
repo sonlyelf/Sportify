@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.sportify.model.dto.UserLoginDto;
 import com.sportify.model.dto.UserRegisterDto;
 import com.sportify.model.po.Course;
+import com.sportify.model.po.Trade;
 import com.sportify.model.po.User;
 import com.sportify.service.CourseService;
+import com.sportify.service.TradeService;
 import com.sportify.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +32,9 @@ public class PathController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private TradeService tradeService;
 
 	// 首頁
 	@GetMapping("/index")
@@ -85,6 +90,19 @@ public class PathController {
 		
 		UserLoginDto userLogin = (UserLoginDto) session.getAttribute("userLogin");
 		User user = userService.findByEmail(userLogin.getEmail()).get();
+		
+	    if (user != null) {
+	        // 获取该用户的所有交易（预定课程）信息
+	        List<Trade> trades = tradeService.findTradesByUserId(user.getId());
+
+	        // 将用户和交易信息添加到模型中
+	        model.addAttribute("user", user);
+	        model.addAttribute("trades", trades);
+	    } else {
+	        // 处理找不到用户的情况
+	        model.addAttribute("error", "用户未找到");
+	    }
+
 		System.out.println(user);
 		model.addAttribute("user", user);
 		
