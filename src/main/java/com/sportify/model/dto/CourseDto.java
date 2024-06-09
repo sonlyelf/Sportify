@@ -15,21 +15,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CourseDto {
 
-	private Integer id;
-	private String name;
+	private Integer id; // 
+	
+	private String name; // 課程名稱
+	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd") // 日期格式
-	private Date startDate;
+	
+	private Date startDate; // 開始時間
+	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd") // 日期格式
-	private Date endDate;
-	
-	private String time;
-	
-	private String day;
-	
-	private Integer price;
-	private Integer groupId;
+	private Date endDate; // 結束時間
 
+	private String time; // 時間
 
+	private String day; // 日期
+
+	private Integer price; // 價格
+	
+	private Integer groupId; // 
 }
