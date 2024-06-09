@@ -21,12 +21,22 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 
-	// 取得所有 User
+	/**
+	 * 取得所有 User
+	 * 
+	 * @return
+	 */
 	public List<User> findAllUsers() {
+
 		return userDao.FindAllUsers();
 	}
 
-	// 根據 id 取得 User
+	/**
+	 * 根據 id 取得 User
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Optional<User> findById(Integer id) {
 		return userDao.findById(id);
 	}
@@ -37,24 +47,48 @@ public class UserService {
 		return userDao.findByEmail(email);
 	}
 
-	// 更新 User
+	/**
+	 * 更新 User
+	 * 
+	 * @param user
+	 * @return
+	 */
 	public int updateUser(User user) {
+
 		return userDao.updateUser(user);
 	}
 
-	// 刪除 User
+	/**
+	 * 刪除 User
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public int deleteUser(Integer id) {
+
 		return userDao.deleteUser(id);
 	}
 
-	// 前台會員更新
+	/**
+	 * 前台會員更新
+	 * 
+	 * @param user
+	 * @return
+	 */
 	public int replaceUser(User user) {
+		
 		return userDao.replaceUser(user);
 	}
 
-	// 註冊 User
+	/**
+	 * 註冊 User
+	 * 
+	 * @param userRegisterDto
+	 * @return
+	 * @throws Exception
+	 */
 	public int addUser(UserRegisterDto userRegisterDto) throws Exception {
-		
+
 		// 1. 取得 加密的 密碼 與鹽巴
 		String[] hashAndSalt = passwordEncryption(userRegisterDto.getPassword());
 
@@ -76,13 +110,13 @@ public class UserService {
 
 	// 登入 User
 	public UserLoginDto logintUser(UserLoginDto userLoginDto) throws Exception {
-		
+
 		// 1. 後端取資料庫 user 資料
 		User user = userDao.findByEmail(userLoginDto.getEmail()).get();
-		
+
 		// 2. 利用鹽巴取得加密過的密碼
 		String hashedHexString = passwordDecryption(userLoginDto.getPassword(), KeyUtil.hexToBytes(user.getSalt()));
-		
+
 		// 3. 前端資訊跟user資料做比對
 		if (user.getPassword().equals(hashedHexString)) {
 			UserLoginDto userLogin = new UserLoginDto();
@@ -90,49 +124,61 @@ public class UserService {
 			userLogin.setPassword(user.getPassword());
 			return userLogin;
 		}
-		
+
 		return new UserLoginDto();
 	}
 
-	// 加密
+	/**
+	 * [加密] 使用 salt 及 SHA-256
+	 * 
+	 * @param password
+	 * @return
+	 * @throws Exception
+	 */
 	private String[] passwordEncryption(String password) throws Exception {
-		
+
 		// 1. 隨機生成一個鹽(Salt)
-		byte[] salt = new byte[16]; 
+		byte[] salt = new byte[16];
 		SecureRandom secureRandom = new SecureRandom();
 		secureRandom.nextBytes(salt); // 填充隨機值
-		
+
 		// 2. 獲取 SHA-256 消息摘要物件來幫助我們生成密碼的哈希
 		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
 		messageDigest.update(salt); // 加鹽
-		
+
 		// 3. 將密碼轉換為 byte[] 然後生成哈希
 		byte[] hashedBytes = messageDigest.digest(password.getBytes());
-		
+
 		// 4. 將 byte[] 轉 Hex
 		String hashedHexString = KeyUtil.bytesToHex(hashedBytes);
-		
+
 		String[] result = new String[2]; // 返回原始密码和盐的哈希值
 		result[0] = hashedHexString; // 哈希后的密码
 		result[1] = KeyUtil.bytesToHex(salt); // 盐的十六进制字符串
-		
+
 		return result;
 	}
 
-	// 利用鹽巴取得加密過的密碼
+	/**
+	 * [加密] 利用鹽巴取得加密過的密碼
+	 * 
+	 * @param password
+	 * @param salt
+	 * @return
+	 * @throws Exception
+	 */
 	private String passwordDecryption(String password, byte[] salt) throws Exception {
-		
+
 		// 1. 獲取 SHA-256 消息摘要物件來幫助我們生成密碼的哈希
 		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
 		messageDigest.update(salt); // 加鹽 (資料庫的鹽巴)
-		
+
 		// 2. 將密碼轉換為 byte[] 然後生成哈希
 		byte[] hashedBytes = messageDigest.digest(password.getBytes());
-		
+
 		// 3. 將 byte[] 轉 Hex
 		String hashedHexString = KeyUtil.bytesToHex(hashedBytes);
-		
+
 		return hashedHexString;
 	}
-
 }
