@@ -10,25 +10,25 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+@SuppressWarnings("serial")
 @WebFilter(urlPatterns = { "/myCenter/*" })
 public class LoginFilter extends HttpFilter {
 
 	// 之前舊的
-//
-//	@Override
-//	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-//			throws IOException, ServletException {
-//		HttpSession session = request.getSession();
-//		if(session.getAttribute("loginStatus") == null) {
-//			response.sendRedirect("/member");
-//		} 
-//		chain.doFilter(request, response);
-//	}
+	// @Override
+	// protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+	//		throws IOException, ServletException {
+	//	HttpSession session = request.getSession();
+	//	if(session.getAttribute("loginStatus") == null) {
+	//		response.sendRedirect("/member");
+	//	} 
+	//	chain.doFilter(request, response);
+	//}
 
 	// 問chatGPT的
 	@Override
 	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
+
 		HttpSession session = request.getSession();
 		Boolean loginStatus = (Boolean) session.getAttribute("loginStatus");
 
@@ -38,5 +38,4 @@ public class LoginFilter extends HttpFilter {
 			chain.doFilter(request, response);
 		}
 	}
-
 }
