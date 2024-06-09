@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isErrorPage="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true"%>
 <!-- Tomcat 10.x JSTL -->    
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
@@ -16,7 +15,6 @@
             <th>Phone</th>
             <th>Email</th>
             <th>Password</th>
-            
         </tr>
         <c:forEach var="users" items="${users}">
             <tr>
@@ -27,7 +25,6 @@
                 <td>${users.email}</td>
                 <td>${users.password}</td>
                 <td>
-                  
                     <form action="/bkuser/userUpdate/${users.id}" method="post" style="display:inline;">
                         <input name="_method"id="_method" type="hidden" value="PUT">
                         <button type="submit" class="pure-button pure-button-primary">修改</button>
