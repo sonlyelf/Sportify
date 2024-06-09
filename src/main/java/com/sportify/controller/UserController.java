@@ -32,14 +32,17 @@ public class UserController {
 	@GetMapping("/check-email")
 	@ResponseBody
 	public Map<String, Boolean> checkEmail(@RequestParam("email") String email) {
+		
 		Map<String, Boolean> response = new HashMap<>();
 		Optional<User> existingUser = userService.findByEmail(email);
 		response.put("exists", existingUser.isPresent());
+		
 		return response;
 	}
 
 	@PostMapping("/regist")
 	public String getRegister(Model model, UserRegisterDto userRegisterDto, HttpSession session) throws Exception {
+		
 		// 檢查郵件是否已存在
 		Optional<User> existingUser = userService.findByEmail(userRegisterDto.getEmail());
 		if (existingUser.isPresent()) {
@@ -48,15 +51,14 @@ public class UserController {
 			model.addAttribute("error1", "此郵箱已被註冊，請重新註冊。");
 			return "register"; // 返回注册页面，显示错误消息
 		}
-		
-		 // 如果邮箱未被使用且密码长度符合要求，则执行注册逻辑
-	    if (userRegisterDto.getPassword().length() < 6) {
-	        model.addAttribute("error2", "密碼長度不得少於6碼。");
-	        return "register"; // 返回注册页面，显示错误消息
-	    }
+
+		// 如果邮箱未被使用且密码长度符合要求，则执行注册逻辑
+		if (userRegisterDto.getPassword().length() < 6) {
+			model.addAttribute("error2", "密碼長度不得少於6碼。");
+			return "register"; // 返回注册页面，显示错误消息
+		}
 
 		// 如果邮箱未被使用，则执行注册逻辑
-
 		int result = userService.addUser(userRegisterDto);
 
 		model.addAttribute("resultMessage", result == 0 ? "註冊成功" : "註冊失敗");
@@ -67,11 +69,11 @@ public class UserController {
 
 	@PostMapping("/user/login")
 	@ResponseBody
-	public String getLogin(Model model, @ModelAttribute UserLoginDto userLoginDto, HttpSession session)
-			throws Exception {
+	public String getLogin(Model model, @ModelAttribute UserLoginDto userLoginDto, HttpSession session) throws Exception {
+		
 		// 模拟登录逻辑，实际应用中应从数据库验证用户信息
-
 		UserLoginDto userLogin = userService.logintUser(userLoginDto);
+		
 		if (userLogin.getEmail() != null) {
 			session.setAttribute("loginStatus", true);
 			session.setAttribute("Email", userLoginDto.getEmail());
@@ -88,26 +90,27 @@ public class UserController {
 	// 登出
 	@PostMapping("/user/logout")
 	private String getLogout(HttpSession session) {
+		
 		session.invalidate();
+		
 		return "redirect:/index"; // 會自動指向/WEB-INF/view/.jsp
 	}
 
 	// 檢查是否登入
 	@GetMapping("/api/check-login")
 	public ResponseEntity<Map<String, Object>> checkLogin(HttpSession session) {
-		
+
 		Map<String, Object> response = new HashMap<>();
-		
+
 		Boolean loginStatus = (Boolean) session.getAttribute("loginStatus");
-		
+
 		if (loginStatus != null && loginStatus) {
 			response.put("loggedIn", true);
 			response.put("email", session.getAttribute("Email"));
 		} else {
 			response.put("loggedIn", false);
 		}
-		
+
 		return ResponseEntity.ok(response);
 	}
-
 }
