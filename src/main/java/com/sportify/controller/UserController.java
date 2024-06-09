@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sportify.model.dto.UserLoginDto;
@@ -25,6 +24,10 @@ import com.sportify.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * User 相關資訊
+ * 
+ */
 @Controller
 @RequestMapping
 public class UserController {
@@ -34,18 +37,6 @@ public class UserController {
 
 	@Autowired
 	private TradeService tradeService;
-
-	// 確認 User 的 Email 是否存在 ?
-	@GetMapping("/check-email")
-	@ResponseBody
-	public Map<String, Boolean> checkEmail(@RequestParam("email") String email) {
-
-		Map<String, Boolean> response = new HashMap<>();
-		Optional<User> existingUser = userService.findByEmail(email);
-		response.put("exists", existingUser.isPresent());
-
-		return response;
-	}
 
 	// 註冊頁面
 	@GetMapping("/register")
@@ -119,6 +110,20 @@ public class UserController {
 
 		return "redirect:/index"; // 會自動指向/WEB-INF/view/.jsp
 	}
+	
+	// 管理:更新資料
+	@PostMapping("/user/management/update")
+	public String upDateUserInfo() {
+
+		return "";
+	}
+	
+	// 管理:更新密碼
+	@PostMapping("/user/management/password")
+	public String upDateUserPassword() {
+
+		return "";
+	}
 
 	// 檢查是否登入
 	@GetMapping("/api/check-login")
@@ -158,4 +163,16 @@ public class UserController {
 		model.addAttribute("user", user);
 		return "myCenter"; // 这里返回会员中心页面的视图名，具体视图名需要根据实际情况修改
 	}
+	
+	// [先不作] 確認 User 的 Email 是否存在 ?
+	// @GetMapping("/check-email")
+	// @ResponseBody
+	//public Map<String, Boolean> checkEmail(@RequestParam("email") String email) {
+	//
+	//	Map<String, Boolean> response = new HashMap<>();
+	//	Optional<User> existingUser = userService.findByEmail(email);
+	//	response.put("exists", existingUser.isPresent());
+	//
+	//	return response;
+	//}
 }
