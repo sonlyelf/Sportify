@@ -168,7 +168,7 @@
 									<li class="nav-item"><a class="nav-link" href="/index">訊息公告</a>
 									</li>
 									<li class="nav-item"><a class="nav-link" href="/announcement">課程介紹</a></li>
-									<li class="nav-item"><a class="nav-link active" href="/course">課程報名</a></li>
+									<li class="nav-item"><a class="nav-link active" href="/backgroundCourse/course">課程報名</a></li>
 									<li class="nav-item"><a class="nav-link" href="/myCenter">會員中心</a></li>
 									<li class="nav-item"><a class="nav-link" href="/information">交通資訊</a></li>
 									<li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>

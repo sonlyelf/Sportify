@@ -1,6 +1,7 @@
 package com.sportify.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sportify.model.dto.UserLoginDto;
 import com.sportify.model.dto.UserRegisterDto;
+import com.sportify.model.po.Trade;
 import com.sportify.model.po.User;
+import com.sportify.service.TradeService;
 import com.sportify.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,20 +32,32 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private TradeService tradeService;
+
+	// 確認 User 的 Email 是否存在 ?
 	@GetMapping("/check-email")
 	@ResponseBody
 	public Map<String, Boolean> checkEmail(@RequestParam("email") String email) {
-		
+
 		Map<String, Boolean> response = new HashMap<>();
 		Optional<User> existingUser = userService.findByEmail(email);
 		response.put("exists", existingUser.isPresent());
-		
+
 		return response;
 	}
 
+	// 註冊頁面
+	@GetMapping("/register")
+	public String getRegister(@ModelAttribute UserRegisterDto userRegisterDto) {
+
+		return "register"; // 會自動指向/WEB-INF/view/.jsp
+	}
+
+	// 註冊
 	@PostMapping("/regist")
 	public String getRegister(Model model, UserRegisterDto userRegisterDto, HttpSession session) throws Exception {
-		
+
 		// 檢查郵件是否已存在
 		Optional<User> existingUser = userService.findByEmail(userRegisterDto.getEmail());
 		if (existingUser.isPresent()) {
@@ -67,13 +82,22 @@ public class UserController {
 		return "member"; // 会自动指向/WEB-INF/view/.jsp
 	}
 
+	// 登入頁面
+	@GetMapping("/member")
+	public String getMember() {
+
+		return "member"; // 这里返回登录页面的视图名，具体视图名需要根据实际情况修改
+	}
+
+	// 登入
 	@PostMapping("/user/login")
 	@ResponseBody
-	public String getLogin(Model model, @ModelAttribute UserLoginDto userLoginDto, HttpSession session) throws Exception {
-		
+	public String getLogin(Model model, @ModelAttribute UserLoginDto userLoginDto, HttpSession session)
+			throws Exception {
+
 		// 模拟登录逻辑，实际应用中应从数据库验证用户信息
 		UserLoginDto userLogin = userService.logintUser(userLoginDto);
-		
+
 		if (userLogin.getEmail() != null) {
 			session.setAttribute("loginStatus", true);
 			session.setAttribute("Email", userLoginDto.getEmail());
@@ -90,9 +114,9 @@ public class UserController {
 	// 登出
 	@PostMapping("/user/logout")
 	private String getLogout(HttpSession session) {
-		
+
 		session.invalidate();
-		
+
 		return "redirect:/index"; // 會自動指向/WEB-INF/view/.jsp
 	}
 
@@ -112,5 +136,26 @@ public class UserController {
 		}
 
 		return ResponseEntity.ok(response);
+	}
+
+	// 我的中心
+	@GetMapping("/myCenter")
+	public String getmyCenter(HttpSession session, Model model) {
+
+		UserLoginDto userLogin = (UserLoginDto) session.getAttribute("userLogin");
+		User user = userService.findByEmail(userLogin.getEmail()).get();
+
+		if (user != null) {
+			// 获取该用户的所有交易（预定课程）信息
+			List<Trade> trades = tradeService.findTradesByUserId(user.getId());
+			// 将用户和交易信息添加到模型中
+			model.addAttribute("user", user);
+			model.addAttribute("trades", trades);
+		} else {
+			// 处理找不到用户的情况
+			model.addAttribute("error", "用户未找到");
+		}
+		model.addAttribute("user", user);
+		return "myCenter"; // 这里返回会员中心页面的视图名，具体视图名需要根据实际情况修改
 	}
 }
