@@ -56,7 +56,7 @@ public class FRUserController {
 	
     //修改使用者資料
     @PutMapping
-    public String updateBkUser(@ModelAttribute User user,Model model) {
+    public String updateFRUser(@ModelAttribute User user,Model model) {
         System.out.println("user");
     	int result = userService.replaceUser(user);
         String message = "更新使用者" + (result == 1 ? "成功" : "失敗");

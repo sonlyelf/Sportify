@@ -120,12 +120,13 @@
                     </div>
                     <div class="form-group">
                         <label for="email">電子信箱 </label>
-                        <span style="color: red">${error}</span>
+                        <span style="color: red">${error1}</span>
                         <sp:input type="email" class="form-control" id="email" name="email"  path="email" required="required" />
                        
                     </div>
                     <div class="form-group">
                         <label for="password">密碼</label>
+                        <span style="color: red">${error2}</span>
                         <sp:input type="password" class="form-control" id="password" name="password" path="password" required="required" onkeyup="validatePassword()" />
                     </div>
                     <div class="form-group">
@@ -233,7 +234,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/app.js"></script>
-     <script src="/js/validatePassword.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script> 
     // 確保桌機版滾動時固定 header
@@ -280,11 +280,25 @@
     });
     
     
-  
-    
-    
-    
-  
+
+    document.getElementById("submitBtn").addEventListener("click", function(event) {
+        // 防止按鈕的默認行為，即提交表單
+        event.preventDefault();
+        
+        // 在這裡添加你想要執行的 JavaScript 代碼
+        // 例如，顯示 SweetAlert 通知框
+        Swal.fire({
+            icon: 'success',
+            title: '註冊成功',
+            showConfirmButton: false,
+            timer: 2000 // 延長跳轉時間到 3 秒
+        }).then(() => {
+            // 3 秒後執行跳轉
+            setTimeout(function() {
+                window.location.href = "/member"; // 重定向到member頁面
+            }, 1000);
+        });
+    });
     
 </script>
   

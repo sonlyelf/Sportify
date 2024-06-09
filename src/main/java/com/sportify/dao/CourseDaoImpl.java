@@ -1,11 +1,13 @@
 package com.sportify.dao;
 
+
+
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+
 import org.springframework.stereotype.Repository;
 
 import com.sportify.model.po.Course;
@@ -57,5 +59,21 @@ public class CourseDaoImpl implements CourseDao {
 		String sql = "SELECT groupId FROM course group by groupId";
 		return jdbcTemplate.queryForList(sql, Integer.class);
 	}
+	
+ /*   private static class CourseRowMapper implements RowMapper<Course> {
+        @Override
+        public Course mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Course course = new Course();
+            course.setId(rs.getInt("id"));
+            course.setName(rs.getString("name"));
+            course.setStartDate(rs.getDate("startDate"));
+			course.setEndDate(rs.getDate("endDate"));
+			course.setTime(rs.getString("time"));
+			course.setDay(rs.getString("day"));
+            course.setPrice(rs.getInt("price"));
+			course.setGroupId(rs.getInt("groupId"));
+            return course;
+        }
+    }*/
 
 }

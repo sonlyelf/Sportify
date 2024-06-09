@@ -45,9 +45,15 @@ public class UserController {
 		if (existingUser.isPresent()) {
 			// 用户已存在，设置登录状态为 false
 			session.setAttribute("loginStatus", false);
-			model.addAttribute("error", "此郵箱已被註冊，請重新註冊。");
+			model.addAttribute("error1", "此郵箱已被註冊，請重新註冊。");
 			return "register"; // 返回注册页面，显示错误消息
 		}
+		
+		 // 如果邮箱未被使用且密码长度符合要求，则执行注册逻辑
+	    if (userRegisterDto.getPassword().length() < 6) {
+	        model.addAttribute("error2", "密碼長度不得少於6碼。");
+	        return "register"; // 返回注册页面，显示错误消息
+	    }
 
 		// 如果邮箱未被使用，则执行注册逻辑
 

@@ -228,7 +228,10 @@ button {
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="submit" id="bookingBtn_${courses[0].groupId}">預約</button>
+                   <span> <img src="../image/purchase.png" alt="Icon" class="icon" width="30px" height="auto"></span>
+                    &nbsp;
+                        <button type="button" class="submit" id="bookingBtn_${courses[0].groupId}">
+                          預約</button>
                     </div>
                 </form>
             </section>

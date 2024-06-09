@@ -1,5 +1,7 @@
 package com.sportify.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -8,6 +10,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.sportify.model.po.User;
@@ -82,4 +85,20 @@ public class UserDaoImpl implements UserDao {
 	    String sql = "UPDATE user SET name=?, phone=?, email=?, password=?, salt=? WHERE id=?";
 	    return jdbcTemplate.update(sql, user.getName(), user.getPhone(), user.getEmail(), user.getPassword(), user.getSalt(), user.getId());
 	}
+	
+	
+/*	   private static class UserRowMapper implements RowMapper<User> {
+	        @Override
+	        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+	            User user = new User();
+	            user.setId(rs.getInt("id"));
+	            user.setName(rs.getString("name"));
+	            user.setEmail(rs.getString("email"));
+	            user.setPhone(rs.getString("phone"));
+	            user.setBirthday(rs.getDate("birthday"));
+	            user.setPassword(rs.getString("password"));
+	            user.setSalt(rs.getString("salt"));
+	            return user;
+	        }
+	    }	*/
 }
