@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sportify.model.dto.UserInfoUpdateDto;
 import com.sportify.model.dto.UserLoginDto;
+import com.sportify.model.dto.UserPwdUpdateDto;
 import com.sportify.model.dto.UserRegisterDto;
 import com.sportify.model.po.Trade;
 import com.sportify.model.po.User;
@@ -118,16 +119,31 @@ public class UserController {
 	
 	// 管理:更新資料
 	@PutMapping("/user/management/update")
-	public String upDateUserInfo(UserInfoUpdateDto userInfoUpdateDto) {
+	public String upDateUserInfo(UserInfoUpdateDto userInfoUpdateDto,Model model) {
 		
 		int result = userService.updateUser(userInfoUpdateDto);
+		if(result == 1) {
+			model.addAttribute("message", "更新成功");
+		}else {
+			model.addAttribute("message", "更新失敗");
+		}
 		
 		return "redirect:/myCenter";
 	}
 	
 	// 管理:更新密碼
-	@PostMapping("/user/management/password")
-	public String upDateUserPassword() {
+	@PutMapping("/user/management/password")
+	public String upDateUserPassword(UserPwdUpdateDto userPwdUpdateDto,Model model) throws Exception {
+
+		int result = userService.updateUserPassword(userPwdUpdateDto);
+		if(result == 1) {
+			model.addAttribute("message", "更新成功");
+		}else {
+			model.addAttribute("message", "更新失敗");
+		}
+
+	        // 更新数据库中的密码和盐值
+	   
 
 		return "redirect:/myCenter";
 	}

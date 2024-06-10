@@ -85,11 +85,11 @@ public class UserDaoImpl implements UserDao {
 	public int updateUserPassword(User user) {
 
 		String sql = "UPDATE user "
-					+ "SET password=? ,salt=? "
+					+ "SET password=? , salt=? "
 					+ "WHERE id=?";
 
 		return jdbcTemplate.update(sql,
-				user.getPassword(), user.getSalt(), user.getId());
+				user.getPassword(),user.getSalt(), user.getId());
 	}
 
 	@Override
@@ -112,6 +112,8 @@ public class UserDaoImpl implements UserDao {
 				user.getName(), user.getPhone(), user.getEmail(), user.getPassword(),
 				user.getSalt(), user.getId());
 	}
+	
+	
 
 	/*
 	 * private static class UserRowMapper implements RowMapper<User> {

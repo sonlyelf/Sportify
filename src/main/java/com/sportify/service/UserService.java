@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.sportify.dao.UserDao;
 import com.sportify.model.dto.UserInfoUpdateDto;
 import com.sportify.model.dto.UserLoginDto;
+import com.sportify.model.dto.UserPwdUpdateDto;
 import com.sportify.model.dto.UserRegisterDto;
 import com.sportify.model.po.User;
 import com.sportify.security.KeyUtil;
@@ -67,6 +68,25 @@ public class UserService {
 		}
 		
 		return userDao.updateUserInfo(user);
+	}
+	
+	
+	public int updateUserPassword(UserPwdUpdateDto userPwdUpdateDto) throws Exception {
+		
+		User user = new User();
+		Optional<User> userData = userDao.findById(userPwdUpdateDto.getUserId());
+		String[] hashAndSalt = passwordEncryption(userPwdUpdateDto.getPassword());
+		System.out.println(userPwdUpdateDto);
+		// DTO 轉 PO
+		if(userData.isPresent()) {
+			user = userData.get();
+			user.setPassword(hashAndSalt[0]);
+			user.setSalt(hashAndSalt[1]);
+	
+		}
+		
+		return userDao.updateUserPassword(user);
+		
 	}
 
 	/**

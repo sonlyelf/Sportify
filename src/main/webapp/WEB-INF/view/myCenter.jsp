@@ -220,7 +220,7 @@
 									<br />
 									<form id="updatePwdForm" class="updateInfoForm" action="/user/management/password" method="post">
 										<input type="hidden" name="_method" value="PUT">
-										<input name="id" id="userId" type="hidden" value="${ user.id }">
+										<input type="hidden" name="userId" value="${ user.id }">
 										<div class="form-group">
 											<label for="password">密碼</label>
 											<input type="password" class="form-control" name="password" value="${ user.password }" required="required" onkeyup="checkPassword()">
@@ -230,7 +230,7 @@
 											<input type="password" class="form-control" name="confirm_password" required="required" onkeyup="checkPassword()">
 										</div>
 										<div class="d-flex justify-content-end">
-											<input name="_method" id="updateMethod" type="hidden" value="PUT">
+										<!-- 	<input name="_method" id="updateMethod" type="hidden" value="PUT"> -->
 											<button type="submit" class="btn btn-update" id="updatePwdBtn">更新</button>
 										</div>
 									</form>
@@ -294,9 +294,21 @@
 			// 密码字段不应该被填充
 		});
 
+		 document.getElementById('updateInfoForm').addEventListener('submit', function(event) {
+	            event.preventDefault(); // 防止表單的默認提交動作
+	            
+	            // 顯示成功通知
+	            Swal.fire({
+	                icon: 'success',
+	                title: '更新成功',
+	                text: '用戶信息已成功更新'
+	            }).then(() => {
+	                // 通知顯示完畢後提交表單
+	                event.target.submit();
+	            });
+	        });
 		
-		
-		document.getElementById("updatePwdForm").addEventListener("submit", function (event) {
+		/* document.getElementById("updatePwdForm").addEventListener("submit", function (event) {
             // 防止按鈕的默認行為，即提交表單
             event.preventDefault();
             // 在這裡添加你想要執行的 JavaScript 代碼
@@ -307,7 +319,7 @@
                 showConfirmButton: false,
                 timer: 2000 // 延長跳轉時間到 3 秒
             });
-        });
+        }); */
 	</script>
 </body>
 
