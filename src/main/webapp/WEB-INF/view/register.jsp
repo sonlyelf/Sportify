@@ -95,7 +95,7 @@
     </header>
 
     <main>
-        <sp:form modelAttribute="userRegisterDto" method="post" action="/regist">
+        <sp:form id="registerfrom" modelAttribute="userRegisterDto" method="post" action="/regist">
             <div class="container form-container" id="from-register">
                 <div class="row">
                     <div class="col-12">
@@ -276,10 +276,9 @@
             $('#confirm_password').val('password').addClass('placeholder-text');;
         });
 
-        document.getElementById("submitBtn").addEventListener("click", function (event) {
+        document.getElementById("registerfrom").addEventListener("submit", function (event) {
             // 防止按鈕的默認行為，即提交表單
             event.preventDefault();
-
             // 在這裡添加你想要執行的 JavaScript 代碼
             // 例如，顯示 SweetAlert 通知框
             Swal.fire({
