@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class UserPwdUpdateDto {
 	
 	private Integer userId; 
-	private String password;
-	private String salt; // 鹽巴
+	
+	private String password; // 密碼
 }
