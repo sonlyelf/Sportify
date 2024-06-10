@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sportify.model.dto.UserInfoUpdateDto;
 import com.sportify.model.dto.UserLoginDto;
 import com.sportify.model.dto.UserRegisterDto;
 import com.sportify.model.po.Trade;
@@ -116,17 +117,19 @@ public class UserController {
 	}
 	
 	// 管理:更新資料
-	@PostMapping("/user/management/update")
-	public String upDateUserInfo() {
-
-		return "";
+	@PutMapping("/user/management/update")
+	public String upDateUserInfo(UserInfoUpdateDto userInfoUpdateDto) {
+		
+		int result = userService.updateUser(userInfoUpdateDto);
+		
+		return "redirect:/myCenter";
 	}
 	
 	// 管理:更新密碼
 	@PostMapping("/user/management/password")
 	public String upDateUserPassword() {
 
-		return "";
+		return "redirect:/myCenter";
 	}
 
 	// 檢查是否登入
@@ -164,7 +167,6 @@ public class UserController {
 			// 处理找不到用户的情况
 			model.addAttribute("error", "用户未找到");
 		}
-		model.addAttribute("user", user);
 		return "myCenter"; // 这里返回会员中心页面的视图名，具体视图名需要根据实际情况修改
 	}
 	
@@ -237,15 +239,13 @@ public class UserController {
 	
 
 	// 修改使用者資料
-	@PutMapping
-	public String updateBkUser(@ModelAttribute User user, Model model) {
-		
-		int result = userService.updateUser(user);
-		String message = "更新使用者" + (result == 1 ? "成功" : "失敗");
-		
-		model.addAttribute("message", message);
-		return "redirect:/bkuser";
-	}
+	// @PutMapping
+	// public String updateBkUser(@ModelAttribute User user, Model model) {		
+	//	int result = userService.updateUser(user);
+	//	String message = "更新使用者" + (result == 1 ? "成功" : "失敗");
+	//	model.addAttribute("message", message);
+	//	return "redirect:/bkuser";
+	//}
 
 	// 更新使用者資料
 	@PutMapping("/userUpdate/{id}")

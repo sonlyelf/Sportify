@@ -9,10 +9,10 @@
 <html lang="zh-Hant-TW">
 
 <head>
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=3.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=3.0">
 	<meta charset="UTF-8">
 	<title>My Center</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/sportlayout.css">
 	<link rel="icon" href="../image/Logocopy11.png">
@@ -198,33 +198,40 @@
 							<div class="row">
 								<div class="col-12">
 									<p class="text-center" style="background-color: darkcyan; color: rgb(244, 247, 247); font-size: 24px;">修改基本資料</p>
-									<form class="updateInfoForm" id="updateInfoForm" action="/fruser" method="post">
-										<input name="_method" id="_method" type="hidden" value="PUT">
-										<input name="id" id="userId" type="hidden" value="${ user.id }">
+									<form id="updateInfoForm" class="updateInfoForm" method="POST" action="/user/management/update">
+										<input type="hidden" name="_method" value="PUT" />
+										<input type="hidden" name="userId" value="${ user.id }">
 										<div class="form-group">
 											<label for="name">姓名</label>
-											<input class="form-control" id="name" name="name" value="${ user.name }" required>
+											<input type="text" class="form-control" name="username" value="${ user.name }" />
 										</div>
 										<div class="form-group">
 											<label for="email">電子信箱</label>
-											<input type="email" class="form-control" id="email" name="email" value="${ user.email }" required>
+											<input type="email" class="form-control" value="${ user.email }" readonly="readonly" />
 										</div>
 										<div class="form-group">
 											<label for="phone">手機</label>
-											<input class="form-control" id="phone" name="phone" value="${ phone }" required>
+											<input type="text" class="form-control" name="phone" value="${ user.phone }" />
 										</div>
-										<hr style="border: darkcyan 1px solid;">
+										<div class="d-flex justify-content-end">
+											<button id="updateInfoBtn" class="btn btn-update" type="submit">更新</button>
+										</div>
+									</form>
+									<br />
+									<form id="updatePwdForm" class="updateInfoForm" action="/user/management/password" method="post">
+										<input type="hidden" name="_method" value="PUT">
+										<input name="id" id="userId" type="hidden" value="${ user.id }">
 										<div class="form-group">
 											<label for="password">密碼</label>
-											<input type="password" class="form-control" id="password" name="password" value="${ user.password }" required="required" onkeyup="checkPassword()">
+											<input type="password" class="form-control" name="password" value="${ user.password }" required="required" onkeyup="checkPassword()">
 										</div>
 										<div class="form-group">
 											<label for="confirm_password">確認密碼</label>
-											<input type="password" class="form-control" id="confirm_password" name="confirm_password" required="required" onkeyup="checkPassword()">
+											<input type="password" class="form-control" name="confirm_password" required="required" onkeyup="checkPassword()">
 										</div>
 										<div class="d-flex justify-content-end">
 											<input name="_method" id="updateMethod" type="hidden" value="PUT">
-											<button type="submit" class="btn btn-update" id="updateBtn">更新</button>
+											<button type="submit" class="btn btn-update" id="updatePwdBtn">更新</button>
 										</div>
 									</form>
 								</div>
@@ -260,6 +267,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="/js/app.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
 		if ($('.navbar-toggler').is(':hidden')) {
 			$(window).on('scroll', function () {
@@ -286,22 +294,20 @@
 			// 密码字段不应该被填充
 		});
 
-		function checkPassword() {
-			var password = document.getElementById("password").value;
-			var confirmPassword = document.getElementById("confirm_password").value;
-			var message = document.getElementById("passwordMessage");
-			var submitButton = document.getElementById("updateBtn");
-
-			if (password === confirmPassword) {
-				message.style.color = "green";
-				message.innerHTML = "密碼匹配";
-				submitButton.disabled = false;
-			} else {
-				message.style.color = "red";
-				message.innerHTML = "密碼不一致";
-				submitButton.disabled = true;
-			}
-		}
+		
+		
+		document.getElementById("updatePwdForm").addEventListener("submit", function (event) {
+            // 防止按鈕的默認行為，即提交表單
+            event.preventDefault();
+            // 在這裡添加你想要執行的 JavaScript 代碼
+            // 例如，顯示 SweetAlert 通知框
+            Swal.fire({
+                icon: 'success',
+                title: '密碼資訊更新成功',
+                showConfirmButton: false,
+                timer: 2000 // 延長跳轉時間到 3 秒
+            });
+        });
 	</script>
 </body>
 

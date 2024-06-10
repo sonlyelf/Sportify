@@ -71,14 +71,24 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int updateUser(User user) {
+	public int updateUserInfo(User user) {
 
 		String sql = "UPDATE user "
-					+ "SET name=?, birthday=?, phone=?, email=? password=? ,salt=? "
+					+ "SET name=?, birthday=?, phone=? "
 					+ "WHERE id=?";
 
 		return jdbcTemplate.update(sql, 
-				user.getName(), user.getBirthday(), user.getPhone(), user.getEmail(),
+				user.getName(), user.getBirthday(), user.getPhone(), user.getId());
+	}
+	
+	@Override
+	public int updateUserPassword(User user) {
+
+		String sql = "UPDATE user "
+					+ "SET password=? ,salt=? "
+					+ "WHERE id=?";
+
+		return jdbcTemplate.update(sql,
 				user.getPassword(), user.getSalt(), user.getId());
 	}
 

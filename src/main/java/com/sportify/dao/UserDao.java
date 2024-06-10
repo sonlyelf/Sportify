@@ -39,12 +39,20 @@ public interface UserDao {
 	int createUser(User user);
 
 	/**
-	 * 更新 User
+	 * 更新 User 資訊
 	 * 
 	 * @param user
 	 * @return
 	 */
-	int updateUser(User user);
+	int updateUserInfo(User user);
+	
+	/**
+	 * 更新 User 密碼
+	 * 
+	 * @param user
+	 * @return
+	 */
+	int updateUserPassword(User user);
 
 	/**
 	 * 刪除 User

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sportify.dao.UserDao;
+import com.sportify.model.dto.UserInfoUpdateDto;
 import com.sportify.model.dto.UserLoginDto;
 import com.sportify.model.dto.UserRegisterDto;
 import com.sportify.model.po.User;
@@ -53,9 +54,19 @@ public class UserService {
 	 * @param user
 	 * @return
 	 */
-	public int updateUser(User user) {
-
-		return userDao.updateUser(user);
+	public int updateUser(UserInfoUpdateDto userInfoUpdateDto) {
+		
+		User user = new User();
+		Optional<User> userData = userDao.findById(userInfoUpdateDto.getUserId());
+		
+		// DTO 轉 PO
+		if(userData.isPresent()) {
+			user = userData.get();
+			user.setName(userInfoUpdateDto.getUsername());
+			user.setPhone(userInfoUpdateDto.getPhone());
+		}
+		
+		return userDao.updateUserInfo(user);
 	}
 
 	/**
@@ -67,17 +78,6 @@ public class UserService {
 	public int deleteUser(Integer id) {
 
 		return userDao.deleteUser(id);
-	}
-
-	/**
-	 * 前台會員更新
-	 * 
-	 * @param user
-	 * @return
-	 */
-	public int replaceUser(User user) {
-		
-		return userDao.replaceUser(user);
 	}
 
 	/**
