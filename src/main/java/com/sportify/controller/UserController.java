@@ -121,7 +121,7 @@ public class UserController {
 	@PutMapping("/user/management/update")
 	public String upDateUserInfo(UserInfoUpdateDto userInfoUpdateDto,Model model) {
 		
-		int result = userService.updateUser(userInfoUpdateDto);
+		int result = userService.updateUserInfo(userInfoUpdateDto);
 		if(result == 1) {
 			model.addAttribute("message", "更新成功");
 		}else {
@@ -141,10 +141,7 @@ public class UserController {
 		}else {
 			model.addAttribute("message", "更新失敗");
 		}
-
-	        // 更新数据库中的密码和盐值
-	   
-
+		
 		return "redirect:/myCenter";
 	}
 

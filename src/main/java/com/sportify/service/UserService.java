@@ -50,12 +50,12 @@ public class UserService {
 	}
 
 	/**
-	 * 更新 User
+	 * 更新 UserInfo
 	 * 
 	 * @param user
 	 * @return
 	 */
-	public int updateUser(UserInfoUpdateDto userInfoUpdateDto) {
+	public int updateUserInfo(UserInfoUpdateDto userInfoUpdateDto) {
 		
 		User user = new User();
 		Optional<User> userData = userDao.findById(userInfoUpdateDto.getUserId());
@@ -70,23 +70,27 @@ public class UserService {
 		return userDao.updateUserInfo(user);
 	}
 	
-	
+	/**
+	 * 更新 UserPassword
+	 * 
+	 * @param userPwdUpdateDto
+	 * @return
+	 * @throws Exception
+	 */
 	public int updateUserPassword(UserPwdUpdateDto userPwdUpdateDto) throws Exception {
 		
 		User user = new User();
 		Optional<User> userData = userDao.findById(userPwdUpdateDto.getUserId());
 		String[] hashAndSalt = passwordEncryption(userPwdUpdateDto.getPassword());
-		System.out.println(userPwdUpdateDto);
+		
 		// DTO 轉 PO
 		if(userData.isPresent()) {
 			user = userData.get();
 			user.setPassword(hashAndSalt[0]);
 			user.setSalt(hashAndSalt[1]);
-	
 		}
 		
 		return userDao.updateUserPassword(user);
-		
 	}
 
 	/**
