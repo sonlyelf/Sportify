@@ -2,6 +2,7 @@ package com.sportify.dao;
 
 import java.util.List;
 
+import com.sportify.model.dto.TradeDto;
 import com.sportify.model.po.Trade;
 
 public interface TradeDao {
@@ -19,7 +20,7 @@ public interface TradeDao {
 	 * @param id
 	 * @return
 	 */
-	Trade findById(Integer id);
+	Trade findTradeById(Integer id);
 
 	/**
 	 * 新增交易
@@ -30,12 +31,12 @@ public interface TradeDao {
 	int createTrade(Trade trade);
 
 	/**
-	 * 更新交易
+	 * 修改交易
 	 * 
 	 * @param trade
 	 * @return
 	 */
-	int updateTrade(Trade trade);
+	int updateTrade(TradeDto tradeDto);
 
 	/**
 	 * 取消交易
@@ -46,30 +47,39 @@ public interface TradeDao {
 	int cancelTrade(Integer id);
 
 	/**
-	 * 更新付款狀態
-	 * 調整訂單狀態，無需整單取消 ：已付款：未付款
+	 * 更新狀態
+	 * 調整狀態，無需整單取消 ：已付款 已完成
+	 * 調整狀態，無需整單取消 ：已退款 已取消
 	 * 
 	 * @param id
 	 * @param paymentStatus
 	 * @return
 	 */
-	int updatePaymentStatus(Integer id, String paymentStatus);
+	int updateStatus(Integer id, String paymentStatus ,String orderStatus);
 
-	/**
-	 * 更新交易狀態
-	 * 更新狀態 訂單 已成功：已取消
-	 * 
-	 * @param id
-	 * @param orderStatus
-	 * @return
-	 */
-	int updateOrderStatus(Integer id, String orderStatus);
-
+	
 	/**
 	 * 根據 UserId 查詢交易
 	 * 
 	 * @param userId
 	 * @return
 	 */
-	List<Trade> findTradesByUserId(Integer userId);
+	List<TradeDto> findTradesByUserId(Integer userId);
+
+	
+//	/**
+//	 * 預約交易狀態
+//	 * 更新狀態 訂單明細
+//	 * 
+//	 * @trade
+//	 * @return
+//	 */
+//	int addBookingCourse(Trade trade);
+
+	
+	
+	List<TradeDto> getAllTrades();
+	
+	
+	List<TradeDto> findTradesByUserPaymentStatus(Integer userId ,String paymentStatus);
 }

@@ -152,36 +152,42 @@
 </head>
 
 <body data-bs-spy="scroll" data-bs-target="#navbarSupportedContent" data-bs-offset="200">
-	<header>
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<nav class="navbar navbar-expand-md navbar-dark fixed-top">
-						<div class="container-xl">
-							<a class="navbar-brand d-flex align-items-center" href="/index">
-								<img src="./image/Logocopy.png" width="100" alt="">
-								<h1 class="m-0 ms-1">SPORTIFy</h1>
-							</a>
-							<button class="navbar-toggler ctr-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-							<div class="collapse navbar-collapse" id="navbarSupportedContent">
-								<div class="navbar-nav ms-auto">
-									<li class="nav-item"><a class="nav-link" href="/index">訊息公告</a>
-									</li>
-									<li class="nav-item"><a class="nav-link" href="/announcement">課程介紹</a></li>
-									<li class="nav-item"><a class="nav-link active" href="/backgroundCourse/course">課程報名</a></li>
-									<li class="nav-item"><a class="nav-link" href="/myCenter">會員中心</a></li>
-									<li class="nav-item"><a class="nav-link" href="/information">交通資訊</a></li>
-									<li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
-									<li class="nav-item"><a id="login-btn" class="nav-link" href="/member" onclick="showLoginForm()">登入</a></li>
-								</div>
-							</div>
-							<span id="user-greeting" style="display: none;"></span>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</header>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+                        <!-- 設定區域範圍 -->
+                        <div class="container-xl">
+                            <!-- 表現LOGO連結的區域，可以加上LOGO圖片 -->
+                            <a class="navbar-brand d-flex align-items-center" href="/index">
+                                <img src="../image/Logocopy.png" width="100" alt="">
+                                <h1 class="m-0 ms-1">SPORTIFy</h1>
+                            </a>
+                            <!-- 以下是手機版才出現的按鈕，負責控制顯示導覽選單 -->
+                            <!-- 注意：data-bs-target的名字必須與可收合部份的ID相同 -->
+                            <button class="navbar-toggler ctr-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                            <!-- 以下區域是在手機版會收合的選單部份 -->
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <!-- 這是一組選單，me-auto負責margin都在右邊，ms-auto負責margin都在左邊 -->
+                                <div class="navbar-nav ms-auto">
+                                    <li class="nav-item"><a class="nav-link " href="/index">訊息公告</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/announcement">課程介紹</a></li>
+                                    <li class="nav-item"><a class="nav-link active" href="/backgroundCourse/course">課程報名</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/myCenter">會員中心</a></li>
+                                    <li class="nav-item "><a class="nav-link" href="/information">交通資訊</a></li>
+                                    <li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
+                                    <li class="nav-item"><a id="login-btn" class="nav-link" href="/member" onclick="showLoginForm()">登入</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/trade/userTrades"><span><img src="../image/shopping-cart111.png" height="30px" width="30px"></span></a></li>
+                                </div>
+                            </div>
+                            <span id="user-greeting" style="display: none;"></span>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
 
 	<main>
 		<section id="course-list">
@@ -202,7 +208,8 @@
 					<section class="group-section">
 						<h4>${courses[0].name }</h4>
 						<section id="course_${courses[0].groupId}" class="course-detail">
-							<form id="bookingForm_${courses[0].groupId}" onsubmit="bookCourse(event, 'course_${courses[0].groupId}')">
+							<form id="bookingForm_${courses[0].groupId}" onsubmit="bookCourse(event, 'course_${courses[0].groupId}')" action="/trade/api/add-to-cart" method="POST">
+								<input type="hidden" name="courseId" value="${courses[0].id}">
 								<div class="mb-3">
 									<label for="booking" class="form-label">
 										${fn:replace(courses[0].startDate, '00:00:00.0', '')}
@@ -219,9 +226,8 @@
 									</div>
 								</div>
 								<div class="d-flex justify-content-end">
-									<span><img src="../image/purchase.png" alt="Icon" class="icon" width="30px" height="auto"></span>
 									&nbsp;
-									<button type="button" class="submit" id="bookingBtn_${courses[0].groupId}">預約</button>
+									<button type="submit" class="submit" id="bookingBtn_${courses[0].groupId}">預約</button>
 								</div>
 							</form>
 						</section>

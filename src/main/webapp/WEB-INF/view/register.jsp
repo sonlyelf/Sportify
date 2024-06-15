@@ -79,6 +79,7 @@
                                     <li class="nav-item"><a class="nav-link" href="/information">交通資訊</a></li>
                                     <li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
                                     <li class="nav-item"><a id="login-btn" class="nav-link" href="/member" onclick="showLoginForm()">登入</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/trade/userTrades"><span><img src="../image/shopping-cart111.png" height="30px" width="30px"></span></a></li>
                                 </div>
                             </div>
                             <span id="user-greeting" style="display: none;"></span>
@@ -278,23 +279,20 @@
             $('#confirm_password').val('password').addClass('placeholder-text');;
         });
 
-        document.getElementById("registerfrom").addEventListener("submit", function (event) {
-            // 防止按鈕的默認行為，即提交表單
-            event.preventDefault();
-            // 在這裡添加你想要執行的 JavaScript 代碼
-            // 例如，顯示 SweetAlert 通知框
-            Swal.fire({
-                icon: 'success',
-                title: '註冊成功',
-                showConfirmButton: false,
-                timer: 2000 // 延長跳轉時間到 3 秒
-            }).then(() => {
-                // 3 秒後執行跳轉
-                setTimeout(function () {
-                    window.location.href = "/member"; // 重定向到member頁面
-                }, 1000);
-            });
-        });
+      document.getElementById("registerfrom").addEventListener("submit", function (event) {
+         
+    	  Swal.fire({
+    	        icon: 'success',
+    	        title: '註冊成功',
+    	        showConfirmButton: false,
+    	        timer: 2000 // 延長通知顯示時間到 2 秒
+    	    });
+
+    	    // 3 秒後執行跳轉
+    	    setTimeout(function() {
+    	        window.location.href = "/member"; // 重定向到 member 頁面
+    	    }, 3000); // 這裡的時間要比通知顯示時間長
+    	});
     </script>
 </body>
 

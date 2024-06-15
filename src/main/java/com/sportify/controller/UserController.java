@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sportify.model.dto.TradeDto;
 import com.sportify.model.dto.UserInfoUpdateDto;
 import com.sportify.model.dto.UserLoginDto;
 import com.sportify.model.dto.UserPwdUpdateDto;
@@ -28,6 +29,7 @@ import com.sportify.model.po.User;
 import com.sportify.service.TradeService;
 import com.sportify.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 /**
@@ -45,39 +47,39 @@ public class UserController {
 	private TradeService tradeService;
 
 	// 註冊頁面
-	@GetMapping("/register")
-	public String getRegister(@ModelAttribute UserRegisterDto userRegisterDto) {
+		@GetMapping("/register")
+		public String getRegister(@ModelAttribute UserRegisterDto userRegisterDto) {
 
-		return "register"; // 會自動指向/WEB-INF/view/.jsp
-	}
-
-	// 註冊
-	@PostMapping("/regist")
-	public String getRegister(Model model, UserRegisterDto userRegisterDto, HttpSession session) throws Exception {
-
-		// 檢查郵件是否已存在
-		Optional<User> existingUser = userService.findByEmail(userRegisterDto.getEmail());
-		if (existingUser.isPresent()) {
-			// 用户已存在，设置登录状态为 false
-			session.setAttribute("loginStatus", false);
-			model.addAttribute("error1", "此郵箱已被註冊，請重新註冊。");
-			return "register"; // 返回注册页面，显示错误消息
+			return "register"; // 會自動指向/WEB-INF/view/.jsp
 		}
 
-		// 如果邮箱未被使用且密码长度符合要求，则执行注册逻辑
-		if (userRegisterDto.getPassword().length() < 6) {
-			model.addAttribute("error2", "密碼長度不得少於6碼。");
-			return "register"; // 返回注册页面，显示错误消息
+		// 註冊
+		@PostMapping("/regist")
+		public String getRegister(Model model, UserRegisterDto userRegisterDto, HttpSession session) throws Exception {
+
+			// 檢查郵件是否已存在
+			Optional<User> existingUser = userService.findByEmail(userRegisterDto.getEmail());
+			if (existingUser.isPresent()) {
+				// 用户已存在，设置登录状态为 false
+				session.setAttribute("loginStatus", false);
+				model.addAttribute("error1", "此郵箱已被註冊，請重新註冊。");
+				return "register"; // 返回注册页面，显示错误消息
+			}
+
+			// 如果邮箱未被使用且密码长度符合要求，则执行注册逻辑
+			if (userRegisterDto.getPassword().length() < 6) {
+				model.addAttribute("error2", "密碼長度不得少於6碼。");
+				return "register"; // 返回注册页面，显示错误消息
+			}
+				System.out.println("sss"+userRegisterDto);
+			// 如果邮箱未被使用，则执行注册逻辑
+			int result = userService.addUser(userRegisterDto);
+
+			model.addAttribute("resultMessage", result == 0 ? "註冊成功" : "註冊失敗");
+			// 注册成功后，设置登录状态为 true
+			session.setAttribute("loginStatus", true);
+			return "member"; // 会自动指向/WEB-INF/view/.jsp
 		}
-
-		// 如果邮箱未被使用，则执行注册逻辑
-		int result = userService.addUser(userRegisterDto);
-
-		model.addAttribute("resultMessage", result == 0 ? "註冊成功" : "註冊失敗");
-		// 注册成功后，设置登录状态为 true
-		session.setAttribute("loginStatus", true);
-		return "member"; // 会自动指向/WEB-INF/view/.jsp
-	}
 
 	// 登入頁面
 	@GetMapping("/member")
@@ -94,9 +96,10 @@ public class UserController {
 
 		// 模拟登录逻辑，实际应用中应从数据库验证用户信息
 		UserLoginDto userLogin = userService.logintUser(userLoginDto);
-
+		System.out.println(userLogin);
 		if (userLogin.getEmail() != null) {
 			session.setAttribute("loginStatus", true);
+			session.setAttribute("userId", userLogin.getId());
 			session.setAttribute("Email", userLoginDto.getEmail());
 			model.addAttribute("userLoginDto", userLoginDto);
 			session.setAttribute("loginStatus", true);
@@ -163,24 +166,35 @@ public class UserController {
 		return ResponseEntity.ok(response);
 	}
 
-	// 我的中心
+	// 我報名的課程
 	@GetMapping("/myCenter")
-	public String getmyCenter(HttpSession session, Model model) {
+	public String getMyCenter(HttpSession session, Model model,HttpServletRequest request) {
+	    // 从session中获取登录用户信息
+	    UserLoginDto userLogin = (UserLoginDto) session.getAttribute("userLogin");
 
-		UserLoginDto userLogin = (UserLoginDto) session.getAttribute("userLogin");
+	    if (userLogin == null) {
+	        // 如果未登录，返回登录页面或错误信息
+	        model.addAttribute("error", "用户未登录");
+	        return "redirect:/member"; // 假设你有一个登录页面的路径
+	    }
+
+	    // 根据用户登录信息获取用户对象
 		User user = userService.findByEmail(userLogin.getEmail()).get();
 
-		if (user != null) {
-			// 获取该用户的所有交易（预定课程）信息
-			List<Trade> trades = tradeService.findTradesByUserId(user.getId());
-			// 将用户和交易信息添加到模型中
-			model.addAttribute("user", user);
-			model.addAttribute("trades", trades);
-		} else {
-			// 处理找不到用户的情况
-			model.addAttribute("error", "用户未找到");
-		}
-		return "myCenter"; // 这里返回会员中心页面的视图名，具体视图名需要根据实际情况修改
+	    if (user == null) {
+	        // 如果找不到用户，返回错误信息
+	        model.addAttribute("error", "用户未找到");
+	        return "error"; // 这里假设有一个错误页面
+	    }
+
+	    // 获取该用户的所有交易（预定课程）信息
+	    List<TradeDto> userTrades = tradeService.findTradesByUserId(user.getId());
+
+	    // 将用户和交易信息添加到模型中
+	    model.addAttribute("user", user);
+	    model.addAttribute("userTrades", userTrades);
+
+	    return "myCenter"; // 返回会员中心页面的视图名
 	}
 	
 	// [先不作] 確認 User 的 Email 是否存在 ?

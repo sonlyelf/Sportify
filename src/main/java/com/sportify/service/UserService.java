@@ -16,6 +16,8 @@ import com.sportify.model.dto.UserRegisterDto;
 import com.sportify.model.po.User;
 import com.sportify.security.KeyUtil;
 
+import jakarta.servlet.ServletOutputStream;
+
 @Service
 public class UserService {
 
@@ -128,6 +130,7 @@ public class UserService {
 
 		// 3. 將 PO 傳入到 DAO
 		int result = userDao.createUser(user);
+		System.out.println(user);
 
 		return result;
 	}
@@ -136,21 +139,21 @@ public class UserService {
 	public UserLoginDto logintUser(UserLoginDto userLoginDto) throws Exception {
 
 		// 1. 後端取資料庫 user 資料
-		User user = userDao.findByEmail(userLoginDto.getEmail()).get();
+				User user = userDao.findByEmail(userLoginDto.getEmail()).get();
 
-		// 2. 利用鹽巴取得加密過的密碼
-		String hashedHexString = passwordDecryption(userLoginDto.getPassword(), KeyUtil.hexToBytes(user.getSalt()));
+				// 2. 利用鹽巴取得加密過的密碼
+				String hashedHexString = passwordDecryption(userLoginDto.getPassword(), KeyUtil.hexToBytes(user.getSalt()));
 
-		// 3. 前端資訊跟user資料做比對
-		if (user.getPassword().equals(hashedHexString)) {
-			UserLoginDto userLogin = new UserLoginDto();
-			userLogin.setEmail(user.getEmail());
-			userLogin.setPassword(user.getPassword());
-			return userLogin;
-		}
+				// 3. 前端資訊跟user資料做比對
+				if (user.getPassword().equals(hashedHexString)) {
+					UserLoginDto userLogin = new UserLoginDto();
+					userLogin.setEmail(user.getEmail());
+					userLogin.setPassword(user.getPassword());
+					return userLogin;
+				}
 
-		return new UserLoginDto();
-	}
+				return new UserLoginDto();
+			}
 
 	/**
 	 * [加密] 使用 salt 及 SHA-256

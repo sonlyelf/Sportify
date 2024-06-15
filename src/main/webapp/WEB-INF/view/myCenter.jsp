@@ -54,6 +54,11 @@
 			border-bottom: none;
 			/* border-bottom-color: #e1dae3; */
 		}
+		.header-text {
+	    background-color: darkcyan;
+	    color: rgb(244, 247, 247);
+	    font-size: 24px;
+		}
 
 		.table-responsive {
 			overflow-x: auto;
@@ -70,6 +75,17 @@
 		.btn-cancel {
 			background-color: rgb(241, 106, 62);
 			color: #fff;
+		}
+		.accordion-button-container {
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+		}
+	
+		.course-name,
+		.course-dates,
+		.course-day {
+		    margin-right: 10px;
 		}
 
 		footer {
@@ -117,10 +133,11 @@
 									<li class="nav-item"><a class="nav-link " href="/index">訊息公告</a></li>
 									<li class="nav-item"><a class="nav-link" href="/announcement">課程介紹</a></li>
 									<li class="nav-item"><a class="nav-link" href="/backgroundCourse/course">課程報名</a></li>
-									<li class="nav-item"><a class="nav-link" href="/myCenter">會員中心</a></li>
+									<li class="nav-item"><a class="nav-link active" href="/myCenter">會員中心</a></li>
 									<li class="nav-item"><a class="nav-link" href="/information">交通資訊</a></li>
 									<li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
 									<li class="nav-item"><a id="login-btn" class="nav-link" href="/member" onclick="showLoginForm()">登入</a></li>
+									<li class="nav-item"><a class="nav-link" href="/trade/userTrades"><span><img src="../image/shopping-cart111.png" height="30px" width="30px"></span></a></li>
 								</div>
 							</div>
 							<span id="user-greeting" style="display: none;"></span>
@@ -144,55 +161,66 @@
 					</div>
 				</nav>
 				<div class="tab-content" id="nav-tabContent">
-					<div class="tab-pane fade show active" id="p1" role="tabpanel" aria-labelledby="p1-tab">
-						<div class="container-xl">
-							<div class="row">
-								<div class="col-xl-12" id="1">
-									<p class="text-center" style="background-color: darkcyan; color: rgb(244, 247, 247); font-size: 24px;">SPORTIFy運動教室</p>
-									<div class="accordion" id="accordionExample">
-										<div class="accordion-item">
-											<h2 class="accordion-header" id="headingOne">
-												<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">${course.id} ${course.name}</button>
-											</h2>
-											<div class="container-xl" id="p1">
-												<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-													<div class="table-responsive">
-														<table class="table">
-															<thead>
-																<tr>
-																	<th scope="col">日期</th>
-																	<th scope="col">時間</th>
-																	<th scope="col">金額</th>
-
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-																	<td>${course.date}</td>
-																	<td>${course.day}</td>
-																	<td>${course.price}</td>
-																</tr>
-																<hr>
-																<tr>
-																	<td></td>
-																	<td></td>
-																	<td>
-																		<div class="d-flex justify-content-end">
-																			<button type="submit" class="btn btn-cancel" id="btnCencel" onclick="bookCourse('course-id')">取消預約</button>
-																		</div>
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+<div class="tab-pane fade show active" id="p1" role="tabpanel" aria-labelledby="p1-tab">
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-xl-12" id="1">
+                <p class="text-center header-text">SPORTIFy運動教室</p>
+                <div class="accordion" id="accordionExample">
+                    <c:forEach items="${userTrades}" var="trade">
+                        <div class="accordion-item">
+                            <input name="_method" id="_method_${trade.id}" type="hidden" value="${method}">
+                            <input name="id" id="id_${trade.id}" type="hidden" value="${trade.id}">
+                            <h2 class="accordion-header" id="heading${trade.id}">
+                            <div class="accordion-button-container">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${trade.id}" aria-expanded="true" aria-controls="collapse${trade.id}"> 
+                                					<span class="course-name">${trade.course.name}</span>
+												    <span class="course-dates">${trade.course.startDate} ~ ${trade.course.endDate}</span>
+												    <span class="course-day">${trade.course.day}</span>
+								</button>
+							</div>	
+                            </h2>
+                            <div class="container-xl">
+                                <div id="collapse${trade.id}" class="accordion-collapse collapse show" aria-labelledby="heading${trade.id}" data-bs-parent="#accordionExample">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col"> 交易日期</th>
+                                                    <th scope="col">金額</th>
+                                                    <th scope="col">付款狀態</th>
+                                                    <th scope="col">交易狀態</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>${trade.createDate}</td>
+                                                    <td>${trade.course.price}</td>
+													<td>${trade.paymentStatus}</td>
+													<td>${trade.orderStatus}</td>
+													
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-end">
+                                                            <button type="submit" class="btn btn-cancel" id="btnCancel${trade.id}" onclick="cancelBooking(${trade.id})">取消預約</button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 					<div class="tab-pane fade" id="p2" role="tabpanel" aria-labelledby="p2-tab">
 						<div class="container form-container">
 							<div class="row">
@@ -308,18 +336,21 @@
 	            });
 	        });
 		
-		/* document.getElementById("updatePwdForm").addEventListener("submit", function (event) {
-            // 防止按鈕的默認行為，即提交表單
-            event.preventDefault();
-            // 在這裡添加你想要執行的 JavaScript 代碼
-            // 例如，顯示 SweetAlert 通知框
-            Swal.fire({
-                icon: 'success',
-                title: '密碼資訊更新成功',
-                showConfirmButton: false,
-                timer: 2000 // 延長跳轉時間到 3 秒
-            });
-        }); */
+		 document.getElementById('updatePwdForm').addEventListener('submit', function(event) {
+	            event.preventDefault(); // 防止表單的默認提交動作
+	            
+	            // 顯示成功通知
+	            Swal.fire({
+	                icon: 'success',
+	                title: '更新成功',
+	                text: '用戶密碼已成功更新'
+	            }).then(() => {
+	                // 通知顯示完畢後提交表單
+	                event.target.submit();
+	            });
+	        });
+		
+		
 	</script>
 </body>
 

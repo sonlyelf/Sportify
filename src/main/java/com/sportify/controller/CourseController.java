@@ -114,4 +114,6 @@ public class CourseController {
 		model.addAttribute("groups", groupCourses);
 		return "course";
 	}
+	
+	
 }
