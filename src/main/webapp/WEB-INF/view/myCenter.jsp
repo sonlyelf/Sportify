@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true"%>
 <!-- Tomcat 10.x JSTL -->
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
@@ -72,9 +72,11 @@
 			margin-right: 10px;
 		}
 
-		.btn-cancel {
+		.btnCancelUpdate {
 			background-color: rgb(241, 106, 62);
 			color: #fff;
+			margin-bottom: 12px;
+		
 		}
 		.accordion-button-container {
 	    display: flex;
@@ -106,6 +108,16 @@
 				padding: 20px;
 				max-width: 900px;
 			}
+			  .status {
+			    display: inline-block;
+			    vertical-align: top;
+			    line-height: 1.5;
+			    margin-right: 5px; /* 調整右邊距 */
+			  }
+			  .separator {
+			    display: inline-block;
+			    vertical-align: top;
+			  }
 		}
 	</style>
 </head>
@@ -166,57 +178,128 @@
         <div class="row">
             <div class="col-xl-12" id="1">
                 <p class="text-center header-text">SPORTIFy運動教室</p>
-                <div class="accordion" id="accordionExample">
-                    <c:forEach items="${userTrades}" var="trade">
-                        <div class="accordion-item">
-                            <input name="_method" id="_method_${trade.id}" type="hidden" value="${method}">
-                            <input name="id" id="id_${trade.id}" type="hidden" value="${trade.id}">
-                            <h2 class="accordion-header" id="heading${trade.id}">
-                            <div class="accordion-button-container">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${trade.id}" aria-expanded="true" aria-controls="collapse${trade.id}"> 
-                                					<span class="course-name">${trade.course.name}</span>
-												    <span class="course-dates">${trade.course.startDate} ~ ${trade.course.endDate}</span>
-												    <span class="course-day">${trade.course.day}</span>
-								</button>
-							</div>	
-                            </h2>
-                            <div class="container-xl">
-                                <div id="collapse${trade.id}" class="accordion-collapse collapse show" aria-labelledby="heading${trade.id}" data-bs-parent="#accordionExample">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col"> 交易日期</th>
-                                                    <th scope="col">金額</th>
-                                                    <th scope="col">付款狀態</th>
-                                                    <th scope="col">交易狀態</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>${trade.createDate}</td>
-                                                    <td>${trade.course.price}</td>
-													<td>${trade.paymentStatus}</td>
-													<td>${trade.orderStatus}</td>
-													
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>
-                                                        <div class="d-flex justify-content-end">
-                                                            <button type="submit" class="btn btn-cancel" id="btnCancel${trade.id}" onclick="cancelBooking(${trade.id})">取消預約</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                
+                <!-- 分頁按鈕 -->
+                <ul class="nav nav-tabs justify-content-center  col-12" id="orderTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="completed-orders-tab" data-bs-toggle="tab" data-bs-target="#completed-orders" type="button" role="tab" aria-controls="completed-orders" aria-selected="true">已完成訂單</button>
+                    </li>
+                    <li class="nav-item " role="presentation">
+                        <button class="nav-link" id="cancelled-orders-tab" data-bs-toggle="tab" data-bs-target="#cancelled-orders" type="button" role="tab" aria-controls="cancelled-orders" aria-selected="false">已取消訂單</button>
+                    </li>
+                </ul>
+
+                <!-- 分頁內容 -->
+                <div class="tab-content" id="orderTabContent">
+                    <!-- 已完成訂單 -->
+                    <div class="tab-pane fade show active" id="completed-orders" role="tabpanel" aria-labelledby="completed-orders-tab">
+                        <div class="accordion" id="accordionCompletedOrders">
+                            <c:forEach items="${userTrades}" var="trade">
+                                <c:if test="${trade.orderStatus eq '已完成'}">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading${trade.id}">
+                                            <div class="accordion-button-container">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCompleted${trade.id}" aria-expanded="true" aria-controls="collapseCompleted${trade.id}">
+                                                    <span class="course-name">${trade.course.name}</span>
+                                                    <span class="course-dates">${trade.course.startDate} ~ ${trade.course.endDate}</span>
+                                                    <span class="course-day">${trade.course.day}</span>
+                                                </button>
+                                            </div>
+                                        </h2>
+                                        <div class="container-xl">
+                                            <div id="collapseCompleted${trade.id}" class="accordion-collapse collapse show" aria-labelledby="heading${trade.id}" data-bs-parent="#accordionCompletedOrders">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">交易日期</th>
+                                                                <th scope="col">金額</th>
+                                                                <th class="d-none d-md-table-cell" scope="col">付款狀態</th>
+                                                               	<th class="d-none d-md-table-cell" scope="col">交易狀態</th>
+                                                                <th class="d-table-cell d-md-none" scope="col">狀態</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>${trade.createDate}</td>
+                                                                <td>${trade.course.price}</td>
+                                                               <td class="d-none d-md-table-cell">${trade.paymentStatus}</td>
+                                                                <td class="d-none d-md-table-cell">${trade.orderStatus}</td>
+                                                                <td class="d-table-cell d-md-none">
+  																	<span class="status">${trade.paymentStatus}</span><span class="separator"> / </span><span class="status">${trade.orderStatus}</span>
+																</td>
+
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="d-flex justify-content-end">
+                                                        <form id="order-form" action="/trade/booking/updateStatus" method="POST" style="display:inline;">
+                                                            <input name="id" id="id" type="hidden" value="${trade.id}"> <!-- 替換為實際的交易 ID -->
+                                                            <input name="paymentStatus" type="hidden" value="已退款">
+                                                            <input name="orderStatus" type="hidden" value="已取消">
+                                                            <button type="submit" class="btn btnCancelUpdate" id="btnCancelUpdate">取消預約</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                </c:if>
+                            </c:forEach>
                         </div>
-                    </c:forEach>
+                    </div>
+
+                    <!-- 已取消訂單 -->
+                    <div class="tab-pane fade" id="cancelled-orders" role="tabpanel" aria-labelledby="cancelled-orders-tab">
+                        <div class="accordion" id="accordionCancelledOrders">
+                            <c:forEach items="${userTrades}" var="trade">
+                                <c:if test="${trade.orderStatus eq '已取消'}">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading${trade.id}">
+                                            <div class="accordion-button-container">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCancelled${trade.id}" aria-expanded="true" aria-controls="collapseCancelled${trade.id}">
+                                                    <span class="course-name">${trade.course.name}</span>
+                                                    <span class="course-dates">${trade.course.startDate} ~ ${trade.course.endDate}</span>
+                                                    <span class="course-day">${trade.course.day}</span>
+                                                </button>
+                                            </div>
+                                        </h2>
+                                        <div class="container-xl">
+                                            <div id="collapseCancelled${trade.id}" class="accordion-collapse collapse show" aria-labelledby="heading${trade.id}" data-bs-parent="#accordionCancelledOrders">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">交易日期</th>
+                                                                <th scope="col">金額</th>
+                                                                <th class="d-none d-md-table-cell" scope="col">付款狀態</th>
+                                                                <th class="d-none d-md-table-cell" scope="col">交易狀態</th>
+                                                                <th class="d-table-cell d-md-none" scope="col">狀態</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>${trade.createDate}</td>
+                                                                <td>${trade.course.price}</td>
+                                                                <td class="d-none d-md-table-cell">${trade.paymentStatus}</td>
+                                                                <td class="d-none d-md-table-cell">${trade.orderStatus}</td>
+                                                                <td class="d-table-cell d-md-none">
+  																	<span class="status">${trade.paymentStatus}</span><span class="separator"> / </span><span class="status">${trade.orderStatus}</span>
+																</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
+                        </div>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>

@@ -54,11 +54,6 @@ public class TradeController {
         }
 
         List<TradeDto> trades = tradeService.findTradesByUserId(user.getId());
-        
-        //獲取總金額
-        //Integer totalAmount = trades.stream().mapToInt(trade -> trade.getCourse().getPrice()).sum();
-        // model.addAttribute("totalAmount", totalAmount);
-
         model.addAttribute("trades", trades);
         return "userTrades"; // 假設你有一個名為 userTrades 的視圖模板
     }
@@ -122,6 +117,8 @@ public class TradeController {
             return "error";
         }
     }
+    
+ 
 
     @DeleteMapping("/trade/cancel/{tradeId}")
     public String cancelTrade(@PathVariable Integer tradeId, Model model, HttpSession session) {
@@ -178,6 +175,42 @@ public class TradeController {
             return "error";
         }
     }
+    
+    @PostMapping("/booking/updateStatus")
+    public String updateOrderStatus(@RequestParam Integer id, 
+							    		@RequestParam String paymentStatus, 
+							    		@RequestParam String orderStatus, 
+							    		HttpSession session, Model model) {
+      
+    	try {
+
+            // 获取当前登录用户的信息
+            UserLoginDto userLogin = (UserLoginDto) session.getAttribute("userLogin");
+            if (userLogin == null) {
+                return "redirect:/member";
+            }
+
+            User user = userService.findByEmail(userLogin.getEmail()).orElse(null);
+            if (user == null) {
+                return "error";
+            }
+           
+            // 更新支付状态和订单状态
+         	int result=  tradeService.updateStatus(id, paymentStatus, orderStatus);
+            if (result == 1) {
+                session.removeAttribute("trades"); // 移除购物车信息
+                model.addAttribute("message", "更新成功");
+            } else {
+                model.addAttribute("message", "更新失败");
+            }
+
+            return "redirect:/myCenter"; // 确保这里返回的是 myCenter 视图名称
+        } catch (Exception e) {
+            model.addAttribute("error", "支付失敗: " + e.getMessage());
+            return "error";
+        }
+    }
+
 
   
 

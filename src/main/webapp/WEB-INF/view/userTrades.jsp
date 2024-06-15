@@ -184,7 +184,7 @@ table tbody tr {
             <tbody>
                 <!-- 使用 JSTL 或其他後端模板引擎來動態生成表格行 -->
                 <c:forEach items="${trades}" var="trade" >
-                    <c:if test="${trade.orderStatus ne '已完成'}">
+                    <c:if test="${trade.orderStatus ne '已完成' and trade.orderStatus ne '已取消'}">
                         <input name="_method" id="_method" type="hidden" value="${method}">
                         <input name="id" id="id_${trade.id}" type="hidden" value="${trade.id}">
                         <tr>
@@ -215,7 +215,7 @@ table tbody tr {
     </div>
     <!-- 回上一頁按鈕 -->
     <div class="back-button">
-       <a href="/backgroundCourse/course" class="btn btn-secondary">回上一頁</a>
+       <a href="/backgroundCourse/course" class="btn btn-secondary">繼續報名</a>
     </div>
  </main>   
  
