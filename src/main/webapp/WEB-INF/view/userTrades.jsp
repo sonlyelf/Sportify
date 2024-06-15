@@ -23,9 +23,19 @@
 
 main{
 	margin-top: 150px;
-	/* margin-left: auto;
-	margin-right: auto; */
+	margin-left: 50px;
+	margin-right: 50px;
+
 	justify-content: center;
+	max-width: 1500px;
+			/* 居中對齊 */ 
+	/* padding: 20px; */
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	background-color: #fff;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	border-collapse: collapse;
+	border-style: none;
 	
 h2{
 	font-size: min(calc(22px +3vw), 40px ) ;
@@ -34,12 +44,18 @@ h2{
 	color:darkcyan; 
 
 }
+
+table thead tr{
+  	border-style: none;
+	text-align: center;
+}
+
 table tbody tr {
   	transform: translateY(3px);  
 	text-align: center;
-	
+		
 }
-}
+
 .btnCancel {
     background-color: red; /* 自定義背景顏色 */
     color: white; /* 自定義文字顏色 */
@@ -68,6 +84,7 @@ table tbody tr {
 }
 
   @media (max-width: 768px) {
+ 		
             .table thead {
                 display: none;
             }
@@ -151,7 +168,7 @@ table tbody tr {
     <h2>Shopping Cart</h2>
     
     <div class="table-responsive">
-        <table class="table">
+        <table class="table" >
             <thead>
                 <tr>
                     <th>訂單編號</th>
@@ -160,6 +177,7 @@ table tbody tr {
                     <th>價錢</th>
                     <th>付款狀態</th>
                     <th>交易狀態</th>
+                    <th >操作</th>
                   
                 </tr>
             </thead>
@@ -176,7 +194,7 @@ table tbody tr {
                             <td data-label="價錢">${trade.course.price}</td>
                             <td data-label="付款狀態">${trade.paymentStatus}</td>
                             <td data-label="交易狀態">${trade.orderStatus}</td>
-
+  							<td class="actions" data-label="操作">
                             <td class="actions">
                                 <form id="pay-cart-form" action="/trade/trade/updateStatus" method="POST" style="display:inline;">
                                     <input name="id" id="id" type="hidden" value="${trade.id}"> <!-- 替換為實際的交易 ID -->
@@ -197,7 +215,7 @@ table tbody tr {
     </div>
     <!-- 回上一頁按鈕 -->
     <div class="back-button">
-        <button onclick="history.back()" class="btn btn-secondary">回上一頁</button>
+       <a href="/backgroundCourse/course" class="btn btn-secondary">回上一頁</a>
     </div>
  </main>   
  
@@ -224,6 +242,7 @@ table tbody tr {
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="/js/app.js"></script>
 	<script >
 	<script>
 	if ($('.navbar-toggler').is(':hidden')) {

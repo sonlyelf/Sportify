@@ -279,20 +279,24 @@
             $('#confirm_password').val('password').addClass('placeholder-text');;
         });
 
-      document.getElementById("registerfrom").addEventListener("submit", function (event) {
-         
-    	  Swal.fire({
-    	        icon: 'success',
-    	        title: '註冊成功',
-    	        showConfirmButton: false,
-    	        timer: 2000 // 延長通知顯示時間到 2 秒
-    	    });
+        document.getElementById("registerfrom").addEventListener("submit", function (event) {
+            event.preventDefault(); // 阻止表單的默認提交行為
 
-    	    // 3 秒後執行跳轉
-    	    setTimeout(function() {
-    	        window.location.href = "/member"; // 重定向到 member 頁面
-    	    }, 3000); // 這裡的時間要比通知顯示時間長
-    	});
+            Swal.fire({
+                icon: 'success',
+                title: '註冊成功',
+                showConfirmButton: false,
+                timer: 2000 // 延長通知顯示時間到 2 秒
+            }).then(() => {
+                // 當 SweetAlert 關閉後，提交表單
+                document.getElementById("registerfrom").submit();
+            });
+
+            // 3 秒後執行跳轉
+            setTimeout(function() {
+                window.location.href = "/member"; // 重定向到 member 頁面
+            }, 3000); // 這裡的時間要比通知顯示時間長
+        });
     </script>
 </body>
 
