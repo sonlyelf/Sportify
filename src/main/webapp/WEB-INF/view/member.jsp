@@ -179,7 +179,7 @@
 									<button type="button" class="btn btnLogIn" id="login-submit-btn" onclick="login()">登入</button>
 								</div>
 								<div class="links">
-									<a href="#" style="font-size: 16px">忘記密碼?</a>
+									   <a href="#" style="font-size: 16px" onclick="openForgotPasswordModal()">忘記密碼?</a>
 								</div>
 							</form>
 						</div>
@@ -197,6 +197,28 @@
 					</div>
 				</div>
 			</div>
+			  <!-- 模态框 -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="forgotPasswordModalLabel">忘記密碼</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="forgotPasswordForm">
+                        <div class="form-group">
+                            <label for="email">请输入您的Email：</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <button type="submit" class="btn btn-forgotPWD">送出</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 		</main>
 
 		<footer class="w-100">
@@ -241,6 +263,41 @@
 					}
 				});
 			}
+			
+			  function openForgotPasswordModal() {
+			        Swal.fire({
+			            title: '忘記密碼',
+			            html:
+			                '<input id="swal-input1" class="swal2-input" placeholder="請輸入您的Email">' +
+			                '<p>我們將向您的Email發送一封重置密碼的郵件</p>',
+			            showCancelButton: true,
+			            confirmButtonText: '發送',
+			            cancelButtonText: '取消',
+			            showLoaderOnConfirm: true,
+			            preConfirm: () => {
+			                const email = Swal.getPopup().querySelector('#swal-input1').value;
+			                return fetch(`/reset-password/${email}`)
+			                    .then(response => {
+			                        if (!response.ok) {
+			                            throw new Error(response.statusText);
+			                        }
+			                        return response.json();
+			                    })
+			                    .catch(error => {
+			                        Swal.showValidationMessage(`發送失敗: ${error}`);
+			                    });
+			            },
+			            allowOutsideClick: () => !Swal.isLoading()
+			        }).then((result) => {
+			            if (result.isConfirmed) {
+			                Swal.fire(
+			                    '發送成功',
+			                    '重置密碼郵件已發送到您的電子郵件地址',
+			                    'success'
+			                );
+			            }
+			        });
+			    }
 		</script>
 	</body>
 

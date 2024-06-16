@@ -167,36 +167,32 @@ table tbody tr {
 <main>
     <h2>Shopping Cart</h2>
     
-    <div class="table-responsive">
-        <table class="table" >
-            <thead>
-                <tr>
-                    <th>訂單編號</th>
-                    <th>課程名稱</th>
-                    <th>課程日期</th>
-                    <th>價錢</th>
-                    <th>付款狀態</th>
-                    <th>交易狀態</th>
-                    <th >操作</th>
-                  
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 使用 JSTL 或其他後端模板引擎來動態生成表格行 -->
-                <c:forEach items="${trades}" var="trade" >
-                    <c:if test="${trade.orderStatus ne '已完成' and trade.orderStatus ne '已取消'}">
-                        <input name="_method" id="_method" type="hidden" value="${method}">
-                        <input name="id" id="id_${trade.id}" type="hidden" value="${trade.id}">
-                        <tr>
-                            <td data-label="訂單編號">${trade.id}</td>
-                            <td data-label="課程名稱">${trade.course.name}</td>
-                            <td data-label="課程日期">${trade.course.day}</td>
-                            <td data-label="價錢">${trade.course.price}</td>
-                            <td data-label="付款狀態">${trade.paymentStatus}</td>
-                            <td data-label="交易狀態">${trade.orderStatus}</td>
-  							<td class="actions" data-label="操作">
-                            <td class="actions">
-                                <form id="pay-cart-form" action="/trade/trade/updateStatus" method="POST" style="display:inline;">
+  <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>訂單編號</th>
+                <th>課程名稱</th>
+                <th>課程日期</th>
+                <th>價錢</th>
+                <th>付款狀態</th>
+                <th>交易狀態</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 使用 JSTL 或其他後端模板引擎來動態生成表格行 -->
+            <c:forEach items="${trades}" var="trade">
+                <c:if test="${trade.orderStatus ne '已完成' and trade.orderStatus ne '已取消'}">
+                    <tr>
+                        <td data-label="訂單編號">${trade.id}</td>
+                        <td data-label="課程名稱">${trade.course.name}</td>
+                        <td data-label="課程日期">${trade.course.day}</td>
+                        <td data-label="價錢">${trade.course.price}</td>
+                        <td data-label="付款狀態">${trade.paymentStatus}</td>
+                        <td data-label="交易狀態">${trade.orderStatus}</td>
+                        <td class="actions" data-label="操作">
+                         <form id="pay-cart-form" action="/trade/trade/updateStatus" method="POST" style="display:inline;">
                                     <input name="id" id="id" type="hidden" value="${trade.id}"> <!-- 替換為實際的交易 ID -->
                                     <input name="paymentStatus" type="hidden" value="已付款">
                                     <input name="orderStatus" type="hidden" value="已完成">
@@ -206,13 +202,14 @@ table tbody tr {
                                     <input name="_method" id="_method" type="hidden" value="DELETE">
                                     <button type="submit" class="btn btnCancel">刪除</button>
                                 </form>
-                            </td>
-                        </tr>
-                    </c:if>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
+     
+                        </td>
+                    </tr>
+                </c:if>
+            </c:forEach>
+        </tbody>
+    </table>
+</div>
     <!-- 回上一頁按鈕 -->
     <div class="back-button">
        <a href="/backgroundCourse/course" class="btn btn-secondary">繼續報名</a>
@@ -243,7 +240,7 @@ table tbody tr {
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/js/app.js"></script>
-	<script >
+
 	<script>
 	if ($('.navbar-toggler').is(':hidden')) {
 		$(window).on('scroll', function () {
@@ -256,6 +253,53 @@ table tbody tr {
 			}
 		});
 	}
+	
+/* 	function confirmPayment(tradeId) {
+	    Swal.fire({
+	        title: '確定要付款嗎？',
+	        text: "此操作將標記訂單為已付款並已完成。",
+	        icon: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        confirmButtonText: '確認付款'
+	    }).then((result) => {
+	        if (result.isConfirmed) {
+	            console.log(`Confirming payment for tradeId: ${tradeId}`);
+	            let form = document.getElementById(`pay-cart-form-${tradeId}`);
+	            if (form) {
+	                console.log('Form element:', form);
+	                form.submit();
+	            } else {
+	                console.error('Form element not found.');
+	            }
+	        }
+	    });
+	}
+
+	function confirmCancel(tradeId) {
+	    Swal.fire({
+	        title: '確定要取消訂單嗎？',
+	        text: "此操作將永久刪除訂單。",
+	        icon: 'error',
+	        showCancelButton: true,
+	        confirmButtonColor: '#d33',
+	        cancelButtonColor: '#3085d6',
+	        confirmButtonText: '確認刪除'
+	    }).then((result) => {
+	        if (result.isConfirmed) {
+	            console.log(`Confirming cancel for tradeId: ${tradeId}`);
+	            let form = document.getElementById(`cancel-cart-form-${tradeId}`);
+	            if (form) {
+	                console.log('Form element:', form);
+	                form.submit();
+	            } else {
+	                console.error('Form element not found.');
+	            }
+	        }
+	    });
+	} */
+
 
 	</script>
 	

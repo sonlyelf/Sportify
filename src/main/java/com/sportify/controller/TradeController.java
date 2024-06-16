@@ -38,6 +38,8 @@ public class TradeController {
     @Autowired
     private UserService userService;
 
+    
+    //進入交易頁面
     @GetMapping("/userTrades")
     public String getUserTrades(HttpSession session, Model model) {
         UserLoginDto userLogin = (UserLoginDto) session.getAttribute("userLogin");
@@ -58,13 +60,16 @@ public class TradeController {
         return "userTrades"; // 假設你有一個名為 userTrades 的視圖模板
     }
 
+    
+	//取得全部交易信息
     @GetMapping("/tradesAll")
     public String getAllTrades(Model model) {
         List<TradeDto> tradesAll = tradeService.getAllTrades();
         model.addAttribute("tradesAll", tradesAll);
-        return "redirect:/userTrades";
+        return "bktrades";
     }
-
+    
+    //根據交易編號取得交易信息回傳到購物頁面
     @GetMapping("/trade/{tradeId}")
     public String getTradeById(@PathVariable Integer tradeId, Model model) {
         Trade trade = tradeService.findTradeById(tradeId);
@@ -77,7 +82,9 @@ public class TradeController {
         model.addAttribute("trade", trade);
         return "redirect:/userTrades";
     }
-
+    
+    
+	//創建交易
     @PostMapping("/trade/create")
     public String createTrade(@ModelAttribute Trade trade, HttpSession session, Model model) {
         UserLoginDto userLogin = (UserLoginDto) session.getAttribute("userLogin");
@@ -105,7 +112,8 @@ public class TradeController {
             return "error";
         }
     }
-
+    
+    // 更新交易
     @PutMapping("/trade/update")
     public String updateTrade(@ModelAttribute TradeDto tradeDto, Model model) {
         try {
@@ -119,7 +127,7 @@ public class TradeController {
     }
     
  
-
+    //刪除購物車訂單
     @DeleteMapping("/trade/cancel/{tradeId}")
     public String cancelTrade(@PathVariable Integer tradeId, Model model, HttpSession session) {
         UserLoginDto userLogin = (UserLoginDto) session.getAttribute("userLogin");
@@ -140,7 +148,9 @@ public class TradeController {
         model.addAttribute("userTrades", userTrades);
         return "redirect:/trade/userTrades";
     }
-
+    
+    
+	// 更改交易狀態：未付款、已付款、已完成 購物車->我的中心
     @PostMapping("/trade/updateStatus")
     public String updatePaymentStatus(@RequestParam Integer id, 
 							    		@RequestParam String paymentStatus, 
@@ -176,6 +186,8 @@ public class TradeController {
         }
     }
     
+    
+    // 更改交易狀態：已取消、已退款 我的中心：已完成訂單->已取消訂單
     @PostMapping("/booking/updateStatus")
     public String updateOrderStatus(@RequestParam Integer id, 
 							    		@RequestParam String paymentStatus, 
@@ -214,6 +226,7 @@ public class TradeController {
 
   
 
+	// 將課程加入購物車
     @PostMapping("/api/add-to-cart")
     public String addToCart(HttpSession session, HttpServletRequest request, Model model) {
         Integer courseId = Integer.parseInt(request.getParameter("booking-course"));
@@ -248,21 +261,5 @@ public class TradeController {
         }
     }
 
-    @PostMapping("/api/get-cart")
-    @ResponseBody
-    public Map<String, Object> getCart(HttpSession session) {
-        Integer userId = (Integer) session.getAttribute("userId");
-        Map<String, Object> response = new HashMap<>();
-
-        try {
-            List<TradeDto> trades = tradeService.findTradesByUserId(userId);
-            response.put("success", true);
-            response.put("trades", trades);
-        } catch (Exception e) {
-            response.put("success", false);
-            response.put("message", e.getMessage());
-        }
-
-        return response;
-    }
+ 
 }

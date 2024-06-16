@@ -210,7 +210,7 @@ public class UserController {
 	//}
 	
 	// 查找所有使用者
-	@GetMapping
+	@GetMapping("/bkuser")
 	public String findAllUsers(@ModelAttribute User user, Model model) {
 		
 		List<User> users = userService.findAllUsers();
