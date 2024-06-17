@@ -62,8 +62,8 @@ public class TradeController {
 
     
 	//取得全部交易信息
-    @GetMapping("/tradesAll")
-    public String getAllTrades(Model model) {
+    @GetMapping("/bktrades")
+    public String getAllTrades(@ModelAttribute TradeDto tradeDto, Model model) {
         List<TradeDto> tradesAll = tradeService.getAllTrades();
         model.addAttribute("tradesAll", tradesAll);
         return "bktrades";

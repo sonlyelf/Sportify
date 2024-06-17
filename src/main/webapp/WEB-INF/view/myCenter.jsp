@@ -233,11 +233,11 @@
                                                         </tbody>
                                                     </table>
                                                     <div class="d-flex justify-content-end">
-                                                        <form id="order-form" action="/trade/booking/updateStatus" method="POST" style="display:inline;">
+                                                        <form id="order-form-${trade.id}" action="/trade/booking/updateStatus" method="POST" style="display:inline;">
                                                             <input name="id" id="id" type="hidden" value="${trade.id}"> <!-- 替換為實際的交易 ID -->
                                                             <input name="paymentStatus" type="hidden" value="已退款">
                                                             <input name="orderStatus" type="hidden" value="已取消">
-                                                            <button type="submit" class="btn btnCancelUpdate" id="btnCancelUpdate">取消預約</button>
+                                                            <button type="button" class="btn btnCancelUpdate" id="btnCancelUpdate" onclick="confirmOrder(${trade.id})">取消預約</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -432,7 +432,47 @@
 	                event.target.submit();
 	            });
 	        });
-		
+		 
+		 function confirmOrder(tradeId) {
+			    Swal.fire({
+			        title: '確認取消',
+			        text: '您確定要取消訂單嗎？',
+			        icon: 'warning',
+			        showCancelButton: true,
+			        confirmButtonText: '確定',
+			        cancelButtonText: '取消'
+			    }).then((result) => {
+			        if (result.isConfirmed) {
+			            Swal.fire({
+			                title: '正在處理中...',
+			                allowOutsideClick: false,
+			                showConfirmButton: false,
+			                onBeforeOpen: () => {
+			                    Swal.showLoading();
+			                }
+			            });
+
+			            // 模拟异步操作
+			            setTimeout(() => {
+			                Swal.close(); // 关闭等待画面
+
+			                // 提示订单已取消
+			                Swal.fire({
+			                    title: '訂單已取消',
+			                    icon: 'success',
+			                    text: '訂單已成功取消。',
+			                    confirmButtonText: '確定'
+			                }).then(() => {
+			                    setTimeout(() => {
+			                        // 提交取消订单表单
+			                        document.getElementById('order-form-' + tradeId).submit();
+			                    }, 1000); // 2秒的延迟
+			                });
+			            }, 2000); // 2秒的延迟，模拟异步操作
+			        }
+			    });
+			}
+
 		
 	</script>
 </body>

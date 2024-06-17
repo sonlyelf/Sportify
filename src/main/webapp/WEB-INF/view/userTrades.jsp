@@ -192,16 +192,16 @@ table tbody tr {
                         <td data-label="付款狀態">${trade.paymentStatus}</td>
                         <td data-label="交易狀態">${trade.orderStatus}</td>
                         <td class="actions" data-label="操作">
-                         <form id="pay-cart-form" action="/trade/trade/updateStatus" method="POST" style="display:inline;">
-                                    <input name="id" id="id" type="hidden" value="${trade.id}"> <!-- 替換為實際的交易 ID -->
-                                    <input name="paymentStatus" type="hidden" value="已付款">
-                                    <input name="orderStatus" type="hidden" value="已完成">
-                                    <button type="submit" class="btn btnPay">付款</button>
-                                </form>
-                                <form action="/trade/trade/cancel/${trade.id}" method="post" style="display:inline;">
-                                    <input name="_method" id="_method" type="hidden" value="DELETE">
-                                    <button type="submit" class="btn btnCancel">刪除</button>
-                                </form>
+                         	<form id="pay-cart-form-${trade.id}" action="/trade/trade/updateStatus" method="POST" style="display:inline;">
+                                <input name="id" id="id" type="hidden" value="${trade.id}">
+                                <input name="paymentStatus" type="hidden" value="已付款">
+                                <input name="orderStatus" type="hidden" value="已完成">
+                                <button type="button" class="btn btnPay" onclick="confirmPay(${trade.id})">付款</button>
+                            </form>
+                            <form id="cancel-cart-form-${trade.id}" action="/trade/trade/cancel/${trade.id}" method="post" style="display:inline;">
+                                <input name="_method" id="_method" type="hidden" value="DELETE">
+                                <button type="button" class="btn btnCancel" onclick="confirmCancel(${trade.id})">刪除</button>
+                            </form>
      
                         </td>
                     </tr>
@@ -254,51 +254,89 @@ table tbody tr {
 		});
 	}
 	
-/* 	function confirmPayment(tradeId) {
+	function confirmPay(tradeId) {
 	    Swal.fire({
-	        title: '確定要付款嗎？',
-	        text: "此操作將標記訂單為已付款並已完成。",
-	        icon: 'warning',
+	        title: '確認付款',
+	        text: '您確定要付款嗎？',
+	        icon: 'question',
 	        showCancelButton: true,
-	        confirmButtonColor: '#3085d6',
-	        cancelButtonColor: '#d33',
-	        confirmButtonText: '確認付款'
+	        confirmButtonText: '確定',
+	        cancelButtonText: '取消'
 	    }).then((result) => {
 	        if (result.isConfirmed) {
-	            console.log(`Confirming payment for tradeId: ${tradeId}`);
-	            let form = document.getElementById(`pay-cart-form-${tradeId}`);
-	            if (form) {
-	                console.log('Form element:', form);
-	                form.submit();
-	            } else {
-	                console.error('Form element not found.');
-	            }
+	            Swal.fire({
+	                title: '正在處理中...',
+	                allowOutsideClick: false,
+	                showConfirmButton: false,
+	                onBeforeOpen: () => {
+	                    Swal.showLoading({
+	                        html: '<div class="my-custom-loader">Loading...</div>',
+	                        customClass: {
+	                            popup: 'my-custom-loader-popup',
+	                            title: 'my-custom-loader-title'
+	                        }
+	                    });
+	                }
+	            });
+
+	            // 模拟异步操作
+	            setTimeout(() => {
+	                Swal.close(); // 关闭等待画面
+
+	                Swal.fire({
+	                    title: '付款完成',
+	                    icon: 'success',
+	                    text: '付款已完成。',
+	                    confirmButtonText: '確定'
+	                }).then(() => {
+	                    setTimeout(() => {
+	                        document.getElementById('pay-cart-form-' + tradeId).submit();
+	                    }, 1000); // 2秒的延迟
+	                });
+	            }, 2000); // 2秒的延迟，模拟异步操作
+	        }
+	    });
+	}
+	function confirmCancel(tradeId) {
+	    Swal.fire({
+	        title: '確認刪除',
+	        text: '您確定要刪除訂單嗎？',
+	        icon: 'warning',
+	        showCancelButton: true,
+	        confirmButtonText: '確定',
+	        cancelButtonText: '取消'
+	    }).then((result) => {
+	        if (result.isConfirmed) {
+	            Swal.fire({
+	                title: '正在處理中...',
+	                allowOutsideClick: false,
+	                showConfirmButton: false,
+	                onBeforeOpen: () => {
+	                    Swal.showLoading();
+	                }
+	            });
+
+	            // 模拟异步操作
+	            setTimeout(() => {
+	                Swal.close(); // 关闭等待画面
+
+	                // 提示订单已删除
+	                Swal.fire({
+	                    title: '訂單已刪除',
+	                    icon: 'success',
+	                    text: '訂單已成功刪除。',
+	                    confirmButtonText: '確定'
+	                }).then(() => {
+	                    setTimeout(() => {
+	                        // 提交取消订单表单
+	                        document.getElementById('cancel-cart-form-' + tradeId).submit();
+	                    }, 1000); // 2秒的延迟
+	                });
+	            }, 2000); // 2秒的延迟，模拟异步操作
 	        }
 	    });
 	}
 
-	function confirmCancel(tradeId) {
-	    Swal.fire({
-	        title: '確定要取消訂單嗎？',
-	        text: "此操作將永久刪除訂單。",
-	        icon: 'error',
-	        showCancelButton: true,
-	        confirmButtonColor: '#d33',
-	        cancelButtonColor: '#3085d6',
-	        confirmButtonText: '確認刪除'
-	    }).then((result) => {
-	        if (result.isConfirmed) {
-	            console.log(`Confirming cancel for tradeId: ${tradeId}`);
-	            let form = document.getElementById(`cancel-cart-form-${tradeId}`);
-	            if (form) {
-	                console.log('Form element:', form);
-	                form.submit();
-	            } else {
-	                console.error('Form element not found.');
-	            }
-	        }
-	    });
-	} */
 
 
 	</script>

@@ -25,49 +25,25 @@
     <table border="1">
         <thead>
             <tr>
-                <th>訂單 ID</th>
-                <th>用戶 ID</th>
-                <th>課程 ID</th>
-                <th>創建時間</th>
-                <th>價格</th>
-                <th>狀態</th>
-                <th>操作</th>
+                <th>訂單編號</th>
+                <th>學員編號</th>
+                <th>課程編號</th>
+                <th>付款狀態</th>
+                <th>交易狀態</th>
+
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="trade" items="${trades}">
+            <c:forEach var="tradesAll" items="${tradesAll}">
                 <tr>
-                    <td>${trade.id}</td>
-                    <td>${trade.userId}</td>
-                    <td>${trade.courseId}</td>
-                    <td>${trade.createDate}</td>
-                    <td>${trade.coursePrice}</td>
-                    <td>${trade.check}</td>
-                    <td>
-                        <form action="/trades/${trade.id}" method="get">
-                            <button type="submit">查看</button>
-                        </form>
-                        <form action="/trades/${trade.id}" method="post">
-                            <input type="hidden" name="_method" value="put" />
-                            <button type="submit">更新</button>
-                        </form>
-                        <form action="/trades/cancel" method="post">
-                            <input type="hidden" name="id" value="${trade.id}" />
-                            <button type="submit">取消</button>
-                        </form>
-                        <form action="/trades/updatePaymentStatus" method="post">
-                            <input type="hidden" name="_method" value="put" />
-                            <input type="hidden" name="id" value="${trade.id}" />
-                            <input type="text" name="paymentStatus" placeholder="更新支付狀態" />
-                            <button type="submit">更新支付狀態</button>
-                        </form>
-                        <form action="/trades/updateOrderStatus" method="post">
-                            <input type="hidden" name="_method" value="put" />
-                            <input type="hidden" name="id" value="${trade.id}" />
-                            <input type="text" name="orderStatus" placeholder="更新訂單狀態" />
-                            <button type="submit">更新訂單狀態</button>
-                        </form>
-                    </td>
+                    <td>${tradesAll.id}</td>
+                    <td>${tradesAll.userId}</td>
+                    <td>${tradesAll.courseId}</td>
+                    <td>${tradesAll.createDate}</td>
+                    <td>${tradesAll.paymentStatus}</td>
+                    <td>${tradesAll.orderStatus}</td>
+                    
+             
                 </tr>
             </c:forEach>
         </tbody>
