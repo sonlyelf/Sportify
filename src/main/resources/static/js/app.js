@@ -62,6 +62,8 @@ function login() {
       });
       }
 
+
+
 function logout() {
     fetch('/user/logout', {
         method: 'POST',
@@ -79,5 +81,8 @@ function logout() {
         console.error('Error:', error);
     });
 }
+
+
+
      
 

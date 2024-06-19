@@ -130,8 +130,7 @@ public class UserService {
 
 		// 3. 將 PO 傳入到 DAO
 		int result = userDao.createUser(user);
-		System.out.println(user);
-
+	
 		return result;
 	}
 

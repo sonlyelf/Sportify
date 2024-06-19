@@ -93,7 +93,18 @@
 		footer {
 			margin-top: 100px;
 		}
-
+		@media (max-width: 768px) {
+		    .table thead,
+		    .table tbody,
+		    .table th,
+		    .table td {
+		        display: flex;
+		        flex-wrap: wrap;
+		        justify-content: space-between; /* 或者其他适当的对齐方式 */
+		        width: 100%; /* 每个单元格占据整个行 */
+		    }
+		
+		
 		@media (min-width :768px) {
 			.updateInfoForm {
 				border-style: solid;
@@ -119,12 +130,13 @@
 			    vertical-align: top;
 			  }
 		}
+		
 	</style>
 </head>
 
 <body data-bs-spy="scroll" data-bs-target="#navbarSupportedContent" data-bs-offset="200">
 	<header>
-		<div class="container">
+		 <div class="container">
 			<div class="row">
 				<div class="col-12">
 					<nav class="navbar navbar-expand-md navbar-dark fixed-top">
@@ -146,9 +158,9 @@
 									<li class="nav-item"><a class="nav-link" href="/announcement">課程介紹</a></li>
 									<li class="nav-item"><a class="nav-link" href="/backgroundCourse/course">課程報名</a></li>
 									<li class="nav-item"><a class="nav-link active" href="/myCenter">會員中心</a></li>
-									<li class="nav-item"><a class="nav-link" href="/information">交通資訊</a></li>
+									<li class="nav-item"><a class="nav-link" href="/information">交通資訊</a></li>	
 									<li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
-									<li class="nav-item"><a id="login-btn" class="nav-link" href="/member" onclick="showLoginForm()">登入</a></li>
+									<li class="nav-item"><a id="login-btn" class="nav-link " href="/member" onclick="showLoginForm()">登入</a></li>
 									<li class="nav-item"><a class="nav-link" href="/trade/userTrades"><span><img src="../image/shopping-cart111.png" height="30px" width="30px"></span></a></li>
 								</div>
 							</div>
@@ -157,7 +169,7 @@
 					</nav>
 				</div>
 			</div>
-		</div>
+		</div> 
 	</header>
 
 	<main>

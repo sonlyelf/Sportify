@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpSession;
 
 //@SuppressWarnings("serial")
 //@WebFilter(urlPatterns = { "/myCenter/*" })
-public class LoginFilter extends HttpFilter {
+//public class LoginFilter extends HttpFilter {
 
 	// 之前舊的
 	// @Override
@@ -38,4 +38,4 @@ public class LoginFilter extends HttpFilter {
 //			chain.doFilter(request, response);
 //		}
 //	}
-}
+

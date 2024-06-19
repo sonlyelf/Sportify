@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sportify.email.SSLEmail;
 import com.sportify.model.dto.TradeDto;
 import com.sportify.model.dto.UserInfoUpdateDto;
 import com.sportify.model.dto.UserLoginDto;
@@ -26,6 +28,7 @@ import com.sportify.model.dto.UserPwdUpdateDto;
 import com.sportify.model.dto.UserRegisterDto;
 import com.sportify.model.po.Trade;
 import com.sportify.model.po.User;
+import com.sportify.security.KeyUtil;
 import com.sportify.service.TradeService;
 import com.sportify.service.UserService;
 
@@ -71,13 +74,11 @@ public class UserController {
 				model.addAttribute("error2", "密碼長度不得少於6碼。");
 				return "register"; // 返回注册页面，显示错误消息
 			}
-				System.out.println("sss"+userRegisterDto);
 			// 如果邮箱未被使用，则执行注册逻辑
 			int result = userService.addUser(userRegisterDto);
-
 			model.addAttribute("resultMessage", result == 0 ? "註冊成功" : "註冊失敗");
 			// 注册成功后，设置登录状态为 true
-			session.setAttribute("loginStatus", true);
+			session.setAttribute("loginStatus", false);
 			return "member"; // 会自动指向/WEB-INF/view/.jsp
 		}
 
@@ -85,7 +86,7 @@ public class UserController {
 	@GetMapping("/member")
 	public String getMember() {
 
-		return "member"; // 这里返回登录页面的视图名，具体视图名需要根据实际情况修改
+		return "member"; 
 	}
 
 	// 登入
@@ -96,7 +97,7 @@ public class UserController {
 
 		// 模拟登录逻辑，实际应用中应从数据库验证用户信息
 		UserLoginDto userLogin = userService.logintUser(userLoginDto);
-		System.out.println(userLogin);
+	
 		if (userLogin.getEmail() != null) {
 			session.setAttribute("loginStatus", true);
 			session.setAttribute("userId", userLogin.getId());
@@ -300,6 +301,33 @@ public class UserController {
 		return "redirect:/bkuser";
 	}
 	
+	 @PostMapping("/forgetPassword")
+	 @ResponseBody
+	 public String forgetPassword(@RequestBody Map<String, String> requestBody) throws Exception {
+	        String email = requestBody.get("email");
+	        try {
+	            System.out.println(email); // 將電子郵件地址打印到控制台，以便調試
+
+	            // 發送郵件
+	            SSLEmail.sendEmail(email);
+
+	            // 查找用戶
+	            Optional<User> user = userService.findByEmail(email);
+	            if (user.isPresent()) {
+	                // 更新用戶密碼
+	                UserPwdUpdateDto userPwdUpdateDto = new UserPwdUpdateDto();
+	                userPwdUpdateDto.setPassword("12345678"); // 這裡設置新的密碼
+	                userPwdUpdateDto.setUserId(user.get().getId());
+	                userService.updateUserPassword(userPwdUpdateDto); // 更新用戶密碼
+	            }
+
+	            return "{\"message\": \"success\"}"; // 返回成功的 JSON 響應給前端
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return "{\"message\": \"error\"}"; // 返回錯誤的 JSON 響應給前端
+	        }
+	    }
+	}
 	
 	
-}
+	

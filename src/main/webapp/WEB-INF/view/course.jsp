@@ -153,7 +153,8 @@
 
 <body data-bs-spy="scroll" data-bs-target="#navbarSupportedContent" data-bs-offset="200">
     <header>
-        <div class="container">
+  
+     <div class="container">
             <div class="row">
                 <div class="col-12">
                     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
@@ -176,8 +177,8 @@
                                     <li class="nav-item"><a class="nav-link active" href="/backgroundCourse/course">課程報名</a></li>
                                     <li class="nav-item"><a class="nav-link" href="/myCenter">會員中心</a></li>
                                     <li class="nav-item "><a class="nav-link" href="/information">交通資訊</a></li>
-                                    <li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
-                                    <li class="nav-item"><a id="login-btn" class="nav-link" href="/member" onclick="showLoginForm()">登入</a></li>
+									<li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
+									<li class="nav-item"><a id="login-btn" class="nav-link " href="/member" onclick="showLoginForm()">登入</a></li>
                                     <li class="nav-item"><a class="nav-link" href="/trade/userTrades"><span><img src="../image/shopping-cart111.png" height="30px" width="30px"></span></a></li>
                                 </div>
                             </div>
@@ -252,13 +253,13 @@
 					<p>電子信箱：sportify@gmail.com</p>
 					<p>營業時間：1000-2200</p>
 				</div>
-				<div class="link-comm">
+				<!-- <div class="link-comm">
 					<a href="https://line.me/tw/"> <img src="./image/line4.png" width="50" height="auto" alt="">
 					</a>
 				</div>
 				<div class="link-comm1">
 					<a href="https://www.instagram.com/"> <img src="./image/instagram4.png" width="50" height="auto" alt=""></a>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</footer>

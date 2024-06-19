@@ -146,7 +146,8 @@
 
 <body data-bs-spy="scroll" data-bs-target="#navbarSupportedContent" data-bs-offset="200">
     <header>
-        <div class="container">
+  
+ <div class="container">
             <div class="row">
                 <div class="col-12">
                     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
@@ -169,8 +170,8 @@
                                     <li class="nav-item"><a class="nav-link" href="/backgroundCourse/course">課程報名</a></li>
                                     <li class="nav-item"><a class="nav-link" href="/myCenter">會員中心</a></li>
                                     <li class="nav-item "><a class="nav-link" href="/information">交通資訊</a></li>
-                                    <li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
-                                    <li class="nav-item"><a id="login-btn" class="nav-link" href="/member" onclick="showLoginForm()">登入</a></li>
+									<li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
+									<li class="nav-item"><a id="login-btn" class="nav-link " href="/member" onclick="showLoginForm()">登入</a></li>
                                     <li class="nav-item"><a class="nav-link" href="/trade/userTrades"><span><img src="../image/shopping-cart111.png" height="30px" width="30px"></span></a></li>
                                 </div>
                             </div>
@@ -179,7 +180,7 @@
                     </nav>
                 </div>
             </div>
-        </div>
+        </div> 
     </header>
 
     <main class="mb-5">
@@ -260,8 +261,8 @@
                                             <img src="../image/newpost.png" alt="" width="460px" height="auto">
                                             <p></p>
                                             <p>🎉🎉12/32-13/15🎉🎉</p>
-                                            <p>試營運全館課程88折</p>
-                                            <p>🥳🥳加入會員再打8折！!🥳🥳</p>
+                                            <p>試營運報名課程送運動毛巾</p>
+                                            <p>🥳🥳現在開始加入會員！!🥳🥳</p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -291,8 +292,8 @@
                                             <p></p>
                                             <p>🎉 🎉 🎉 會員好康🎉 🎉 🎉 </p>
                                             <p>現在加入即免會費</p>
-                                            <p>三堂課程免費體驗</p>
-                                            <p>再送兩個月會籍！</p>
+                                            <p>加入一年會籍再送兩個月！</p>
+                                           
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

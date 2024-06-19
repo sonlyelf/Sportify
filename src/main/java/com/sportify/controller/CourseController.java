@@ -43,7 +43,7 @@ public class CourseController {
 
 		model.addAttribute("courses", courses);
 		model.addAttribute("method", "POST");
-		return "backgroundCourse";
+		return "bkcourse";
 	}
 
 	// 根據課程ID查找課程
@@ -53,7 +53,7 @@ public class CourseController {
 		Course course = courseService.getCourseById(id);
 
 		model.addAttribute("course", course);
-		return "backgroundCourse";
+		return "bkcourse";
 	}
 
 	// 新增課程
@@ -64,7 +64,7 @@ public class CourseController {
 
 		String message = "課程新增" + (result == 1 ? "成功" : "失敗");
 		model.addAttribute("message", message);
-		return "redirect:/backgroundCourse";
+		return "redirect:/bkcourse";
 	}
 
 	// 修改課程
@@ -75,7 +75,7 @@ public class CourseController {
 
 		String message = "課程修改" + (result == 1 ? "成功" : "失敗");
 		model.addAttribute("message", message);
-		return "redirect:/backgroundCourse";
+		return "redirect:/bkcourse";
 	}
 
 	// 更新課程
@@ -88,7 +88,7 @@ public class CourseController {
 		model.addAttribute("method", "PUT");
 		model.addAttribute("courses", courses);
 		model.addAttribute("course", course);
-		return "backgroundCourse";
+		return "bkcourse";
 	}
 
 	// 刪除課程
@@ -99,7 +99,7 @@ public class CourseController {
 
 		String message = "課程取消" + (rowcount == 1 ? "成功" : "失敗");
 		model.addAttribute("message", message);
-		return "redirect:/backgroundCourse";
+		return "redirect:/bkcourse";
 	}
 
 	// 課程報名
