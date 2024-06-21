@@ -15,8 +15,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sportify.model.dto.CourseDto;
+import com.sportify.model.dto.UserLoginDto;
 import com.sportify.model.po.Course;
+import com.sportify.model.po.User;
 import com.sportify.service.CourseService;
+import com.sportify.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/backgroundCourse")
@@ -24,6 +30,8 @@ public class CourseController {
 
 	@Autowired
 	private CourseService courseService;
+	
+	
 
 	// 根據群組ID查找課程
 	@GetMapping("/group/{groupId}")
@@ -32,18 +40,17 @@ public class CourseController {
 		List<Course> courses = courseService.getGroupCourse(groupId);
 
 		model.addAttribute("groupCourses", courses);
-		return "backgroundCourse";
-	}
-
-	// 查找所有課程
-	@GetMapping
-	public String findAll(@ModelAttribute CourseDto courseDto, Model model) {
-
-		List<Course> courses = courseService.findAllCourses();
-
-		model.addAttribute("courses", courses);
-		model.addAttribute("method", "POST");
 		return "bkcourse";
+	}
+	
+	@GetMapping("/bkcourse")
+	public String getBkCourse(HttpSession session, Model model) {
+	   
+	    // 載入所有課程信息
+	    List<Course> courses = courseService.findAllCourses();
+	    model.addAttribute("courses", courses);
+
+	    return "bkcourse"; // 返回到後台管理頁面的視圖名稱，顯示管理員相關的內容和所有課程信息
 	}
 
 	// 根據課程ID查找課程
@@ -64,7 +71,7 @@ public class CourseController {
 
 		String message = "課程新增" + (result == 1 ? "成功" : "失敗");
 		model.addAttribute("message", message);
-		return "redirect:/bkcourse";
+		return "redirect:/backgroundCourse/bkcourse";
 	}
 
 	// 修改課程
@@ -75,7 +82,7 @@ public class CourseController {
 
 		String message = "課程修改" + (result == 1 ? "成功" : "失敗");
 		model.addAttribute("message", message);
-		return "redirect:/bkcourse";
+		return "redirect:/backgroundCourse/bkcourse";
 	}
 
 	// 更新課程
@@ -99,7 +106,7 @@ public class CourseController {
 
 		String message = "課程取消" + (rowcount == 1 ? "成功" : "失敗");
 		model.addAttribute("message", message);
-		return "redirect:/bkcourse";
+		return "redirect:/backgroundCourse/bkcourse";
 	}
 
 	// 課程報名

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true"%>
 
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
@@ -151,7 +151,7 @@
 						<h2 class="text-center" style="font-size: 36px;">管理員登入</h2>
 						<!-- <span id="user-greeting"></span> -->
 						<div id="login-form-container">
-							<form id="login-form" class="form">
+							<form id="adminlogin-form" class="form">
 								<div class="loginGroup">
 									<label>帳號
 										<input type="email" id="email" name="email" placeholder="請輸入電子信箱" required="required">
@@ -163,7 +163,7 @@
 									</label>
 								</div>
 								<div class="btnLogIn">
-									<button type="button" class="btn btnLogIn" id="login-submit-btn" onclick="login()">登入</button>
+									<button type="button" class="btn btnLogIn" id="login-submit-btn" onclick="adminlogin()">登入</button>
 								</div>
 								<div class="links">
 									   <a href="/member" style="font-size: 16px">切換會員 </a>
@@ -202,7 +202,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script src="/js/app.js"></script>
+		
 		<script>
 			//header============
 			//當桌機版時....那麼進行以下工作
@@ -222,6 +222,34 @@
 				});
 			}
 			
+			function adminlogin() {
+		        var email = document.getElementById('email').value;
+		        var password = document.getElementById('password').value;
+
+		        // 前端验证示例，检查邮箱和密码是否为空
+		        if (!email || !password) {
+		            alert('請輸入信箱和密碼');
+		            return;
+		        }
+
+		        // 发送登录请求到后端
+		        $.ajax({
+		            url: '/admin/login', // 后端处理登录的路径
+		            type: 'POST',
+		            data: {
+		                email: email,
+		                password: password
+		            },
+		            success: function(response) {
+		                // 登录成功后的处理逻辑，例如重定向到后台管理页面
+		                window.location.href = '/backgroundCourse/bkcourse';
+		            },
+		            error: function(xhr, status, error) {
+		                // 处理登录失败的逻辑，例如显示错误消息
+		                alert('登入失敗，请檢查帳號和密碼');
+		            }
+		        });
+		    }
 
 		</script>
 	</body>

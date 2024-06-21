@@ -50,6 +50,26 @@ public class UserService {
 
 		return userDao.findByEmail(email);
 	}
+	 /**
+     * 根據名字查詢 User
+     * 
+     * @param name
+     * @return
+     */
+    public Optional<User> findByName(String name) {
+        return userDao.findByName(name);
+    }
+
+    /**
+     * 根據名字和Email查詢 User
+     * 
+     * @param name
+     * @param email
+     * @return
+     */
+    public Optional<User> findByNameAndEmail(String name, String email) {
+        return userDao.findByNameAndEmail(name, email);
+    }
 
 	/**
 	 * 更新 UserInfo
@@ -207,4 +227,6 @@ public class UserService {
 
 		return hashedHexString;
 	}
+
+	
 }

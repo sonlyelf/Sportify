@@ -1,5 +1,7 @@
 package com.sportify.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sportify.email.SSLEmail;
 import com.sportify.model.dto.TradeDto;
@@ -48,6 +51,11 @@ public class UserController {
 
 	@Autowired
 	private TradeService tradeService;
+	
+//	@GetMapping("/adminLogin")
+//	public String getAdminLogin() {
+//		return "adminLogin";
+//	}
 
 	// 註冊頁面
 		@GetMapping("/register")
@@ -88,17 +96,47 @@ public class UserController {
 
 		return "member"; 
 	}
+	 
+//	@PostMapping("/admin/login")
+//	@ResponseBody
+//	public String adminLogin(Model model,@ModelAttribute UserLoginDto userLoginDto, HttpSession session) throws Exception {
+//	
+//	        // 实际应用中应该调用 userService 来验证用户登录信息
+//	        UserLoginDto adminLogin = userService.logintUser(userLoginDto);
+//	        System.out.println("adminLogin: " + adminLogin);
+//	        // 假设 adminLogin 包含从数据库中查询得到的用户信息
+//	        if (adminLogin != null && adminLogin.getEmail().equals("sportify@gmail.com") && adminLogin.getPassword().equals("12345678")) {
+//	            // 登录成功，设置会话信息
+//	            session.setAttribute("loginStatus", true);
+//	            session.setAttribute("adminId", adminLogin.getId());
+//	            session.setAttribute("adminEmail", adminLogin.getEmail());
+//	            model.addAttribute("adminPassword", adminLogin.getPassword());
+//	            session.setAttribute("adminLogin", adminLogin);
+//	    		return "success"; // 会自动指向/WEB-INF/view/.jsp
+//			} else {
+//				model.addAttribute("loginError", "Invalid email or password");
+//				return "fail"; // 登录失败，返回登录页面
+//			}
+//		    
+//	    }	    
+		
+//	// 登出
+//		@PostMapping("/admin/logout")
+//		private String getAdminLogout(HttpSession session) {
+//
+//			session.invalidate();
+//
+//			return "redirect:/adminLogin"; // 會自動指向/WEB-INF/view/.jsp
+//		}
+	
 
-	// 登入
 	@PostMapping("/user/login")
 	@ResponseBody
-	public String getLogin(Model model, @ModelAttribute UserLoginDto userLoginDto, HttpSession session)
-			throws Exception {
+	public String loginUser(Model model, @ModelAttribute UserLoginDto userLoginDto, HttpSession session) throws Exception {
+	    // 调用 userService 的方法验证用户登录信息
+	    UserLoginDto userLogin = userService.logintUser(userLoginDto);
 
-		// 模拟登录逻辑，实际应用中应从数据库验证用户信息
-		UserLoginDto userLogin = userService.logintUser(userLoginDto);
-	
-		if (userLogin.getEmail() != null) {
+	    if (userLogin.getEmail() != null) {
 			session.setAttribute("loginStatus", true);
 			session.setAttribute("userId", userLogin.getId());
 			session.setAttribute("Email", userLoginDto.getEmail());
@@ -110,8 +148,9 @@ public class UserController {
 			model.addAttribute("loginError", "Invalid email or password");
 			return "fail"; // 登录失败，返回登录页面
 		}
+	    
+	    
 	}
-
 	// 登出
 	@PostMapping("/user/logout")
 	private String getLogout(HttpSession session) {
@@ -221,21 +260,21 @@ public class UserController {
 		return "bkuser";
 	}
 	
-	// 查詢會員email
-	@GetMapping("/email")
-	public String findByEmail(@RequestParam("email") String email, Model model) {
-		
-		Optional<User> user = userService.findByEmail(email);
-		
-		if (user.isPresent()) {
-			model.addAttribute("user", user.get());
-			model.addAttribute("method", "POST");
-			return "bkuser";
-		} else {
-			model.addAttribute("message", "User not found");
-			return "redirect:/bkuser"; // 一个处理用户未找到的视图
-		}
-	}
+//	// 查詢會員email
+//	@GetMapping("/email")
+//	public String findByEmail(@RequestParam("email") String email, Model model) {
+//		
+//		Optional<User> user = userService.findByEmail(email);
+//		
+//		if (user.isPresent()) {
+//			model.addAttribute("user", user.get());
+//			model.addAttribute("method", "POST");
+//			return "bkuser";
+//		} else {
+//			model.addAttribute("message", "User not found");
+//			return "redirect:/bkuser"; // 一个处理用户未找到的视图
+//		}
+//	}
 	
 	// 刪除使用者
 	@DeleteMapping("/deleteUser/{id}")
@@ -248,24 +287,31 @@ public class UserController {
 		return "redirect:/bkuser";
 	}
 	
-	// 查詢單一使用者
-	@GetMapping("/user/{id}")
-	@ResponseBody
-	public String findById(@PathVariable Integer id, Model model) {
-		
-		Optional<User> user = userService.findById(id);
-		
-		if (user.isPresent()) {
-			model.addAttribute("user", user.get());
-			model.addAttribute("method", "POST");
-			return "bkuser";
-		} else {
-			model.addAttribute("message", "User not found");
-			return "redirect:/bkuser"; // 一个处理用户未找到的视图
-		}
+	@GetMapping("/searchMember")
+	public String searchMember() {
+		return "searchMember";
 	}
 	
+	@GetMapping("/searchUser")
+    public String searchUser(@RequestParam(required = false) String name,
+                             @RequestParam(required = false) String email,
+                             Model model) {
+        Optional<User> user = Optional.empty();
 
+        if (name != null && email != null) {
+            user = userService.findByNameAndEmail(name, email);
+        } else if (name != null) {
+            user = userService.findByName(name);
+        } else if (email != null) {
+            user = userService.findByEmail(email);
+        }
+
+        user.ifPresent(u -> model.addAttribute("user", u));
+
+        return "searchMember"; // 返回到搜索页面，显示搜索结果
+    }
+
+	
 	// 修改使用者資料
 	// @PutMapping
 	// public String updateBkUser(@ModelAttribute User user, Model model) {		

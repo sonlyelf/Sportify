@@ -15,6 +15,35 @@ public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	@Override
+	public Optional<User> findByName(String name) {
+	    String sql = "SELECT id, name, birthday, phone, email, password, salt " +
+	                 "FROM user " +
+	                 "WHERE name=?";
+	    
+	    try {
+	        User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), name);
+	        return Optional.of(user);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return Optional.empty();
+	}
+	
+	@Override
+	public Optional<User> findByNameAndEmail(String name, String email) {
+	    String sql = "SELECT id, name, birthday, phone, email, password, salt " +
+	                 "FROM user " +
+	                 "WHERE name=? AND email=?";
+	    
+	    try {
+	        User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), name, email);
+	        return Optional.of(user);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return Optional.empty();
+	}
 
 	@Override
 	public Optional<User> findById(Integer id) {

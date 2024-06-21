@@ -22,7 +22,7 @@
   }
 
 html{
-  font-size: 20px;
+  font-size: 18px;
 }
 
 /* main {
@@ -97,23 +97,29 @@ footer p {
   color: black;
 }
 
-
-.link-comm img{ 
+.sidebar {
   position: fixed;
-  border-radius: 23%;
-  right: 0px;
-  bottom: 30px;
-  margin: 10px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 230px; /* 调整侧边栏宽度 */
+  padding-top: 50px; /* 顶部空白 */
+  background: linear-gradient(to bottom,rgb(63, 142, 146),rgb(63, 142, 146,0.8),rgb(63, 142, 146,0.5));  /* 侧边栏背景色 */
+  color: rgb(255, 251, 251); /* 文字颜色 */
+  overflow-y: auto; /* 如果内容高度超过侧边栏高度，启用滚动条 */
 }
-
-.link-comm1 img{
-  position: fixed;
-  right: 0px;
-  bottom: 90px;
-  margin: 10px;
-}   
-
-
+.sidebar .nav-link {
+  padding: 10px 15px;
+  color: #fbfbfb;
+}
+.sidebar .nav-link.active {
+  background-color: #60adb6; /* 激活链接背景色 */
+}
+.sidebar img{
+  width: min(calc(40px +3vw), 80px ) ;
+  height: auto;
+  margin-top: -50px;
+}
 
 
 
@@ -149,4 +155,5 @@ footer p {
 
 
 }
+
 

@@ -71,6 +71,7 @@
 			margin-bottom: 10px;
 			margin-right: 10px;
 		}
+		
 
 		.btnCancelUpdate {
 			background-color: rgb(241, 106, 62);
@@ -93,20 +94,7 @@
 		footer {
 			margin-top: 100px;
 		}
-		@media (max-width: 768px) {
-		    .table thead,
-		    .table tbody,
-		    .table th,
-		    .table td {
-		        display: flex;
-		        flex-wrap: wrap;
-		        justify-content: space-between; /* 或者其他适当的对齐方式 */
-		        width: 100%; /* 每个单元格占据整个行 */
-		    }
-		
-		
-		@media (min-width :768px) {
-			.updateInfoForm {
+		.updateInfoForm {
 				border-style: solid;
 				border-width: 1px;
 				border-color: darkcyan;
@@ -129,7 +117,18 @@
 			    display: inline-block;
 			    vertical-align: top;
 			  }
-		}
+		@media (max-width: 768px) {
+		    .table thead,
+		    .table tbody,
+		    .table th,
+		    .table td {
+		        display: flex;
+		        flex-wrap: wrap;
+		        justify-content: space-between; /* 或者其他适当的对齐方式 */
+		        width: 100%; /* 每个单元格占据整个行 */
+		    }
+		
+		
 		
 	</style>
 </head>

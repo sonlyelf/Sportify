@@ -6,7 +6,20 @@ import java.util.Optional;
 import com.sportify.model.po.User;
 
 public interface UserDao {
-	
+	/**
+	 * 查詢 User
+	 * 
+	 * @param name
+	 * @return
+	 */
+	Optional<User> findByName(String name);
+	/**
+	 * 查詢 User
+	 * 
+	 * @param name&email
+	 * @return
+	 */
+	Optional<User> findByNameAndEmail(String name, String email);
 	/**
 	 * 查詢 User
 	 * 
