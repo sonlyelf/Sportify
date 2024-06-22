@@ -1,11 +1,13 @@
 package com.sportify.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -259,6 +261,34 @@ public class TradeController {
             model.addAttribute("error", "無法將課程添加到購物車: " + e.getMessage());
             return "error";
         }
+    }
+    
+    
+    // 獲取交易統計圖表
+    @GetMapping("/getStatistics")
+    public ResponseEntity<Map<String, Object>> getStatistics() {
+        Map<String, Object> statistics = new HashMap<>();
+        
+        // 假设从 tradeService 中获取交易数据，并统计课程报名数量
+        List<TradeDto> trades = tradeService.getAllTrades();
+        Map<String, Integer> courseEnrollments = new HashMap<>();
+        
+        for (TradeDto trade : trades) {
+            String courseName = trade.getCourse().getName(); // 假设课程名称在 TradeDto 中有对应的属性
+            if (!courseEnrollments.containsKey(courseName)) {
+                courseEnrollments.put(courseName, 0);
+            }
+            courseEnrollments.put(courseName, courseEnrollments.get(courseName) + 1);
+        }
+        
+        // 将统计数据放入返回的 Map 中
+        List<String> courseNames = new ArrayList<>(courseEnrollments.keySet());
+        List<Integer> enrollmentCounts = new ArrayList<>(courseEnrollments.values());
+        
+        statistics.put("courseNames", courseNames);
+        statistics.put("enrollmentCounts", enrollmentCounts);
+        
+        return ResponseEntity.ok().body(statistics);
     }
 
  

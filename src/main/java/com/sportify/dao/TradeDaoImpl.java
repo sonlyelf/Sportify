@@ -3,6 +3,7 @@ package com.sportify.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -280,4 +281,72 @@ public class TradeDaoImpl implements TradeDao {
 
 	     return jdbcTemplate.query(sql, mapper, userId,paymentStatus);
 	 }
-	}
+
+	 @Override
+	 public List<TradeDto> findByNameAndEmail(String username, String useremail) {
+	     // 建立 SQL 查詢語句
+	     String sql = "SELECT " +
+	                  "    t.id AS id, t.user_id AS userId, t.course_id AS courseId, t.createDate AS createDate, " +
+	                  "    t.payment_status AS paymentStatus, t.order_status AS orderStatus, " +
+	                  "    u.id AS user_id, u.name AS user_name,u.email AS user_email, " +
+	                  "    c.id AS courseId, c.name AS courseName, c.price AS coursePrice, c.startDate AS startDate, c.endDate AS endDate, c.day AS day " +
+	                  "FROM " +
+	                  "    trade t " +
+	                  "JOIN " +
+	                  "    user u ON t.user_id = u.id " +
+	                  "JOIN " +
+	                  "    course c ON t.course_id = c.id " +
+	                  "WHERE " +
+	                  "    u.name = ? " +
+	                  "    AND u.email = ?";
+
+	     RowMapper<TradeDto> mapper = (rs, rowNum) -> {
+	         // 获取每一列的数据
+	    	 Integer tradeId = rs.getInt("id");
+             Integer userId = rs.getInt("userId");
+             Integer courseId = rs.getInt("courseId");
+             Timestamp createDate = rs.getTimestamp("createDate");
+             String paymentStatus = rs.getString("paymentStatus");
+             String orderStatus = rs.getString("orderStatus");
+
+             String userName = rs.getString("user_name");
+			 String userEmail = rs.getString("user_email");
+             String courseName = rs.getString("courseName");
+             Integer coursePrice = rs.getInt("coursePrice");
+             Date startDate = rs.getDate("startDate");
+             Date endDate = rs.getDate("endDate");
+             String day = rs.getString("day");
+
+	         // 创建 User 对象并设置属性
+	         User user = new User();
+	         user.setId(userId);
+	         user.setName(userName);
+	         user.setEmail(userEmail); // 注意：这里将 userEmail 设置到 user 对象中
+
+	         // 创建 Course 对象并设置属性
+	         Course course = new Course();
+	         course.setId(courseId);
+	         course.setName(courseName);
+	         course.setPrice(coursePrice);
+	         course.setStartDate(startDate);
+	         course.setEndDate(endDate);
+	         course.setDay(day);
+
+	         // 创建 TradeDto 对象并设置属性
+	         TradeDto tradeDto = new TradeDto();
+	         tradeDto.setId(tradeId);
+	         tradeDto.setUserId(userId);
+	         tradeDto.setCourseId(courseId);
+	         tradeDto.setCreateDate(createDate); // 将 Timestamp 转换为 LocalDateTime
+	         tradeDto.setPaymentStatus(paymentStatus);
+	         tradeDto.setOrderStatus(orderStatus);
+	         tradeDto.setUser(user);
+	         tradeDto.setCourse(course);
+
+	         return tradeDto;
+	     };
+
+	     // 使用 JdbcTemplate 执行查询
+	     return jdbcTemplate.query(sql, mapper, username, useremail);
+	 }
+}

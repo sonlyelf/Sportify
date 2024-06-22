@@ -5,10 +5,12 @@
 <!-- Spring Form 表單標籤 -->
 <%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant-TW">
 
 <head>
-    <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=3.0">
+  <meta charset="UTF-8">
     <title>交易管理</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
@@ -174,28 +176,27 @@
 </head>
 
 <body>
-    <header>
-        <div class="sidebar">
-            <a class="navbar-brand d-flex align-items-center" href="/index">
-                <img src="../image/Logocopy.png" width="100" alt="">
-            </a>
-            <h1 class="m-0 ms-1">SPORTIFy</h1>
-            <ul>
-                <li class="nav-item"><a class="nav-link" href="./bkcourse.html">課程管理</a></li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">會員管理</a>
-                    <ul>
-                        <li><a href="./bkuser.html">會員表單</a></li>
-                        <li><a href="./search-member.html">搜尋會員</a></li>
-                        <li><a href="./member-transactions.html">會員交易紀錄</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="./bktrades.html">訂單管理</a></li>
-                <li class="nav-item"><a id="login-btn" class="nav-link">登入</a></li>
-                <li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;"
-                        onclick="logout()">登出</a></li>
-            </ul>
-        </div>
+     <header>
+	      <div class="sidebar">
+		    <a class="navbar-brand d-flex align-items-center" href="/index">
+		        <img src="../image/Logocopy.png" width="100" alt="">
+		    </a>
+		    <h1 class="m-0 ms-1">SPORTIFy</h1>
+		    <ul>
+		        <li class="nav-item"><a class="nav-link" href="/backgroundCourse/bkcourse">課程管理</a></li>
+		        <li class="nav-item">
+		            <a class="nav-link active">會員管理</a>
+		            <ul>
+		                <li><a href="/bkuser">會員表單</a></li>
+		                <li><a href="/searchMember">搜尋會員</a></li>
+		                <li><a href="/memberTransactions">會員交易紀錄</a></li>
+		            </ul>
+		        </li>
+		        <li class="nav-item"><a class="nav-link" href="/trade/bktrades">訂單管理</a></li>
+		        <li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
+		        <li class="nav-item"><a id="login-btn" class="nav-link" href="/admin/login" onclick="showLoginForm()">登入</a></li>
+		    </ul>
+		</div>
     </header>
 
     <!-- 交易管理 -->
@@ -208,11 +209,11 @@
                         <legend style=" font-size: 36px;">交易管理</legend>
                         <div class="pure-control-group">
                             <label for="transactionName">Name:</label>
-                            <input name="transactionName" id="transactionName" type="text" class="form-control" />
+                            <input name="name" id="name" type="text" class="form-control"  value="${ param.name }" />
                         </div>
                         <div class="pure-control-group">
                             <label for="transactionEmail">Email:</label>
-                            <input name="transactionEmail" id="transactionEmail" type="email" class="form-control" />
+                            <input name="email" id="email" type="email" class="form-control" value="${ param.email }" />
                         </div>
                         <div class="pure-controls">
                             <button type="submit" class="btn btnserchtrade">搜尋</button>
@@ -220,35 +221,38 @@
                     </fieldset>
                 </form>
                 <!-- 交易紀錄表格 -->
-                <fieldset class="transaction-table">
-                    <legend>交易紀錄</legend>
-                    <table class="table table-bordered" id="transactionResultsTable">
-                        <thead>
-                            <tr>
-                                <th>交易ID</th>
-                                <th>會員ID</th>
-                                <th>課程名稱</th>
-                                <th>交易日期</th>
-                                <th>交易金額</th>
-                                <th>交易狀態</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- 使用JSP EL語法來渲染交易紀錄 -->
-                            <c:forEach var="transaction" items="${transactions}">
-                                <tr>
-                                    <td>${transaction.id}</td>
-                                    <td>${transaction.userId}</td>
-                                    <td>${transaction.course.name}</td>
-                                    <td><fmt:formatDate value="${transaction.date}" pattern="yyyy-MM-dd" /></td>
-                                    <td>${transaction.course.price}</td>
-                                    <td>${transaction.orderStatus}</td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                  
-                </fieldset>
+              <fieldset class="transaction-table">
+				    <legend>交易紀錄</legend>
+				    <table class="table table-bordered" id="transactionResultsTable">
+				        <thead>
+				            <tr>
+				                <th>交易ID</th>
+				                <th>會員ID</th>
+				                <th>課程名稱</th>
+				                <th>交易日期</th>
+				                <th>交易金額</th>
+				                <th>交易狀態</th>
+				            </tr>
+				        </thead>
+				        <tbody>
+				            <c:if test="${empty searchuserTrades}">
+				                <tr>
+				                    <td colspan="6">尚未有交易紀錄</td>
+				                </tr>
+				            </c:if>
+				            <c:forEach var="trade" items="${searchuserTrades}">
+				                <tr>
+				                    <td>${trade.id}</td>
+				                    <td>${trade.userId}</td>
+				                    <td>${trade.course.name}</td>
+				                    <td><fmt:formatDate value="${trade.createDate}" pattern="yyyy-MM-dd" /></td>
+				                    <td>${trade.course.price}</td>
+				                    <td>${trade.orderStatus}</td>
+				                </tr>
+				            </c:forEach>
+				        </tbody>
+				    </table>
+				</fieldset>
             </div>
         </div>
     </main>
@@ -257,6 +261,7 @@
   <!-- 外部脚本 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
 <!-- 这里可以添加您的自定义脚本 -->
 <script>
 

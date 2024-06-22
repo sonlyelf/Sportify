@@ -122,9 +122,25 @@ public class TradeService {
 	public List<TradeDto> getAllTrades() {
 		return tradeDao.getAllTrades();
 	}
+	
+	/**
+	 * 根據 userId 查詢交易狀態
+	 * 
+	 * @return
+	 */
 
 	public List<TradeDto> findTradeByPaymentStatus(Integer userId ,String paymentStatus) {
 		return tradeDao.findTradesByUserPaymentStatus(userId,paymentStatus);
 	}
 	
+	
+	/**
+	 * 根據 username 和 useremail 查詢交易
+	 * 
+	 * @return
+	 */
+	
+	public List<TradeDto> findByNameAndEmail(String username, String useremail) {
+		return tradeDao.findByNameAndEmail(username,useremail);
+	}
 }

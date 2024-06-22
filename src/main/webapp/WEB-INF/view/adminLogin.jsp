@@ -1,5 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!-- Tomcat 10.x JSTL -->    
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<!-- Spring Form 表單標籤 -->
+<%@ taglib prefix="sp" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 
@@ -16,6 +21,7 @@
 			box-sizing: border-box;
 			font-family: "Noto Sans TC", sans-serif;
 			align-items: center;
+			min-height: 100vh;
 
 		}
 
@@ -25,15 +31,13 @@
 		}
 
 		.form {
-			max-width: 800px;
-			/* 增加最大寬度 */
-			margin: 0 auto;
-			/* 居中對齊 */
-			padding: 20px;
-			border: 1px solid #ddd;
-			border-radius: 5px;
-			background-color: #fff;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		    width: 280px; /* 增大最大宽度 */
+		    margin: 0 auto; /* 居中对齐 */
+		    padding: 20px;
+		    border: 1px solid #ddd;
+		    border-radius: 5px;
+		    background-color: #fff;
+		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 		}
 
 		.loginGroup {
@@ -118,7 +122,7 @@
 	</style>
 </head>
 
-<body data-bs-spy="scroll" data-bs-target="#navbarSupportedContent" data-bs-offset="200">
+<body >
 	<header>
 	
 	<div class="container">
@@ -130,126 +134,109 @@
 							<!-- 表現LOGO連結的區域，可以加上LOGO圖片 -->
 							<a class="navbar-brand d-flex align-items-center" href="/index">
 								<img src="../image/Logocopy.png" width="100" alt="">
-								<h1 class="m-0 ms-1">SPORTIFy </h1>
+								<h1 class="m-0 ms-1">SPORTIFy</h1>
 							</a>
 							<!-- 以下是手機版才出現的按鈕，負責控制顯示導覽選單 -->
 							
 							</div>
-							<span id="user-greeting" style="display: none;"></span>
-						</div>
+						 <span id="user-greeting" style="display: none;"></span> 
+					
 					</nav>
+					</div>
 				</div>
 			</div>
-		</div> 
+		
 	</header>
 
 	<body>
 		<main>
 			<div class="container mb-5">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="text-center" style="font-size: 36px;">管理員登入</h2>
-						<!-- <span id="user-greeting"></span> -->
-						<div id="login-form-container">
-							<form id="adminlogin-form" class="form">
-								<div class="loginGroup">
-									<label>帳號
-										<input type="email" id="email" name="email" placeholder="請輸入電子信箱" required="required">
-									</label>
-								</div>
-								<div class="loginGroup">
-									<label>密碼
-										<input type="password" id="password" name="password" placeholder="請輸入密碼" required="required">
-									</label>
-								</div>
-								<div class="btnLogIn">
-									<button type="button" class="btn btnLogIn" id="login-submit-btn" onclick="adminlogin()">登入</button>
-								</div>
-								<div class="links">
-									   <a href="/member" style="font-size: 16px">切換會員 </a>
-									
-								</div>
+			    <div class="row">
+			        <div class="col-12">
+			            <h2 class="text-center" style="font-size: 36px;">管理員登入</h2>
+			            <div id="login-form-container">
+			               <form id="adminlogin-form" class="form" onsubmit="adminLogin(); return false;">
+							    <div class="loginGroup">
+							        <label for="email">帳號</label>
+							        <input type="email" id="email" name="email" placeholder="請輸入電子信箱" required>
+							    </div>
+							    <div class="loginGroup">
+							        <label for="password">密碼</label>
+							        <input type="password" id="password" name="password" placeholder="請輸入密碼" required>
+							    </div>
+							    <div class="btnLogIn">
+							        <button type="submit" class="btn btnLogIn" id="login-submit-btn">登入</button>
+							    </div>
+							    <div class="links">
+							        <a href="/member" style="font-size: 16px;">切換會員</a>
+							    </div>
 							</form>
-						</div>
-					</div>
-				</div>
+			            </div>
+			        </div>
+			    </div>
 			</div>
-			
 			  <!-- 模态框 -->
    
 		</main>
 
-		<footer class="w-100">
-			<div class="container">
-				<div class="row">
-					<div class="col-12 col-md-4 d-flex flex-column">
-						<p class="footer-title " style="font-size: 26px;">SPORTIFy</p>
-						<p>地址：302 新竹縣竹北市十興ＸＸ街25號</p>
-						<p>電話：(03)3456700</p>
-						<p>電子信箱：sportify@gmail.com</p>
-						<p>營業時間：1000-2200</p>
-					</div>
-					<div class="link-comm">
-						<a href="https://line.me/tw/"> <img src="../image/line4.png" width="50" height="auto" alt=""></a>
-					</div>
-					<div class="link-comm1">
-						<a href="https://www.instagram.com/"> <img src="../image/instagram4.png" width="50" height="auto" alt=""></a>
-					</div>
-				</div>
-			</div>
-		</footer>
+		
 
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
+
 		
 		<script>
-			//header============
-			//當桌機版時....那麼進行以下工作
-			//當window視窗scroll捲動時
-			//if判斷捲出的範圍是否大於header的高度
-			//如果是，則header應該......addClass('fixed')
-			//安排 .fixed得樣式設定 for CSS 提示：position
-			if ($('.navbar-toggler').is(':hidden')) {
-				$(window).on('scroll', function () {
-					if ($('html').scrollTop() > $('header').innerHeight()) {
-						// console.log('yes');
-						$('header').addClass('fixed');
-					}
-					if ($('html').scrollTop() == 0) {
-						$('header').removeClass('fixed');
-					}
-				});
-			}
-			
-			function adminlogin() {
-		        var email = document.getElementById('email').value;
-		        var password = document.getElementById('password').value;
+ 		function updateNavbar(isLogin, email) {
+		    // 更新导航栏显示状态和内容
+		    var userGreeting = document.getElementById("user-greeting");
+		    /* if (isLogin) {
+		        userGreeting.style.display = "block";
+		        userGreeting.textContent = "歡迎 " + email;
+		    } else {
+		        userGreeting.style.display = "none";
+		    } */
+		} 
+ 
+		function adminLogin() {
+		    // 获取表单数据并通过 fetch 发送登录请求
+		    var formData = new FormData();
+		    formData.append('adminEmail', document.getElementById('email').value);
+		    formData.append('adminPassword', document.getElementById('password').value);
 
-		        // 前端验证示例，检查邮箱和密码是否为空
-		        if (!email || !password) {
-		            alert('請輸入信箱和密碼');
-		            return;
+		    fetch('/admin/login', {
+		        method: 'POST',
+		        body: formData
+		    }).then(response => {
+		        if (!response.ok) {
+		            throw new Error('Network response was not ok');
 		        }
-
-		        // 发送登录请求到后端
-		        $.ajax({
-		            url: '/admin/login', // 后端处理登录的路径
-		            type: 'POST',
-		            data: {
-		                email: email,
-		                password: password
-		            },
-		            success: function(response) {
-		                // 登录成功后的处理逻辑，例如重定向到后台管理页面
-		                window.location.href = '/backgroundCourse/bkcourse';
-		            },
-		            error: function(xhr, status, error) {
-		                // 处理登录失败的逻辑，例如显示错误消息
-		                alert('登入失敗，请檢查帳號和密碼');
-		            }
+		        return response.text();
+		    }).then(data => {
+		        if (data === 'success') {
+		            // 登录成功的处理逻辑
+		            updateNavbar(true, formData.get('adminEmail'));
+		            window.location.href = '/backgroundCourse/bkcourse'; // 登录成功后重定向到后台页面
+		        } else {
+		            // 登录失败的处理逻辑
+		            Swal.fire({
+		                title: '登入失敗',
+		                text: '請檢查帳號密碼正確無誤',
+		                icon: 'error',
+		                confirmButtonText: '確定'
+		            });
+		        }
+		    }).catch(error => {
+		        console.error('Error:', error);
+		        Swal.fire({
+		            title: '登入失敗',
+		            text: '發生錯誤，請稍後再試',
+		            icon: 'error',
+		            confirmButtonText: '確定'
 		        });
-		    }
+		    });
+		}
 
 		</script>
 	</body>

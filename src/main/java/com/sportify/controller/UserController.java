@@ -1,7 +1,6 @@
 package com.sportify.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,10 +51,7 @@ public class UserController {
 	@Autowired
 	private TradeService tradeService;
 	
-//	@GetMapping("/adminLogin")
-//	public String getAdminLogin() {
-//		return "adminLogin";
-//	}
+
 
 	// 註冊頁面
 		@GetMapping("/register")
@@ -97,60 +93,50 @@ public class UserController {
 		return "member"; 
 	}
 	 
-//	@PostMapping("/admin/login")
-//	@ResponseBody
-//	public String adminLogin(Model model,@ModelAttribute UserLoginDto userLoginDto, HttpSession session) throws Exception {
-//	
-//	        // 实际应用中应该调用 userService 来验证用户登录信息
-//	        UserLoginDto adminLogin = userService.logintUser(userLoginDto);
-//	        System.out.println("adminLogin: " + adminLogin);
-//	        // 假设 adminLogin 包含从数据库中查询得到的用户信息
-//	        if (adminLogin != null && adminLogin.getEmail().equals("sportify@gmail.com") && adminLogin.getPassword().equals("12345678")) {
-//	            // 登录成功，设置会话信息
-//	            session.setAttribute("loginStatus", true);
-//	            session.setAttribute("adminId", adminLogin.getId());
-//	            session.setAttribute("adminEmail", adminLogin.getEmail());
-//	            model.addAttribute("adminPassword", adminLogin.getPassword());
-//	            session.setAttribute("adminLogin", adminLogin);
-//	    		return "success"; // 会自动指向/WEB-INF/view/.jsp
-//			} else {
-//				model.addAttribute("loginError", "Invalid email or password");
-//				return "fail"; // 登录失败，返回登录页面
-//			}
-//		    
-//	    }	    
-		
-//	// 登出
-//		@PostMapping("/admin/logout")
-//		private String getAdminLogout(HttpSession session) {
-//
-//			session.invalidate();
-//
-//			return "redirect:/adminLogin"; // 會自動指向/WEB-INF/view/.jsp
-//		}
 	
+	// 登入
+		@PostMapping("/user/login")
+		@ResponseBody
+		public String loginUser(Model model, @ModelAttribute UserLoginDto userLoginDto, HttpSession session) throws Exception {
+		    // 调用 userService 的方法验证用户登录信息
+		    UserLoginDto userLogin = userService.logintUser(userLoginDto);
 
-	@PostMapping("/user/login")
-	@ResponseBody
-	public String loginUser(Model model, @ModelAttribute UserLoginDto userLoginDto, HttpSession session) throws Exception {
-	    // 调用 userService 的方法验证用户登录信息
-	    UserLoginDto userLogin = userService.logintUser(userLoginDto);
-
-	    if (userLogin.getEmail() != null) {
-			session.setAttribute("loginStatus", true);
-			session.setAttribute("userId", userLogin.getId());
-			session.setAttribute("Email", userLoginDto.getEmail());
-			model.addAttribute("userLoginDto", userLoginDto);
-			session.setAttribute("loginStatus", true);
-			session.setAttribute("userLogin", userLogin);
-			return "success"; // 会自动指向/WEB-INF/view/.jsp
-		} else {
-			model.addAttribute("loginError", "Invalid email or password");
-			return "fail"; // 登录失败，返回登录页面
+		    if (userLogin.getEmail() != null) {
+				session.setAttribute("loginStatus", true);
+				session.setAttribute("userId", userLogin.getId());
+				session.setAttribute("Email", userLoginDto.getEmail());
+				model.addAttribute("userLoginDto", userLoginDto);
+				session.setAttribute("loginStatus", true);
+				session.setAttribute("userLogin", userLogin);
+				return "success"; // 会自动指向/WEB-INF/view/.jsp
+			} else {
+				model.addAttribute("loginError", "Invalid email or password");
+				return "fail"; // 登录失败，返回登录页面
+			}
+		    
+		    
 		}
-	    
-	    
-	}
+		
+	
+	// 檢查是否登入
+		@GetMapping("/api/check-login")
+		public ResponseEntity<Map<String, Object>> checkLogin(HttpSession session) {
+
+			Map<String, Object> response = new HashMap<>();
+
+			Boolean loginStatus = (Boolean) session.getAttribute("loginStatus");
+
+			if (loginStatus != null && loginStatus) {
+				response.put("loggedIn", true);
+				response.put("email", session.getAttribute("Email"));
+			} else {
+				response.put("loggedIn", false);
+			}
+
+			return ResponseEntity.ok(response);
+		}
+		
+		
 	// 登出
 	@PostMapping("/user/logout")
 	private String getLogout(HttpSession session) {
@@ -159,6 +145,9 @@ public class UserController {
 
 		return "redirect:/index"; // 會自動指向/WEB-INF/view/.jsp
 	}
+	
+	
+
 	
 	// 管理:更新資料
 	@PutMapping("/user/management/update")
@@ -174,6 +163,8 @@ public class UserController {
 		return "redirect:/myCenter";
 	}
 	
+	
+	
 	// 管理:更新密碼
 	@PutMapping("/user/management/password")
 	public String upDateUserPassword(UserPwdUpdateDto userPwdUpdateDto,Model model) throws Exception {
@@ -188,25 +179,9 @@ public class UserController {
 		return "redirect:/myCenter";
 	}
 
-	// 檢查是否登入
-	@GetMapping("/api/check-login")
-	public ResponseEntity<Map<String, Object>> checkLogin(HttpSession session) {
+	
 
-		Map<String, Object> response = new HashMap<>();
-
-		Boolean loginStatus = (Boolean) session.getAttribute("loginStatus");
-
-		if (loginStatus != null && loginStatus) {
-			response.put("loggedIn", true);
-			response.put("email", session.getAttribute("Email"));
-		} else {
-			response.put("loggedIn", false);
-		}
-
-		return ResponseEntity.ok(response);
-	}
-
-	// 我報名的課程
+	// 會員報名的課程和訂單
 	@GetMapping("/myCenter")
 	public String getMyCenter(HttpSession session, Model model,HttpServletRequest request) {
 	    // 从session中获取登录用户信息
@@ -249,7 +224,9 @@ public class UserController {
 	//	return response;
 	//}
 	
-	// 查找所有使用者
+	
+	
+	// 後台頁面-查找所有使用者
 	@GetMapping("/bkuser")
 	public String findAllUsers(@ModelAttribute User user, Model model) {
 		
@@ -260,23 +237,9 @@ public class UserController {
 		return "bkuser";
 	}
 	
-//	// 查詢會員email
-//	@GetMapping("/email")
-//	public String findByEmail(@RequestParam("email") String email, Model model) {
-//		
-//		Optional<User> user = userService.findByEmail(email);
-//		
-//		if (user.isPresent()) {
-//			model.addAttribute("user", user.get());
-//			model.addAttribute("method", "POST");
-//			return "bkuser";
-//		} else {
-//			model.addAttribute("message", "User not found");
-//			return "redirect:/bkuser"; // 一个处理用户未找到的视图
-//		}
-//	}
+
 	
-	// 刪除使用者
+	// 後台頁面-刪除使用者
 	@DeleteMapping("/deleteUser/{id}")
 	public String delete(@PathVariable Integer id, Model model) {
 		
@@ -287,11 +250,13 @@ public class UserController {
 		return "redirect:/bkuser";
 	}
 	
+	
+	//後台頁面-搜尋會員頁面
 	@GetMapping("/searchMember")
 	public String searchMember() {
 		return "searchMember";
 	}
-	
+	//後台頁面-搜尋會員方法
 	@GetMapping("/searchUser")
     public String searchUser(@RequestParam(required = false) String name,
                              @RequestParam(required = false) String email,
@@ -312,16 +277,9 @@ public class UserController {
     }
 
 	
-	// 修改使用者資料
-	// @PutMapping
-	// public String updateBkUser(@ModelAttribute User user, Model model) {		
-	//	int result = userService.updateUser(user);
-	//	String message = "更新使用者" + (result == 1 ? "成功" : "失敗");
-	//	model.addAttribute("message", message);
-	//	return "redirect:/bkuser";
-	//}
+	
 
-	// 更新使用者資料
+	// 後台頁面-更新使用者資料
 	@PutMapping("/userUpdate/{id}")
 	public String updateUser(@PathVariable Integer id, Model model) {
 		
@@ -334,8 +292,30 @@ public class UserController {
 		model.addAttribute("users", userService.findAllUsers());
 		return "bkuser";
 	}
+	
+	
+	//後台頁面-查詢會員交易紀錄
+	@GetMapping("/memberTransactions")
+	public String searchTrade() {
+		return "memberTransactions";
+	}
+	//後台頁面-搜尋會員交易紀錄方法
+	@GetMapping("/bkuser/transactions")
+	public String searchTransactions(@RequestParam(required = false) String name,
+	                                 @RequestParam(required = false) String email,
+	                                 Model model) {
+	    // 获取该用户的所有交易（预定课程）信息
+	    List<TradeDto> searchuserTrades = tradeService.findByNameAndEmail(name, email);
 
-	// 新增使用者
+	    // 将用户和交易信息添加到模型中
+	    model.addAttribute("searchuserTrades", searchuserTrades);
+
+	    return "memberTransactions";
+	}
+	
+	
+
+	// 後台頁面-新增使用者
 	@PostMapping
 	public String addUser(@ModelAttribute UserRegisterDto user, Model model) throws Exception {
 		
@@ -347,6 +327,8 @@ public class UserController {
 		return "redirect:/bkuser";
 	}
 	
+	
+	// 會員忘記密碼
 	 @PostMapping("/forgetPassword")
 	 @ResponseBody
 	 public String forgetPassword(@RequestBody Map<String, String> requestBody) throws Exception {

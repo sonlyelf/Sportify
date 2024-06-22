@@ -178,6 +178,7 @@
                                 <button type="button" class="btn btnLogIn" id="login-submit-btn" onclick="login()">登入</button>
                             </div>
                             <div class="links">
+								 <a href="/admin/login" style="font-size: 16px">切換管理員 </a>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" style="font-size: 16px">/忘記密碼?</a>
                             </div>
                         </form>

@@ -192,26 +192,27 @@
 </head>
 
 <body>
-    <header>
-        <div class="sidebar">
-            <a class="navbar-brand d-flex align-items-center" href="/index">
-                <img src="../image/Logocopy.png" width="100" alt="">
-            </a>
-            <h1 class="m-0 ms-1">SPORTIFy</h1>
-            <ul>
-                <li class="nav-item"><a class="nav-link " href="/backgroundCourse/bkcourse">課程管理</a></li>
-                <li class="nav-item"><a class="nav-link active"">會員管理</a>
-                    <ul>
-                        <li><a href="/bkuser" >會員表單</a></li>
-                        <li><a href="/searchMember">搜尋會員</a></li>
-                        <li><a href="/memberTransactions">會員交易紀錄</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="/trade/bktrades">訂單管理</a></li>
-                <li class="nav-item"><a id="login-btn" class="nav-link " >登入</a></li>
-                <li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
-            </ul>
-        </div>
+        <header>
+	      <div class="sidebar">
+		    <a class="navbar-brand d-flex align-items-center" href="/index">
+		        <img src="../image/Logocopy.png" width="100" alt="">
+		    </a>
+		    <h1 class="m-0 ms-1">SPORTIFy</h1>
+		    <ul>
+		        <li class="nav-item"><a class="nav-link" href="/backgroundCourse/bkcourse">課程管理</a></li>
+		        <li class="nav-item">
+		            <a class="nav-link active">會員管理</a>
+		            <ul>
+		                <li><a href="/bkuser">會員表單</a></li>
+		                <li><a href="/searchMember">搜尋會員</a></li>
+		                <li><a href="/memberTransactions">會員交易紀錄</a></li>
+		            </ul>
+		        </li>
+		        <li class="nav-item"><a class="nav-link" href="/trade/bktrades">訂單管理</a></li>
+		        <li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
+		        <li class="nav-item"><a id="login-btn" class="nav-link" href="/admin/login" onclick="showLoginForm()">登入</a></li>
+		    </ul>
+		</div>
     </header>
 
     <main class="main-content">
@@ -253,8 +254,9 @@
                         </div>
                     </fieldset>
                 </form>
+                 <form action="/ExportUserServlet" method="post">
                 <button id="exportAllUsersBtn" class="btn btn-secondary btn-Allmembers">導出所有會員資料為 Excel</button>
-
+				</form>
                 <!-- 所有會員資料表格 -->
                 <fieldset class="user-table">
                     <legend>所有會員資料</legend>
@@ -301,6 +303,7 @@
     <!-- jQuery and Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+  
 </body>
 
 </html>

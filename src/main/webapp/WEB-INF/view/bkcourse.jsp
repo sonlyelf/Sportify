@@ -187,27 +187,28 @@ body {
 
 </style>
 <body>
-<header>
-    <div class="sidebar">
-        <a class="navbar-brand d-flex align-items-center" href="/index">
-            <img src="../image/Logocopy.png" width="100" alt="">
-        </a>
-        <h1 class="m-0 ms-1">SPORTIFy</h1>
-        <ul>
-            <li class="nav-item"><a class="nav-link active" href="/backgroundCourse/bkcourse">課程管理</a></li>
-            <li class="nav-item"><a class="nav-link">會員管理</a>
-                <ul>
-                    <li><a href="/bkuser">會員表單</a></li>
-                    <li><a href="/searchMember">搜尋會員</a></li>
-                    <li><a href="./member-transactions.html">會員交易紀錄</a></li>
-                </ul>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="/trade/bktrades">訂單管理</a></li>
-            <li class="nav-item"><a id="login-btn" class="nav-link " >登入</a></li>
-            <li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
-        </ul>
-    </div>
-</header>
+    <header>
+	      <div class="sidebar">
+		    <a class="navbar-brand d-flex align-items-center" href="/index">
+		        <img src="../image/Logocopy.png" width="100" alt="">
+		    </a>
+		    <h1 class="m-0 ms-1">SPORTIFy</h1>
+		    <ul>
+		        <li class="nav-item"><a class="nav-link active" href="/backgroundCourse/bkcourse">課程管理</a></li>
+		        <li class="nav-item">
+		            <a class="nav-link ">會員管理</a>
+		            <ul>
+		                <li><a href="/bkuser">會員表單</a></li>
+		                <li><a href="/searchMember">搜尋會員</a></li>
+		                <li><a href="/memberTransactions">會員交易紀錄</a></li>
+		            </ul>
+		        </li>
+		        <li class="nav-item"><a class="nav-link" href="/trade/bktrades">訂單管理</a></li>
+		        <li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
+		        <li class="nav-item"><a id="login-btn" class="nav-link" href="/admin/login" onclick="showLoginForm()">登入</a></li>
+		    </ul>
+		</div>
+    </header>
 <main>
     <div class="main-content-container" >
         <div class="container main-content">
@@ -268,9 +269,10 @@ body {
                     </div>
                 </fieldset>
             </form>
-
+			<!-- 導出課程資料的按鈕 -->
+			<form action="/ExportCourseServlet" method="post">
             <button id="exportCoursesBtn" class="btn btn-secondary mt-3">導出課程資料為 Excel</button>
-
+			</form>
             <fieldset class="course-table mt-5" >
                 <legend style=" font-size: 36px;">課程列表</legend>
                 <table border="1">
@@ -318,9 +320,53 @@ body {
 <!-- 外部脚本 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
 <!-- 这里可以添加您的自定义脚本 -->
 <script>
+//检查管理员登录状态，通常在页面加载后执行
+/* document.addEventListener("DOMContentLoaded", function() {
+    checkAdminLoginStatus();
+});
 
+function checkAdminLoginStatus() {
+    fetch('/admin/check-login') // 发送检查登录状态的请求
+        .then(response => response.json())
+        .then(data => {
+            if (data.adminLogin) {
+                // 管理员已登录，显示登出按钮，隐藏登录按钮
+                document.getElementById('logout-btn').style.display = 'block';
+                document.getElementById('login-btn').style.display = 'none';
+            } else {
+                // 管理员未登录，显示登录按钮，隐藏登出按钮
+                document.getElementById('logout-btn').style.display = 'none';
+                document.getElementById('login-btn').style.display = 'block';
+            }
+        })
+        .catch(error => {
+            console.error('Error checking admin login status:', error);
+        });
+}
+
+function logout() {
+    fetch('/admin/logout', {
+        method: 'POST'
+    })
+    .then(response => {
+        if (response.ok) {
+            // 登出成功，跳转回管理员登录页面
+            window.location.href = '/admin/login';
+        } else {
+            console.error('Logout failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error logging out:', error);
+    });
+}
+function showLoginForm() {
+    // 根据需要处理登录表单的显示或直接跳转到登录页面
+    // 这里直接跳转到登录页面，让浏览器处理跳转
+} */
    
 </script>
 </body>

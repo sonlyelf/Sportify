@@ -45,6 +45,11 @@ public class CourseController {
 	
 	@GetMapping("/bkcourse")
 	public String getBkCourse(HttpSession session, Model model) {
+		// 检查管理员是否已登录，如果未登录则重定向到登录页面
+	    Boolean adminLoggedIn = (Boolean) session.getAttribute("adminloginStatus");
+	    if (adminLoggedIn == null || !adminLoggedIn) {
+	        return "redirect:/admin/login";
+	    }
 	   
 	    // 載入所有課程信息
 	    List<Course> courses = courseService.findAllCourses();

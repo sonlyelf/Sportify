@@ -1,9 +1,11 @@
 package com.sportify.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.sportify.model.dto.TradeDto;
 import com.sportify.model.po.Trade;
+import com.sportify.model.po.User;
 
 public interface TradeDao {
 
@@ -65,6 +67,9 @@ public interface TradeDao {
 	 * @return
 	 */
 	List<TradeDto> findTradesByUserId(Integer userId);
+	
+	
+	/**
 
 	
 //	/**
@@ -76,7 +81,7 @@ public interface TradeDao {
 //	 */
 //	int addBookingCourse(Trade trade);
 
-	
+	List<TradeDto> findByNameAndEmail(String username, String useremail);
 	
 	List<TradeDto> getAllTrades();
 	
