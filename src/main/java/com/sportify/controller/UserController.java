@@ -228,7 +228,13 @@ public class UserController {
 	
 	// 後台頁面-查找所有使用者
 	@GetMapping("/bkuser")
-	public String findAllUsers(@ModelAttribute User user, Model model) {
+	public String findAllUsers(@ModelAttribute User user, Model model,HttpSession session) {
+		// 检查管理员是否已登录，如果未登录则重定向到登录页面
+	    Boolean adminLoggedIn = (Boolean) session.getAttribute("adminloginStatus");
+	    if (adminLoggedIn == null || !adminLoggedIn) {
+	        return "redirect:/admin/login";
+	    }
+	   
 		
 		List<User> users = userService.findAllUsers();
 		
@@ -260,7 +266,14 @@ public class UserController {
 	@GetMapping("/searchUser")
     public String searchUser(@RequestParam(required = false) String name,
                              @RequestParam(required = false) String email,
-                             Model model) {
+                             Model model, HttpSession session) {
+		
+		// 检查管理员是否已登录，如果未登录则重定向到登录页面
+	    Boolean adminLoggedIn = (Boolean) session.getAttribute("adminloginStatus");
+	    if (adminLoggedIn == null || !adminLoggedIn) {
+	        return "redirect:/admin/login";
+	    }
+	   
         Optional<User> user = Optional.empty();
 
         if (name != null && email != null) {
@@ -303,7 +316,14 @@ public class UserController {
 	@GetMapping("/bkuser/transactions")
 	public String searchTransactions(@RequestParam(required = false) String name,
 	                                 @RequestParam(required = false) String email,
-	                                 Model model) {
+	                                 Model model, HttpSession session) {
+		
+		// 检查管理员是否已登录，如果未登录则重定向到登录页面
+	    Boolean adminLoggedIn = (Boolean) session.getAttribute("adminloginStatus");
+	    if (adminLoggedIn == null || !adminLoggedIn) {
+	        return "redirect:/admin/login";
+	    }
+	   
 	    // 获取该用户的所有交易（预定课程）信息
 	    List<TradeDto> searchuserTrades = tradeService.findByNameAndEmail(name, email);
 

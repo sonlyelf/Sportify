@@ -280,12 +280,12 @@
                                     <td>${users.phone}</td>
                                     <td>${users.email}</td>
                                     <td>
-                                        <form action="/bkuser/userUpdate/${users.id}" method="post"
+                                        <form action="/userUpdate/${users.id}" method="post"
                                             style="display:inline;">
                                             <input name="_method" id="_method" type="hidden" value="PUT">
                                             <button type="submit" class="btn btn-update btn-sm">修改</button>
                                         </form>
-                                        <form action="/bkuser/deleteUser/${users.id}" method="post"
+                                        <form action="/deleteUser/${users.id}" method="post"
                                             style="display:inline;">
                                             <input name="_method" id="_method" type="hidden" value="DELETE">
                                             <button type="submit" class="btn btn-danger btn-sm">刪除</button>
@@ -303,7 +303,7 @@
     <!-- jQuery and Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-  
+  	<script src="/js/admin.js"></script>
 </body>
 
 </html>

@@ -184,6 +184,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="/js/admin.js"></script>
 	
 
 		
@@ -199,44 +200,7 @@
 		    } */
 		} 
  
-		function adminLogin() {
-		    // 获取表单数据并通过 fetch 发送登录请求
-		    var formData = new FormData();
-		    formData.append('adminEmail', document.getElementById('email').value);
-		    formData.append('adminPassword', document.getElementById('password').value);
-
-		    fetch('/admin/login', {
-		        method: 'POST',
-		        body: formData
-		    }).then(response => {
-		        if (!response.ok) {
-		            throw new Error('Network response was not ok');
-		        }
-		        return response.text();
-		    }).then(data => {
-		        if (data === 'success') {
-		            // 登录成功的处理逻辑
-		            updateNavbar(true, formData.get('adminEmail'));
-		            window.location.href = '/backgroundCourse/bkcourse'; // 登录成功后重定向到后台页面
-		        } else {
-		            // 登录失败的处理逻辑
-		            Swal.fire({
-		                title: '登入失敗',
-		                text: '請檢查帳號密碼正確無誤',
-		                icon: 'error',
-		                confirmButtonText: '確定'
-		            });
-		        }
-		    }).catch(error => {
-		        console.error('Error:', error);
-		        Swal.fire({
-		            title: '登入失敗',
-		            text: '發生錯誤，請稍後再試',
-		            icon: 'error',
-		            confirmButtonText: '確定'
-		        });
-		    });
-		}
+		
 
 		</script>
 	</body>

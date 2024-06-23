@@ -147,7 +147,7 @@
 		            </ul>
 		        </li>
 		        <li class="nav-item"><a class="nav-link active" href="/trade/bktrades">訂單管理</a></li>
-		        <li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
+		        <li class="nav-item"><a id="logout-btn" class="nav-link" href="/admin/login" style="display:none;" onclick="logout()">登出</a></li>
 		        <li class="nav-item"><a id="login-btn" class="nav-link" href="/admin/login" onclick="showLoginForm()">登入</a></li>
 		    </ul>
 		</div>
@@ -216,6 +216,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- 引入 Google Charts 库 -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="/js/admin.js"></script>
 
 <script>
 

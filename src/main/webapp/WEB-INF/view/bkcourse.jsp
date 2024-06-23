@@ -204,7 +204,7 @@ body {
 		            </ul>
 		        </li>
 		        <li class="nav-item"><a class="nav-link" href="/trade/bktrades">訂單管理</a></li>
-		        <li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
+		        <li class="nav-item"><a id="logout-btn" class="nav-link" href="/admin/login" style="display:none;" onclick="logout()">登出</a></li>
 		        <li class="nav-item"><a id="login-btn" class="nav-link" href="/admin/login" onclick="showLoginForm()">登入</a></li>
 		    </ul>
 		</div>
@@ -320,53 +320,12 @@ body {
 <!-- 外部脚本 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="/js/admin.js"></script>
 
 <!-- 这里可以添加您的自定义脚本 -->
 <script>
-//检查管理员登录状态，通常在页面加载后执行
-/* document.addEventListener("DOMContentLoaded", function() {
-    checkAdminLoginStatus();
-});
 
-function checkAdminLoginStatus() {
-    fetch('/admin/check-login') // 发送检查登录状态的请求
-        .then(response => response.json())
-        .then(data => {
-            if (data.adminLogin) {
-                // 管理员已登录，显示登出按钮，隐藏登录按钮
-                document.getElementById('logout-btn').style.display = 'block';
-                document.getElementById('login-btn').style.display = 'none';
-            } else {
-                // 管理员未登录，显示登录按钮，隐藏登出按钮
-                document.getElementById('logout-btn').style.display = 'none';
-                document.getElementById('login-btn').style.display = 'block';
-            }
-        })
-        .catch(error => {
-            console.error('Error checking admin login status:', error);
-        });
-}
 
-function logout() {
-    fetch('/admin/logout', {
-        method: 'POST'
-    })
-    .then(response => {
-        if (response.ok) {
-            // 登出成功，跳转回管理员登录页面
-            window.location.href = '/admin/login';
-        } else {
-            console.error('Logout failed');
-        }
-    })
-    .catch(error => {
-        console.error('Error logging out:', error);
-    });
-}
-function showLoginForm() {
-    // 根据需要处理登录表单的显示或直接跳转到登录页面
-    // 这里直接跳转到登录页面，让浏览器处理跳转
-} */
    
 </script>
 </body>

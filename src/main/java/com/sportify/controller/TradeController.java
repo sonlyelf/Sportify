@@ -65,8 +65,15 @@ public class TradeController {
     
 	//取得全部交易信息
     @GetMapping("/bktrades")
-    public String getAllTrades(@ModelAttribute TradeDto tradeDto, Model model) {
-        List<Trade> tradesAll = tradeService.findAllTrades();
+    public String getAllTrades(@ModelAttribute TradeDto tradeDto, Model model, HttpSession session) {
+    	// 检查管理员是否已登录，如果未登录则重定向到登录页面
+	    Boolean adminLoggedIn = (Boolean) session.getAttribute("adminloginStatus");
+	    if (adminLoggedIn == null || !adminLoggedIn) {
+	        return "redirect:/admin/login";
+	    }
+	   
+    	
+    	List<Trade> tradesAll = tradeService.findAllTrades();
         model.addAttribute("tradesAll", tradesAll);
         return "bktrades";
     }

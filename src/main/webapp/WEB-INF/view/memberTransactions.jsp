@@ -193,7 +193,7 @@
 		            </ul>
 		        </li>
 		        <li class="nav-item"><a class="nav-link" href="/trade/bktrades">訂單管理</a></li>
-		        <li class="nav-item"><a id="logout-btn" class="nav-link" href="#" style="display:none;" onclick="logout()">登出</a></li>
+		        <li class="nav-item"><a id="logout-btn" class="nav-link" href="/admin/login" style="display:none;" onclick="logout()">登出</a></li>
 		        <li class="nav-item"><a id="login-btn" class="nav-link" href="/admin/login" onclick="showLoginForm()">登入</a></li>
 		    </ul>
 		</div>
@@ -261,6 +261,7 @@
   <!-- 外部脚本 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="/js/admin.js"></script>
 
 <!-- 这里可以添加您的自定义脚本 -->
 <script>
