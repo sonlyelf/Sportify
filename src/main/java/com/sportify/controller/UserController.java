@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sportify.Captcha.CaptchaGenerator;
 import com.sportify.email.SSLEmail;
 import com.sportify.model.dto.TradeDto;
 import com.sportify.model.dto.UserInfoUpdateDto;
@@ -35,6 +36,7 @@ import com.sportify.service.TradeService;
 import com.sportify.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
@@ -95,26 +97,44 @@ public class UserController {
 	 
 	
 	// 登入
-		@PostMapping("/user/login")
-		@ResponseBody
-		public String loginUser(Model model, @ModelAttribute UserLoginDto userLoginDto, HttpSession session) throws Exception {
-		    // 调用 userService 的方法验证用户登录信息
-		    UserLoginDto userLogin = userService.logintUser(userLoginDto);
-
-		    if (userLogin.getEmail() != null) {
-				session.setAttribute("loginStatus", true);
-				session.setAttribute("userId", userLogin.getId());
-				session.setAttribute("Email", userLoginDto.getEmail());
-				model.addAttribute("userLoginDto", userLoginDto);
-				session.setAttribute("loginStatus", true);
-				session.setAttribute("userLogin", userLogin);
-				return "success"; // 会自动指向/WEB-INF/view/.jsp
-			} else {
-				model.addAttribute("loginError", "Invalid email or password");
-				return "fail"; // 登录失败，返回登录页面
-			}
-		    
-		    
+	@PostMapping("/user/login")
+	@ResponseBody
+	public String loginUser(Model model, @ModelAttribute UserLoginDto userLoginDto, HttpSession session,
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
+	
+		// 获取用户提交的验证码、用户名和密码
+		String userCaptcha = request.getParameter("captcha");
+		String email = userLoginDto.getEmail();
+		
+		// 获取会话中存储的验证码
+		String expectedCaptcha = (String) request.getSession().getAttribute("captcha");
+		
+		// 输出以便调试
+		System.out.println("userCaptcha: " + userCaptcha + " expectedCaptcha: " + expectedCaptcha);
+		
+		// 检查验证码是否匹配
+		if (userCaptcha != null && expectedCaptcha != null && userCaptcha.equalsIgnoreCase(expectedCaptcha)) {
+		// 验证码正确，处理登录逻辑
+		UserLoginDto userLogin = userService.logintUser(userLoginDto);
+		
+		if (userLogin != null) {
+		// 登录成功，设置用户状态等
+		session.setAttribute("loginStatus", true);
+		session.setAttribute("userId", userLogin.getId());
+		session.setAttribute("Email", email);
+		session.setAttribute("userLogin", userLogin);
+		
+		return "success"; // 登录成功，重定向到成功页面或其他目标页面
+		} else {
+		// 登录失败，用户名或密码错误
+		model.addAttribute("loginError", "Invalid email or password");
+		return "fail"; // 登录失败，返回登录页面
+		}
+		} else {
+		// 验证码错误，返回登录页面并附带错误提示
+		model.addAttribute("loginError", "Invalid captcha");
+		return "fail";
+		}
 		}
 		
 	
@@ -268,12 +288,7 @@ public class UserController {
                              @RequestParam(required = false) String email,
                              Model model, HttpSession session) {
 		
-		// 检查管理员是否已登录，如果未登录则重定向到登录页面
-	    Boolean adminLoggedIn = (Boolean) session.getAttribute("adminloginStatus");
-	    if (adminLoggedIn == null || !adminLoggedIn) {
-	        return "redirect:/admin/login";
-	    }
-	   
+   
         Optional<User> user = Optional.empty();
 
         if (name != null && email != null) {
@@ -318,12 +333,7 @@ public class UserController {
 	                                 @RequestParam(required = false) String email,
 	                                 Model model, HttpSession session) {
 		
-		// 检查管理员是否已登录，如果未登录则重定向到登录页面
-	    Boolean adminLoggedIn = (Boolean) session.getAttribute("adminloginStatus");
-	    if (adminLoggedIn == null || !adminLoggedIn) {
-	        return "redirect:/admin/login";
-	    }
-	   
+
 	    // 获取该用户的所有交易（预定课程）信息
 	    List<TradeDto> searchuserTrades = tradeService.findByNameAndEmail(name, email);
 

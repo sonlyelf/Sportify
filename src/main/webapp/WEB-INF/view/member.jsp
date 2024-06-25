@@ -82,6 +82,8 @@
 
 		.links a {
 			color: #007bff;
+			display: flex;
+			justify-content:between;
 		}
 
 		.links a:hover {
@@ -168,25 +170,32 @@
                 <div class="col-12">
                     <h2 class="text-center" style="font-size: 36px;">會員登入</h2>
                     <div id="login-form-container">
-                        <form id="login-form" class="form">
-                            <div class="loginGroup">
-                                <label>帳號
-                                    <input type="email" id="email" name="email" placeholder="請輸入電子信箱" required="required">
-                                </label>
-                            </div>
-                            <div class="loginGroup">
-                                <label>密碼
-                                    <input type="password" id="password" name="password" placeholder="請輸入密碼" required="required">
-                                </label>
-                            </div>
-                            <div class="btnLogIn">
-                                <button type="button" class="btn btnLogIn" id="login-submit-btn" onclick="login()">登入</button>
-                            </div>
-                            <div class="links">
-								 <a href="/admin/login" style="font-size: 16px">切換管理員 </a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" style="font-size: 16px">/忘記密碼?</a>
-                            </div>
-                        </form>
+                        <form id="login-form" class="form" action="/user/login" method="post">
+    <div class="loginGroup">
+        <label>帳號
+            <input type="email" id="email" name="email" placeholder="請輸入電子信箱" required="required">
+        </label>
+    </div>
+    <div class="loginGroup">
+        <label>密碼
+            <input type="password" id="password" name="password" placeholder="請輸入密碼" required="required">
+        </label>
+    </div>
+    <div class="loginGroup">
+        <label>驗證碼
+            <input type="text" id="captcha" name="captcha" required>
+        </label>
+        <img id="captchaImg" src="/captchaImageServlet" onclick="refreshCaptcha()" alt="验证码">
+        <a href="javascript:void(0)" style="font-size: 16px" onclick="refreshCaptcha()">刷新驗證碼</a>
+    </div>
+    <div class="btnLogIn">
+        <button type="submit" class="btn btnLogIn" id="login-submit-btn">登入</button>
+    </div>
+    <div class="links">
+        <a href="/admin/login" style="font-size: 16px">切換管理員</a>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" style="font-size: 16px">/忘記密碼?</a>
+    </div>
+</form>
                     </div>
                 </div>
             </div>
@@ -262,6 +271,11 @@
                     $('header').removeClass('fixed');
                 }
             });
+        }
+       
+        function refreshCaptcha() {
+            var captchaImg = document.getElementById('captchaImg');
+            captchaImg.src = '/captchaImageServlet?' + new Date().getTime(); // 加入时间戳来避免浏览器缓存
         }
 
         function sendResetEmail() {

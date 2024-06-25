@@ -24,6 +24,12 @@
 			min-height: 100vh;
 
 		}
+		.navbar-brand h1{
+		  font-size: min(calc(22px +3vw), 48px ) ;
+		  transform: translateY(3px);  
+		  font-family: var(--f-family-1);
+		  
+}
 
 		main h2 {
 			color: rgb(146, 99, 28);
@@ -134,7 +140,7 @@
 							<!-- 表現LOGO連結的區域，可以加上LOGO圖片 -->
 							<a class="navbar-brand d-flex align-items-center" href="/index">
 								<img src="../image/Logocopy.png" width="100" alt="">
-								<h1 class="m-0 ms-1">SPORTIFy</h1>
+								<h1 class="m-0 ms-1" >SPORTIFy</h1>
 							</a>
 							<!-- 以下是手機版才出現的按鈕，負責控制顯示導覽選單 -->
 							

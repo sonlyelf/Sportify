@@ -36,10 +36,13 @@ function showLoginForm() {
     document.getElementById('login-form-container').style.display = 'block';
 }
 
+
+
 function login() {
-	var formData = new FormData();
-	formData.append('email', document.getElementById('email').value);
-	formData.append('password', document.getElementById('password').value);
+    var formData = new FormData();
+    formData.append('email', document.getElementById('email').value);
+    formData.append('password', document.getElementById('password').value);
+    formData.append('captcha', document.getElementsByName('captcha')[0].value); // 添加验证码参数
 
     fetch('/user/login', {
         method: 'POST',
@@ -60,7 +63,7 @@ function login() {
       }).catch(error => {
           console.error('Error:', error);
       });
-      }
+}
 
 
 
