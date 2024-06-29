@@ -24,11 +24,21 @@
             display: flex;
 			justify-content: center;
 			align-items: center;
-			background-color: white;
+			background-color:rgb(216 , 203, 187,0.5);
 			width: 100%;
 			padding: 20px;
 			box-sizing: border-box;
+			margin-top:120px;
+		
         }
+          .banner video {
+          	margin-top:80px;
+          	margin-botton:80px;
+	        width: 100%; /* 讓影片充滿其父元素的寬度 */
+	     	width: 1200px; /* 最大寬度為 300px，以避免在較大螢幕上影片過大 */
+	        display: block; /* 確保影片是以區塊元素顯示，並佔據其父元素的整個寬度 */
+	        margin: 0 auto; /* 如果需要將影片置中，可以使用 margin:auto */
+	    }
 
         picture {
             display: block;
@@ -87,6 +97,12 @@
         margin-top: 10px; /* 段落上边距 */
         padding: 0 10px; /* 内边距 */
     }
+      .banner video {
+        width: 100%; /* 讓影片充滿其父元素的寬度 */
+        max-width: 300px; /* 最大寬度為 300px，以避免在較大螢幕上影片過大 */
+        display: block; /* 確保影片是以區塊元素顯示，並佔據其父元素的整個寬度 */
+        margin: 0 auto; /* 如果需要將影片置中，可以使用 margin:auto */
+    }
 }
     </style>
 </head>
@@ -124,12 +140,15 @@
     </header>
 
     <div class="col-12 banner">
-        <picture>
-            <source srcset="../image/ToDaybig.png" media="(max-width: 300px)">
-            <source srcset="../image/ToDaybig.png" media="(min-width: 768px)">
-            <img src="../image/ToDaybig.png" alt="...">
-        </picture>
-    </div>
+    	<video autoplay loop muted playsinline>
+	        <!-- 手機版影片 -->
+	        <source src="../image/Sportify.mp4" type="video/mp4" media="(max-width: 767px)">
+	        <!-- 桌面版影片 -->
+	        <source src="../image/Sportify.mp4" type="video/mp4" media="(min-width: 768px)">
+	        <!-- 如果需要支持其他格式的视频，可以添加对应的<source>标签 -->
+        
+    	</video>
+	</div>
 
 <main class="mb-5">
     <div class="container mb-5 mt-3">

@@ -51,7 +51,25 @@
 			text-align: left;
 			padding: 20px;
 		}
-
+		  .banner {
+            display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color:white;
+			width: 100%;
+			padding: 20px;
+			box-sizing: border-box;
+			margin-top:120px;
+		
+        }
+          .banner video {
+          	margin-top:80px;
+          	margin-botton:80px;
+	        width: 100%; /* 讓影片充滿其父元素的寬度 */
+	     	width: 600px; /* 最大寬度為 300px，以避免在較大螢幕上影片過大 */
+	        display: block; /* 確保影片是以區塊元素顯示，並佔據其父元素的整個寬度 */
+	        margin: 0 auto; /* 如果需要將影片置中，可以使用 margin:auto */
+	    }
 		#myModal {
 			display: none;
 			position: fixed;
@@ -147,6 +165,27 @@
 				width: auto;
 				/* 在桌機版上自動調整寬度 */
 			}
+			  .banner {
+            display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color:white;
+			width: 100%;
+			padding: 20px;
+			box-sizing: border-box;
+			margin-top:120px;
+		
+        }
+          .banner video {
+          	margin-top:80px;
+          	margin-botton:80px;
+	        width: 100%; /* 讓影片充滿其父元素的寬度 */
+	     	width: 1200px; /* 最大寬度為 300px，以避免在較大螢幕上影片過大 */
+	        display: block; /* 確保影片是以區塊元素顯示，並佔據其父元素的整個寬度 */
+	        margin: 0 auto; /* 如果需要將影片置中，可以使用 margin:auto */
+	    }
+			
+			
 		}
 	</style>
 </head>
@@ -191,6 +230,16 @@
     </header>
 
 	<main>
+	<div class="col-12 banner">
+    	<video autoplay loop muted playsinline>
+	        <!-- 手機版影片 -->
+	        <source src="../image/Sportifyclass.mp4" type="video/mp4" media="(max-width: 767px)">
+	        <!-- 桌面版影片 -->
+	        <source src="../image/Sportifyclass.mp4" type="video/mp4" media="(min-width: 768px)">
+	        <!-- 如果需要支持其他格式的视频，可以添加对应的<source>标签 -->
+        
+    	</video>
+	</div>
 		<section id="course-list">
 			<h2 class="text-center" style="font-size: 36px">課程報名</h2>
 		</section>
