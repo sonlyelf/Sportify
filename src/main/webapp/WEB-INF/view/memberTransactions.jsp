@@ -183,9 +183,15 @@
 		    </a>
 		    <h1 class="m-0 ms-1">SPORTIFy</h1>
 		    <ul>
-		        <li class="nav-item"><a class="nav-link" href="/backgroundCourse/bkcourse">課程管理</a></li>
+		          <li class="nav-item">
+       				 <a class="nav-link">課程管理</a>
+		        <ul>
+		            <li ><a href="/backgroundCourse/bkcourse">課程表單</a></li>
+		             <li ><a href="/classInfo/bkClassInfo">課程資訊</a></li>     
+		        </ul>
+		          </li>
 		        <li class="nav-item">
-		            <a class="nav-link active">會員管理</a>
+		            <a class="nav-link">會員管理</a>
 		            <ul>
 		                <li><a href="/bkuser">會員表單</a></li>
 		                <li><a href="/searchMember">搜尋會員</a></li>

@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
-@WebFilter(urlPatterns = { "/searchMember", "/memberTransactions" })
+@WebFilter(urlPatterns = { "/searchMember", "/memberTransactions","/classInfo/bkClassInfo" })
 public class LoginFilter extends HttpFilter {
 
 	// 之前舊的

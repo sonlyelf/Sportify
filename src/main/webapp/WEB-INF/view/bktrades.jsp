@@ -137,7 +137,13 @@
 		    </a>
 		    <h1 class="m-0 ms-1">SPORTIFy</h1>
 		    <ul>
-		        <li class="nav-item"><a class="nav-link" href="/backgroundCourse/bkcourse">課程管理</a></li>
+		          <li class="nav-item">
+       				 <a class="nav-link">課程管理</a>
+		        <ul>
+		            <li ><a href="/backgroundCourse/bkcourse">課程表單</a></li>
+		             <li ><a href="/classInfo/bkClassInfo">課程資訊</a></li>     
+		        </ul>
+		          </li>
 		        <li class="nav-item">
 		            <a class="nav-link ">會員管理</a>
 		            <ul>
@@ -146,7 +152,7 @@
 		                <li><a href="/memberTransactions">會員交易紀錄</a></li>
 		            </ul>
 		        </li>
-		        <li class="nav-item"><a class="nav-link active" href="/trade/bktrades">訂單管理</a></li>
+		        <li class="nav-item"><a class="nav-link" href="/trade/bktrades">訂單管理</a></li>
 		        <li class="nav-item"><a id="logout-btn" class="nav-link" href="/admin/login" style="display:none;" onclick="logout()">登出</a></li>
 		        <li class="nav-item"><a id="login-btn" class="nav-link" href="/admin/login" onclick="showLoginForm()">登入</a></li>
 		    </ul>

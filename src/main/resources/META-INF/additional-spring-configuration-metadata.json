@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "upload.dir",
+      "type": "java.lang.String",
+      "description": "這是用於設置上傳文件的目錄路徑。"
+    }
+  ]
+}

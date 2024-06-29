@@ -183,9 +183,9 @@
     </div>
     <div class="loginGroup">
         <label>驗證碼
-            <input type="text" id="captcha" name="captcha" required>
+            <input type="text" id="captcha" name="captcha" placeholder="請輸入驗證碼" required>
         </label>
-        <img id="captchaImg" src="/captchaImageServlet" onclick="refreshCaptcha()" alt="验证码">
+        <img id="captchaImg" src="/captchaImageServlet" onclick="refreshCaptcha()" alt="驗證碼">
         <a href="javascript:void(0)" style="font-size: 16px" onclick="refreshCaptcha()">刷新驗證碼</a>
     </div>
     <div class="btnLogIn">
@@ -341,5 +341,6 @@
                 });
             }
         }
+    
     </script>
 </body>
