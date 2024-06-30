@@ -22,7 +22,7 @@
 	<style>
 		main h2 {
 			color: rgb(146, 99, 28);
-			margin-top: 160px;
+			margin-top: 40px;
 			align-items: center;
 		}
 
@@ -66,7 +66,7 @@
           	margin-top:80px;
           	margin-botton:80px;
 	        width: 100%; /* 讓影片充滿其父元素的寬度 */
-	     	width: 600px; /* 最大寬度為 300px，以避免在較大螢幕上影片過大 */
+	     	width: 400px; /* 最大寬度為 300px，以避免在較大螢幕上影片過大 */
 	        display: block; /* 確保影片是以區塊元素顯示，並佔據其父元素的整個寬度 */
 	        margin: 0 auto; /* 如果需要將影片置中，可以使用 margin:auto */
 	    }
@@ -140,6 +140,8 @@
 			width: 100%;
 			/* 確保下拉選單在小螢幕上佔滿寬度 */
 		}
+		
+		
 
 		@media (min-width : 768px) {
 			.container {
@@ -233,9 +235,9 @@
 	<div class="col-12 banner">
     	<video autoplay loop muted playsinline>
 	        <!-- 手機版影片 -->
-	        <source src="../image/Sportifyclass.mp4" type="video/mp4" media="(max-width: 767px)">
+	        <source src="../image/startTraning.mp4" type="video/mp4" media="(max-width: 767px)">
 	        <!-- 桌面版影片 -->
-	        <source src="../image/Sportifyclass.mp4" type="video/mp4" media="(min-width: 768px)">
+	        <source src="../image/startTraning.mp4" type="video/mp4" media="(min-width: 768px)">
 	        <!-- 如果需要支持其他格式的视频，可以添加对应的<source>标签 -->
         
     	</video>
@@ -251,7 +253,8 @@
 					<source srcset="../image/corse23.1.png" media="(max-width: 768px)">
 					<img src="../image/course22.1.png" alt="課程表" onclick="openModal()">
 				</picture>
-			</div>
+		</div>
+
 			<div class="content">
 				<!-- 根據課程名稱選擇 -->
 				<c:forEach items="${groups}" var="courses">
@@ -371,6 +374,8 @@
 				document.getElementById(formId).submit();
 			}
 		}
+		
+		
 	</script>
 </body>
 

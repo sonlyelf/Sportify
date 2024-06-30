@@ -225,7 +225,7 @@
         <div class="tab-content" id="userTabsContent">
             <!-- 會員表單 -->
             <div class="tab-pane fade show active" id="userForm" role="tabpanel" aria-labelledby="userForm-tab">
-                <form action="/bkuser" method="post" class="user-form">
+                <form action="/bkuser" method="post" class="user-form" id="user-form">
                     <input name="_method" id="_method" type="hidden" value="${ method }">
                     <input name="id" id="id" type="hidden" value="${ user.id }">
                     <fieldset>
@@ -291,7 +291,7 @@
                                             <input name="_method" id="_method" type="hidden" value="PUT">
                                             <button type="submit" class="btn btn-update btn-sm">修改</button>
                                         </form>
-                                        <form action="/deleteUser/${users.id}" method="post"
+                                        <form action="/deleteUser/${users.id}" id="deleteForm_${users.id}" method="post"
                                             style="display:inline;">
                                             <input name="_method" id="_method" type="hidden" value="DELETE">
                                             <button type="submit" class="btn btn-danger btn-sm">刪除</button>
@@ -307,9 +307,15 @@
     </main>
 
     <!-- jQuery and Bootstrap Bundle JS -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   	<script src="/js/admin.js"></script>
+  	<!-- 这里可以添加您的自定义脚本 -->
+<script>
+
+   
+</script>
 </body>
 
 </html>

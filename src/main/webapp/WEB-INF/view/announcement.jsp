@@ -17,7 +17,7 @@
     <style>
         main h2 {
             color: rgb(146, 99, 28);
-            margin-top: 200px;
+            margin-top: 210px;
         }
 
         .banner {
@@ -66,6 +66,8 @@
 	    margin-right: 20px; /* 图片右边距 */
 	    width: 300px; /* 图片宽度 */
 	    height: auto; /* 图片高度 */
+	    margin-top: auto;
+	    margin-bottom: auto;
 	}
 	
 	.course-description {
@@ -99,7 +101,7 @@
     }
       .banner video {
         width: 100%; /* 讓影片充滿其父元素的寬度 */
-        max-width: 300px; /* 最大寬度為 300px，以避免在較大螢幕上影片過大 */
+        max-width: 400px; /* 最大寬度為 300px，以避免在較大螢幕上影片過大 */
         display: block; /* 確保影片是以區塊元素顯示，並佔據其父元素的整個寬度 */
         margin: 0 auto; /* 如果需要將影片置中，可以使用 margin:auto */
     }
@@ -142,9 +144,9 @@
     <div class="col-12 banner">
     	<video autoplay loop muted playsinline>
 	        <!-- 手機版影片 -->
-	        <source src="../image/Sportify.mp4" type="video/mp4" media="(max-width: 767px)">
+	        <source src="../image/SportifyWW.mp4" type="video/mp4" media="(max-width: 767px)">
 	        <!-- 桌面版影片 -->
-	        <source src="../image/Sportify.mp4" type="video/mp4" media="(min-width: 768px)">
+	        <source src="../image/SportifyWW.mp4" type="video/mp4" media="(min-width: 768px)">
 	        <!-- 如果需要支持其他格式的视频，可以添加对应的<source>标签 -->
         
     	</video>

@@ -33,6 +33,14 @@
         width: 100%;
         height: 100%;
     }
+    .contenttext{
+		font-size: 20px;
+        color: #666;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        text-align: left;
+	
+    }
 
     @media(min-width: 768px) {
         .map-container {
@@ -51,6 +59,22 @@
             border-style: double;
             box-shadow: 0 0 5px 5px rgb(22, 22, 21, 0.5);
             color: rgb(138, 85, 15);
+        }
+          .contenttext{
+		
+		justify-content: center;
+		align-items: center;
+		text-align: left;
+		flex: 1;
+		margin-left: 320px;
+	
+    }
+    }
+     @media (max-width: 767px) {
+        .contenttext {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
         }
     }
 
@@ -123,7 +147,7 @@
         </div>
         <div class="container mb-5">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 contenttext">
                     <h4>自行前往:</h4>
                     <p>沿國道1號前往竹北的光明Ｘ路/120縣道。從國道1號的ＸＸ-竹北出口下交流道</p>
                     <h4>大眾運輸:</h4>

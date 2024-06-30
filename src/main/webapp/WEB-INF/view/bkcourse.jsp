@@ -219,7 +219,7 @@ body {
 <main>
     <div class="main-content-container" >
         <div class="container main-content">
-            <form action="/backgroundCourse" method="post" class="pure-form pure-form-aligned course-form">
+            <form action="/backgroundCourse" method="post" id="course-form" class="pure-form pure-form-aligned course-form">
                 <input name="_method" id="_method" type="hidden" value="${method}">
                 <input name="id" id="id" type="hidden" value="${course.id}">
                 <fieldset>
@@ -309,7 +309,7 @@ body {
                                     <input name="_method"id="_method" type="hidden" value="PUT">
                                     <button type="submit" class="btn btnUPDATE ">修改</button>
                                 </form>
-                                <form action="/backgroundCourse/delete/${courses.id}" method="post" style="display:inline;">
+                                <form id="deleteForm_${courses.id}" action="/backgroundCourse/delete/${courses.id}" method="post" style="display:inline;">
                                     <input name="_method" id="_method" type="hidden" value="DELETE">
                                     <button type="submit" class="btn btnDELETE">刪除</button>
                                 </form>
@@ -327,12 +327,86 @@ body {
 <!-- 外部脚本 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/admin.js"></script>
 
 <!-- 这里可以添加您的自定义脚本 -->
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('course-form');
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // 防止表单的默认提交动作
+            
+            // 获取提交方式（新增或修改）
+            const method = document.getElementById('_method').value;
+            
+            // 根据提交方式显示不同的成功提示信息
+            let successTitle, successText;
+            if (method === 'PUT') {
+                successTitle = '修改成功';
+                successText = '課程已成功修改';
+            } else {
+                successTitle = '新增成功';
+                successText = '課程已成功新增';
+            }
+            
+            // 显示成功通知
+            Swal.fire({
+                icon: 'success',
+                title: successTitle,
+                text: successText
+            }).then(() => {
+                // 通知显示完毕后提交表单
+                event.target.submit();
+            });
+        });
+    } else {
+        console.error('未找到表單元素 #course-form');
+    }
+});
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    // 添加表单提交事件监听器
+    document.querySelectorAll('[id^=deleteForm_]').forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // 阻止默认提交行为
+            
+            // 获取表单的 ID（通过 ID 获取课程 ID）
+            const formId = form.id;
+            const courseId = formId.split('_')[1]; // 提取课程 ID
+            
+            // 发送异步请求删除课程
+            fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: '_method=DELETE' // 手动设置 DELETE 方法
+            })
+            .then(response => {
+                if (response.ok) {
+                    // 成功删除后显示通知
+                    Swal.fire({
+                        icon: 'success',
+                        title: '刪除成功',
+                        text: '課程已成功刪除'
+                    }).then(() => {
+                        // 刷新页面或更新课程列表等操作
+                        location.reload(); // 示例：刷新页面
+                    });
+                } else {
+                    throw new Error('刪除操作失败');
+                }
+            })
+            .catch(error => {
+                console.error('刪除操作失败', error);
+                // 可以添加失败时的处理逻辑，如显示错误信息给用户
+            });
+        });
+    });
+});
    
 </script>
 </body>
