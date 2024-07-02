@@ -17,7 +17,8 @@
     <style>
         main h2 {
             color: rgb(146, 99, 28);
-            margin-top: 210px;
+            margin-top: 260px;
+            margin-bottom: 20px;
         }
 
         .banner {

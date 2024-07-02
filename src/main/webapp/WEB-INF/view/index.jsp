@@ -230,7 +230,7 @@
         </section>
 
         <section id="sec1">
-            <div class="d-md-block text-center" style="color: rgb(26, 123, 220);">
+            <div class="d-md-block text-center" style="color:  rgb(146, 99, 28);">
                 <h2 style="font-size: 36px" id="mainContent" tabindex="2">訊息公告</h2>
             </div>
             <nav>

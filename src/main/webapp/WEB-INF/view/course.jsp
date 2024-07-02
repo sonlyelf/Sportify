@@ -22,7 +22,7 @@
 	<style>
 		main h2 {
 			color: rgb(146, 99, 28);
-			margin-top: 40px;
+			margin-top: 20px;
 			align-items: center;
 		}
 

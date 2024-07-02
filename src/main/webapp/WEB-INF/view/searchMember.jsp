@@ -206,12 +206,12 @@
                     <fieldset>
                         <legend style="font-size: 36px;">搜尋會員</legend>
                         <div class="pure-control-group">
-                            <label for="searchName">Name:</label>
+                            <label for="searchName">姓名:</label>
                             <input name="name" id="name" type="text" class="form-control"
                                 value="${ param.name }" />
                         </div>
                         <div class="pure-control-group">
-                            <label for="searchEmail">Email:</label>
+                            <label for="searchEmail">電子郵件:</label>
                             <input name="email" id="email" type="email" class="form-control"
                                 value="${ param.email }" />
                         </div>
@@ -227,11 +227,11 @@
                     <table class="table table-bordered" id="searchResultsTable">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>BirthDay</th>
-                                <th>Phone</th>
-                                <th>Email</th>
+                                <th>會員編號</th>
+                                <th>姓名</th>
+                                <th>生日</th>
+                                <th>電話</th>
+                                <th>電子郵件</th>
                             </tr>
                         </thead>
                         <tbody>

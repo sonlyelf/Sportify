@@ -231,26 +231,26 @@
                     <fieldset>
                         <legend style="text-align: center; font-size: 36px;">會員表單</legend>
                         <div class="form-group">
-                            <label for="name">Name:</label>
+                            <label for="name">姓名:</label>
                             <input name="name" id="name" value="${ user.name }" required="required"
                                 class="form-control" />
                         </div>
                         <div class="form-group">
-                            <label for="birthday">BirthDay:</label>
+                            <label for="birthday">生日:</label>
                             <input name="birthday" id="birthday" type="date" value="${ birthday }" required
                                 class="form-control" />
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone:</label>
+                            <label for="phone">電話:</label>
                             <input name="phone" id="phone" value="${ user.phone }" required class="form-control" />
                         </div>
                         <div class="form-group">
-                            <label for="email">Email:</label>
+                            <label for="email">電子郵件:</label>
                             <input name="email" id="email" type="email" value="${ user.email }"
                                 required="required" class="form-control" />
                         </div>
                         <div class="form-group">
-                            <label for="password">Password:</label>
+                            <label for="password">密碼:</label>
                             <input name="password" id="password" type="password" value="${ user.password }"
                                 required="required" class="form-control" />
                         </div>
@@ -269,11 +269,11 @@
                     <table class="table table-bordered" id="allUsersTable">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>BirthDay</th>
-                                <th>Phone</th>
-                                <th>Email</th>
+                                <th>會員編號</th>
+                                <th>姓名</th>
+                                <th>生日</th>
+                                <th>電話</th>
+                                <th>電子郵件</th>
                                 <th>操作</th>
                             </tr>
                         </thead>

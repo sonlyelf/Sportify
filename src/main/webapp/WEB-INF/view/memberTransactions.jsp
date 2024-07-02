@@ -214,11 +214,11 @@
                     <fieldset>
                         <legend style=" font-size: 36px;">交易管理</legend>
                         <div class="pure-control-group">
-                            <label for="transactionName">Name:</label>
+                            <label for="transactionName">姓名:</label>
                             <input name="name" id="name" type="text" class="form-control"  value="${ param.name }" />
                         </div>
                         <div class="pure-control-group">
-                            <label for="transactionEmail">Email:</label>
+                            <label for="transactionEmail">電子郵件:</label>
                             <input name="email" id="email" type="email" class="form-control" value="${ param.email }" />
                         </div>
                         <div class="pure-controls">
@@ -232,8 +232,8 @@
 				    <table class="table table-bordered" id="transactionResultsTable">
 				        <thead>
 				            <tr>
-				                <th>交易ID</th>
-				                <th>會員ID</th>
+				                <th>交易編號</th>
+				                <th>會員編號</th>
 				                <th>課程名稱</th>
 				                <th>交易日期</th>
 				                <th>交易金額</th>

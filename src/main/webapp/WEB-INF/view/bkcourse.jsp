@@ -284,15 +284,15 @@ body {
                 <legend style=" font-size: 36px;">課程列表</legend>
                 <table border="1">
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Day</th>
-                        <th>Time</th>
-                        <th>Price</th>
-                        <th>Group</th>
-                        <th>Actions</th>
+                        <th>課程編號</th>
+                        <th>課程名稱</th>
+                        <th>開始日期</th>
+                        <th>結束日期</th>
+                        <th>上課日</th>
+                        <th>時間</th>
+                        <th>金額</th>
+                        <th>群組</th>
+                        <th>操作</th>
                     </tr>
                     <c:forEach var="courses" items="${courses}">
                         <tr>
