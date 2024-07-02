@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -359,22 +360,26 @@ public class UserController {
 	
 	
 	// 會員忘記密碼
-	 @PostMapping("/forgetPassword")
-	 @ResponseBody
-	 public String forgetPassword(@RequestBody Map<String, String> requestBody) throws Exception {
+	  @PostMapping("/forgetPassword")
+	    @ResponseBody
+	    public String forgetPassword(@RequestBody Map<String, String> requestBody) throws Exception {
 	        String email = requestBody.get("email");
 	        try {
 	            System.out.println(email); // 將電子郵件地址打印到控制台，以便調試
 
+	            // 生成隨機8位數字密碼
+	            String newPassword = generateRandomPassword();
+
 	            // 發送郵件
-	            SSLEmail.sendEmail(email);
+	            SSLEmail.sendEmail(email, newPassword);
 
 	            // 查找用戶
 	            Optional<User> user = userService.findByEmail(email);
 	            if (user.isPresent()) {
+	               
 	                // 更新用戶密碼
 	                UserPwdUpdateDto userPwdUpdateDto = new UserPwdUpdateDto();
-	                userPwdUpdateDto.setPassword("12345678"); // 這裡設置新的密碼
+	                userPwdUpdateDto.setPassword(newPassword);
 	                userPwdUpdateDto.setUserId(user.get().getId());
 	                userService.updateUserPassword(userPwdUpdateDto); // 更新用戶密碼
 	            }
@@ -384,6 +389,16 @@ public class UserController {
 	            e.printStackTrace();
 	            return "{\"message\": \"error\"}"; // 返回錯誤的 JSON 響應給前端
 	        }
+	    }
+
+	    // 生成隨機8位數字密碼的方法
+	    private String generateRandomPassword() {
+	        Random random = new Random();
+	        StringBuilder sb = new StringBuilder(8);
+	        for (int i = 0; i < 8; i++) {
+	            sb.append(random.nextInt(10)); // 產生0到9的隨機數字
+	        }
+	        return sb.toString();
 	    }
 	}
 	

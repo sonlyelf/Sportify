@@ -25,7 +25,7 @@ public class SSLEmail {
 	   Use Authentication: Yes
 	   Port for SSL: 465
 	 */
-	public static void sendEmail(String email) {
+	public static void sendEmail(String email , String newPassword) {
 		final String fromEmail = "sarahyuyuyu@gmail.com"; //requires valid gmail id
 		final String password = "rpde ztok xekf vtyr"; // 應用程式密碼
 		final String toEmail = email; // can be any email id 
@@ -39,16 +39,20 @@ public class SSLEmail {
 		props.put("mail.smtp.auth", "true"); //Enabling SMTP Authentication
 		props.put("mail.smtp.port", "465"); //SMTP Port
 		
-		Authenticator auth = new Authenticator() {
-			//override the getPasswordAuthentication method
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(fromEmail, password);
-			}
-		};
-		
-		Session session = Session.getDefaultInstance(props, auth);
-		System.out.println("Session created");
-		EmailUtil.sendEmail(session, toEmail,"Sportify忘記密碼", "親愛的會員您好！您的預設密碼為：12345678 。請儘速更新您的密碼" );
-	}
+	    Authenticator auth = new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        };
+
+        Session session = Session.getDefaultInstance(props, auth);
+
+        try {
+            // 創建一個新的郵件訊息
+            EmailUtil.sendEmail(session, email, "Sportify忘記密碼", "親愛的會員您好！您的新密碼為：" + newPassword + "。請儘速更新您的密碼");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
 }
