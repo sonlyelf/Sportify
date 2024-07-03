@@ -14,6 +14,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
     <!-- 自定義CSS -->
+    <link rel="icon" href="../image/Logocopy11.png">
     <style>
         * {
             margin: 0;
